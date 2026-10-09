@@ -12,22 +12,18 @@
         }
 
         :root {
-            --bg-base: #1b1b25;
-            --bg-panel: #27272d;
-            --bg-inputbox: #2e2e39;
+            --bg-base: #0d0d11;
+            --bg-panel: #1a1a1e;
+            --bg-inputbox: #252529;
             --text-title: #ffffff;
-            --text-secondary: #c0c0c0;
-            --primary-red: #e43732;
-            --primary-red-hover: #c91820;
-            --box-border: #393947;
-            --line: #ffffff1a;
-            --divider: #11111c;
+            --text-secondary: #a8a8a8;
+            --primary-red: #e41e26;
+            --box-border: #4a4a4f;
+            --line: #4a4a4f;
         }
 
         html {
             background-color: var(--bg-base);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
@@ -35,7 +31,6 @@
             color: var(--text-title);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             font-size: 14px;
-            line-height: 1.5;
         }
 
         #root {
@@ -70,23 +65,16 @@
             gap: 12px;
             text-decoration: none;
             color: inherit;
-            transition: opacity 0.2s;
-        }
-
-        .logo-section:hover {
-            opacity: 0.8;
         }
 
         .logo-icon {
             width: 34px;
             height: 36px;
-            flex-shrink: 0;
         }
 
         .logo-text {
             font-size: 14px;
             font-weight: 500;
-            letter-spacing: -0.3px;
         }
 
         .header-actions {
@@ -98,7 +86,7 @@
         .location-btn {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             padding: 6px 12px;
             border: 1px solid var(--box-border);
             background-color: var(--bg-inputbox);
@@ -106,12 +94,6 @@
             border-radius: 6px;
             font-size: 12px;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .location-btn:hover {
-            border-color: var(--box-border);
-            opacity: 0.8;
         }
 
         .avatar {
@@ -119,7 +101,6 @@
             height: 30px;
             border-radius: 50%;
             overflow: hidden;
-            flex-shrink: 0;
         }
 
         .avatar img {
@@ -134,13 +115,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #1a1a24;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><rect fill="%231a1a24" width="1920" height="1080"/><defs><radialGradient id="grad" cx="50%25" cy="30%25" r="70%25"><stop offset="0%25" style="stop-color:%23404050;stop-opacity:0.08"/><stop offset="100%25" style="stop-color:%231a1a24;stop-opacity:1"/></radialGradient></defs><rect fill="url(%23grad)" width="1920" height="1080"/></svg>');
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><rect fill="%230d0d11" width="1920" height="1080"/><defs><radialGradient id="grad" cx="50%25" cy="30%25" r="70%25"><stop offset="0%25" style="stop-color:%23333333;stop-opacity:0.3"/><stop offset="100%25" style="stop-color:%230d0d11;stop-opacity:1"/></radialGradient></defs><rect fill="url(%23grad)" width="1920" height="1080"/></svg>');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             padding: 20px;
-            min-height: calc(100vh - 56px);
         }
 
         .card {
@@ -150,36 +128,33 @@
             width: 100%;
             max-width: 540px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            animation: slideUp 0.3s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         /* BANNER */
         .banner {
             position: relative;
             height: 140px;
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #8B4513 100%);
             overflow: hidden;
+            background: linear-gradient(135deg, #4d2a14 0%, #a35a2d 45%, #2b1b17 100%);
         }
 
         .banner::before {
             content: '';
             position: absolute;
             inset: 0;
-            background-image: url('https://assets.garena.com/gop/mshop/www/live/assets/FF-4470ba9b.jpg');
+            background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
-            opacity: 0.85;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+            filter: saturate(1.1) contrast(1.05);
+        }
+
+        .banner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.12), rgba(0,0,0,0.45));
         }
 
         .back-button {
@@ -190,7 +165,7 @@
             align-items: center;
             gap: 6px;
             padding: 8px 16px;
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.45);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.7);
             border-radius: 24px;
@@ -199,18 +174,6 @@
             font-weight: 500;
             cursor: pointer;
             z-index: 10;
-            transition: background-color 0.2s;
-        }
-
-        .back-button:hover {
-            background-color: rgba(0, 0, 0, 0.6);
-        }
-
-        .back-arrow {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            transform: rotate(90deg);
         }
 
         /* GAME INFO */
@@ -232,44 +195,40 @@
             border: 4px solid var(--bg-base);
             object-fit: contain;
             background-color: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .game-title {
             font-size: 24px;
-            font-weight: 700;
+            font-weight: bold;
             color: var(--text-title);
-            letter-spacing: -0.5px;
         }
 
         /* SUMMARY */
         .summary {
             padding: 20px;
-            border-bottom: 8px solid var(--divider);
+            border-bottom: 8px solid var(--bg-base);
         }
 
         .summary-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
             padding: 12px 0;
-            border-bottom: 1px solid rgba(74, 74, 79, 0.2);
+            border-bottom: 1px solid rgba(74, 74, 79, 0.3);
             font-size: 14px;
         }
 
-        .summary-row:last-of-type {
+        .summary-row:last-child {
             border-bottom: none;
         }
 
         .summary-label {
             color: var(--text-secondary);
-            font-weight: 400;
         }
 
         .summary-value {
             color: var(--text-title);
             font-weight: 500;
-            text-align: right;
         }
 
         .diamond-icon {
@@ -281,13 +240,11 @@
         .diamond-img {
             width: 12px;
             height: 12px;
-            object-fit: contain;
-            flex-shrink: 0;
         }
 
         .bonus-box {
-            background-color: #2a2a32;
-            border: 1px solid #3a3a44;
+            background-color: var(--bg-panel);
+            border: 1px solid rgba(74, 74, 79, 0.5);
             border-radius: 5px;
             padding: 12px;
             margin: 8px 0;
@@ -305,20 +262,11 @@
             padding-bottom: 0;
         }
 
-        .bonus-label {
-            color: var(--text-secondary);
-        }
-
-        .bonus-value {
-            color: var(--text-title);
-            font-weight: 500;
-        }
-
         /* PROMO SECTION */
         .promo-section {
             padding: 20px;
-            border-bottom: 8px solid var(--divider);
-            border-top: 1px solid rgba(74, 74, 79, 0.2);
+            border-bottom: 8px solid var(--bg-base);
+            border-top: 1px solid rgba(74, 74, 79, 0.3);
         }
 
         .promo-title {
@@ -326,130 +274,76 @@
             font-weight: 500;
             color: var(--text-title);
             margin-bottom: 12px;
-            letter-spacing: -0.2px;
         }
 
         .promo-input-group {
             display: flex;
             gap: 0;
-            border-radius: 6px;
-            overflow: hidden;
         }
 
         .form-input {
             flex: 1;
-            background-color: #333339;
-            border: 1px solid #4a4a54;
+            background-color: var(--bg-inputbox);
+            border: 1px solid var(--box-border);
             color: var(--text-title);
             padding: 12px;
             font-size: 13px;
             border-radius: 6px 0 0 6px;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary-red);
-            background-color: #3a3a42;
         }
 
         .form-input::placeholder {
-            color: #888888;
+            color: #666;
         }
 
         .btn-apply {
-            background-color: #a94545;
+            background-color: var(--primary-red);
             color: white;
-            border: 1px solid #a94545;
+            border: 1px solid var(--primary-red);
             padding: 12px 20px;
-            font-weight: 700;
-            font-size: 12px;
+            font-weight: bold;
+            font-size: 13px;
             cursor: pointer;
             border-radius: 0 6px 6px 0;
             white-space: nowrap;
-            transition: all 0.2s;
-            font-family: inherit;
-            letter-spacing: 0.5px;
+            transition: background-color 0.2s;
         }
 
-        .btn-apply:hover:not(:disabled) {
-            background-color: #b55555;
-            border-color: #b55555;
-            transform: translateY(-1px);
-        }
-
-        .btn-apply:active:not(:disabled) {
-            transform: translateY(0);
+        .btn-apply:hover {
+            background-color: #c91820;
         }
 
         .btn-apply:disabled {
-            opacity: 0.35;
+            opacity: 0.4;
             cursor: not-allowed;
         }
 
         /* PAYMENT SECTION */
         .payment-section {
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 0;
         }
 
         .paypal-button {
             width: 100%;
             height: 55px;
-            background: linear-gradient(180deg, #FFC439 0%, #FFB81C 100%);
+            background-color: #FFC439;
             border: none;
             border-radius: 6px;
-            font-weight: 700;
+            font-weight: bold;
             font-size: 18px;
             color: #003087;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'PayPal Sans', Arial, sans-serif;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-            letter-spacing: 0.3px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .paypal-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
-            pointer-events: none;
+            transition: background-color 0.2s;
+            font-family: Arial, sans-serif;
         }
 
         .paypal-button:hover {
-            background: linear-gradient(180deg, #FFD066 0%, #FFC439 100%);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .paypal-button:active {
-            transform: translateY(0);
-        }
-
-        .payment-info {
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-align: center;
-            padding: 8px 0;
+            background-color: #FFD066;
         }
 
         /* FOOTER */
         footer {
             background-color: var(--bg-base);
             border-top: 1px solid rgba(74, 74, 79, 0.3);
-            margin-top: auto;
         }
 
         .footer-content {
@@ -462,28 +356,24 @@
         }
 
         .footer-top {
-            margin-bottom: 12px;
-            font-weight: 400;
+            margin-bottom: 8px;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 0;
+            gap: 16px;
             flex-wrap: wrap;
-            align-items: center;
         }
 
         .footer-link {
             color: var(--text-secondary);
             text-decoration: none;
             transition: opacity 0.2s;
-            padding: 0 8px;
         }
 
         .footer-link:hover {
             opacity: 0.7;
-            text-decoration: underline;
         }
 
         .footer-divider {
@@ -492,61 +382,11 @@
             background-color: var(--line);
             margin: 0 8px;
             display: inline-block;
-            opacity: 0.5;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .card {
-                max-width: 100%;
-                border-radius: 0;
-            }
-
-            main {
-                padding: 0;
-            }
-
-            .banner {
-                height: 120px;
-            }
-
-            .game-info {
-                margin-top: -40px;
-                padding: 0 16px;
-                gap: 10px;
-            }
-
-            .game-icon {
-                width: 64px;
-                height: 64px;
-                border-width: 3px;
-            }
-
-            .game-title {
-                font-size: 20px;
-            }
-
-            .summary {
-                padding: 16px;
-            }
-
-            .promo-section {
-                padding: 16px;
-            }
-
-            .payment-section {
-                padding: 16px;
-            }
-
-            .footer-content {
-                padding: 16px;
-            }
         }
     </style>
 </head>
 <body>
     <div id="root">
-        <!-- HEADER -->
         <header>
             <div class="header-content">
                 <a href="/" class="logo-section">
@@ -566,28 +406,17 @@
             </div>
         </header>
 
-        <!-- MAIN -->
         <main>
             <div class="card">
-                <!-- BANNER -->
                 <div class="banner">
-                    <a href="/" class="back-button">
-                        <svg class="back-arrow" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g id="arrow_down">
-                                <path id="Vector 564 (Stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M17.1716 28.1716C18.7337 26.6095 21.2663 26.6095 22.8284 28.1716L40 45.3431L57.1716 28.1716C58.7337 26.6095 61.2663 26.6095 62.8284 28.1716C64.3905 29.7337 64.3905 32.2663 62.8284 33.8284L42.8284 53.8284C41.2663 55.3905 38.7337 55.3905 37.1716 53.8284L17.1716 33.8284C15.6095 32.2663 15.6095 29.7337 17.1716 28.1716Z" fill="currentColor"></path>
-                            </g>
-                        </svg>
-                        Regresar
-                    </a>
+                    <a href="/" class="back-button">← Regresar</a>
                 </div>
 
-                <!-- GAME INFO -->
                 <div class="game-info">
                     <img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/icon.png" alt="Free Fire" class="game-icon">
                     <h1 class="game-title">Free Fire</h1>
                 </div>
 
-                <!-- SUMMARY -->
                 <div class="summary">
                     <div class="summary-row">
                         <span class="summary-label">Monto total</span>
@@ -601,15 +430,15 @@
 
                     <div class="bonus-box">
                         <div class="bonus-row">
-                            <span class="bonus-label">Precio inicial</span>
-                            <span class="bonus-value diamond-icon">
+                            <span>Precio inicial</span>
+                            <span class="diamond-icon">
                                 <img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png" alt="💎" class="diamond-img">
                                 100
                             </span>
                         </div>
                         <div class="bonus-row">
-                            <span class="bonus-label">+ Bonus General</span>
-                            <span class="bonus-value diamond-icon">
+                            <span>+ Bonus General</span>
+                            <span class="diamond-icon">
                                 <img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png" alt="💎" class="diamond-img">
                                 10
                             </span>
@@ -632,7 +461,6 @@
                     </div>
                 </div>
 
-                <!-- PROMO SECTION -->
                 <div class="promo-section">
                     <div class="promo-title">Código promocional</div>
                     <div class="promo-input-group">
@@ -641,15 +469,12 @@
                     </div>
                 </div>
 
-                <!-- PAYMENT SECTION -->
                 <div class="payment-section">
                     <button class="paypal-button">PayPal</button>
-                    <div class="payment-info">Procesa tu pago de forma segura con PayPal</div>
                 </div>
             </div>
         </main>
 
-        <!-- FOOTER -->
         <footer>
             <div class="footer-content">
                 <div class="footer-top">© Garena Online. Todos los derechos reservados.</div>
@@ -667,29 +492,9 @@
     </div>
 
     <script>
-        // Funcionalidad del botón APLICAR
-        const inputPromo = document.querySelector('.form-input');
-        const btnApply = document.querySelector('.btn-apply');
-
-        // Habilitar/deshabilitar botón según contenido del input
-        inputPromo.addEventListener('input', function() {
-            btnApply.disabled = this.value.trim() === '';
-        });
-
-        btnApply.addEventListener('click', function() {
-            const codigoPromo = inputPromo.value.trim();
-            if (codigoPromo) {
-                alert('Código promocional aplicado: ' + codigoPromo);
-                inputPromo.value = '';
-                btnApply.disabled = true;
-            }
-        });
-
-        // Permitir aplicar con Enter
-        inputPromo.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && !btnApply.disabled) {
-                btnApply.click();
-            }
+        document.querySelector('.btn-apply').addEventListener('click', function() {
+            const input = document.querySelector('.form-input').value;
+            alert('Código: ' + (input || 'vacío'));
         });
     </script>
 </body>
