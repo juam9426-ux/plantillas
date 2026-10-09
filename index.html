@@ -134,27 +134,18 @@
         .banner {
             position: relative;
             height: 140px;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #8B4513 100%);
             overflow: hidden;
-            background: linear-gradient(135deg, #4d2a14 0%, #a35a2d 45%, #2b1b17 100%);
         }
 
         .banner::before {
             content: '';
             position: absolute;
             inset: 0;
-            background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80');
+            background-image: url('https://assets.garena.com/gop/mshop/www/live/assets/FF-4470ba9b.jpg');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
             opacity: 0.8;
-            filter: saturate(1.1) contrast(1.05);
-        }
-
-        .banner::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.12), rgba(0,0,0,0.45));
         }
 
         .back-button {
@@ -165,7 +156,7 @@
             align-items: center;
             gap: 6px;
             padding: 8px 16px;
-            background-color: rgba(0, 0, 0, 0.45);
+            background-color: rgba(0, 0, 0, 0.4);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.7);
             border-radius: 24px;
@@ -387,6 +378,7 @@
 </head>
 <body>
     <div id="root">
+        <!-- HEADER -->
         <header>
             <div class="header-content">
                 <a href="/" class="logo-section">
@@ -406,17 +398,21 @@
             </div>
         </header>
 
+        <!-- MAIN -->
         <main>
             <div class="card">
+                <!-- BANNER -->
                 <div class="banner">
                     <a href="/" class="back-button">← Regresar</a>
                 </div>
 
+                <!-- GAME INFO -->
                 <div class="game-info">
                     <img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/icon.png" alt="Free Fire" class="game-icon">
                     <h1 class="game-title">Free Fire</h1>
                 </div>
 
+                <!-- SUMMARY -->
                 <div class="summary">
                     <div class="summary-row">
                         <span class="summary-label">Monto total</span>
@@ -461,6 +457,7 @@
                     </div>
                 </div>
 
+                <!-- PROMO SECTION -->
                 <div class="promo-section">
                     <div class="promo-title">Código promocional</div>
                     <div class="promo-input-group">
@@ -469,12 +466,14 @@
                     </div>
                 </div>
 
+                <!-- PAYMENT SECTION -->
                 <div class="payment-section">
                     <button class="paypal-button">PayPal</button>
                 </div>
             </div>
         </main>
 
+        <!-- FOOTER -->
         <footer>
             <div class="footer-content">
                 <div class="footer-top">© Garena Online. Todos los derechos reservados.</div>
@@ -492,6 +491,7 @@
     </div>
 
     <script>
+        // Funcionalidad del botón
         document.querySelector('.btn-apply').addEventListener('click', function() {
             const input = document.querySelector('.form-input').value;
             alert('Código: ' + (input || 'vacío'));
