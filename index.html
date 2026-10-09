@@ -12,16 +12,16 @@
         }
 
         :root {
-            --bg-base: #0d0d11;
-            --bg-panel: #1a1a1e;
-            --bg-inputbox: #252529;
+            --bg-base: #1b1b25;
+            --bg-panel: #27272d;
+            --bg-inputbox: #2e2e39;
             --text-title: #ffffff;
-            --text-secondary: #a8a8a8;
-            --primary-red: #e41e26;
+            --text-secondary: #c0c0c0;
+            --primary-red: #e43732;
             --primary-red-hover: #c91820;
-            --box-border: #4a4a4f;
-            --line: #4a4a4f;
-            --divider: #2a2a2e;
+            --box-border: #393947;
+            --line: #ffffff1a;
+            --divider: #11111c;
         }
 
         html {
@@ -134,8 +134,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--bg-base);
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><rect fill="%230d0d11" width="1920" height="1080"/><defs><radialGradient id="grad" cx="50%25" cy="30%25" r="70%25"><stop offset="0%25" style="stop-color:%23333333;stop-opacity:0.15"/><stop offset="100%25" style="stop-color:%230d0d11;stop-opacity:1"/></radialGradient></defs><rect fill="url(%23grad)" width="1920" height="1080"/></svg>');
+            background-color: #1a1a24;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><rect fill="%231a1a24" width="1920" height="1080"/><defs><radialGradient id="grad" cx="50%25" cy="30%25" r="70%25"><stop offset="0%25" style="stop-color:%23404050;stop-opacity:0.08"/><stop offset="100%25" style="stop-color:%231a1a24;stop-opacity:1"/></radialGradient></defs><rect fill="url(%23grad)" width="1920" height="1080"/></svg>');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -286,8 +286,8 @@
         }
 
         .bonus-box {
-            background-color: var(--bg-panel);
-            border: 1px solid rgba(74, 74, 79, 0.5);
+            background-color: #2a2a32;
+            border: 1px solid #3a3a44;
             border-radius: 5px;
             padding: 12px;
             margin: 8px 0;
@@ -338,8 +338,8 @@
 
         .form-input {
             flex: 1;
-            background-color: var(--bg-inputbox);
-            border: 1px solid var(--box-border);
+            background-color: #333339;
+            border: 1px solid #4a4a54;
             color: var(--text-title);
             padding: 12px;
             font-size: 13px;
@@ -351,30 +351,31 @@
         .form-input:focus {
             outline: none;
             border-color: var(--primary-red);
-            background-color: rgba(37, 37, 41, 0.8);
+            background-color: #3a3a42;
         }
 
         .form-input::placeholder {
-            color: #666;
+            color: #888888;
         }
 
         .btn-apply {
-            background-color: var(--primary-red);
+            background-color: #a94545;
             color: white;
-            border: 1px solid var(--primary-red);
+            border: 1px solid #a94545;
             padding: 12px 20px;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             border-radius: 0 6px 6px 0;
             white-space: nowrap;
             transition: all 0.2s;
             font-family: inherit;
+            letter-spacing: 0.5px;
         }
 
         .btn-apply:hover:not(:disabled) {
-            background-color: var(--primary-red-hover);
-            border-color: var(--primary-red-hover);
+            background-color: #b55555;
+            border-color: #b55555;
             transform: translateY(-1px);
         }
 
@@ -383,7 +384,7 @@
         }
 
         .btn-apply:disabled {
-            opacity: 0.4;
+            opacity: 0.35;
             cursor: not-allowed;
         }
 
@@ -392,28 +393,45 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 0;
         }
 
         .paypal-button {
             width: 100%;
             height: 55px;
-            background-color: #FFC439;
+            background: linear-gradient(180deg, #FFC439 0%, #FFB81C 100%);
             border: none;
             border-radius: 6px;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 18px;
             color: #003087;
             cursor: pointer;
-            transition: all 0.2s;
-            font-family: Arial, sans-serif;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            font-family: 'PayPal Sans', Arial, sans-serif;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .paypal-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
         }
 
         .paypal-button:hover {
-            background-color: #FFD066;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            transform: translateY(-1px);
+            background: linear-gradient(180deg, #FFD066 0%, #FFC439 100%);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
         }
 
         .paypal-button:active {
