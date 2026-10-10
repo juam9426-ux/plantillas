@@ -18,8 +18,11 @@
             --text-title: #ffffff;
             --text-secondary: #a8a8a8;
             --primary-red: #e41e26;
+            --primary-red-hover: #c91820;
             --box-border: #4a4a4f;
             --line: #4a4a4f;
+            --short-line: #4a4a4f;
+            --divider: #0d0d11;
         }
 
         html {
@@ -31,6 +34,7 @@
             color: var(--text-title);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             font-size: 14px;
+            line-height: 1.5;
         }
 
         #root {
@@ -49,6 +53,12 @@
             background-color: var(--bg-base);
         }
 
+        @media (min-width: 768px) {
+            header {
+                height: 60px;
+            }
+        }
+
         .header-content {
             max-width: 1280px;
             margin: 0 auto;
@@ -56,31 +66,91 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 16px;
+            padding: 0 12px;
+            gap: 4px;
+        }
+
+        @media (min-width: 768px) {
+            .header-content {
+                padding: 0 16px;
+                gap: 12px;
+            }
         }
 
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
             color: inherit;
+            min-width: 0;
+        }
+
+        @media (min-width: 768px) {
+            .logo-section {
+                gap: 12px;
+            }
         }
 
         .logo-icon {
             width: 34px;
             height: 36px;
+            flex-shrink: 0;
+        }
+
+        .logo-icon.hidden-mobile {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .logo-icon.hidden-mobile {
+                display: block;
+            }
         }
 
         .logo-text {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 500;
+            max-width: 96px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        @media (min-width: 768px) {
+            .logo-text {
+                font-size: 14px;
+                max-width: none;
+            }
+        }
+
+        .header-divider {
+            width: 1px;
+            height: 20px;
+            background-color: var(--short-line);
+            display: none;
+            margin: 0 8px;
+        }
+
+        @media (min-width: 768px) {
+            .header-divider {
+                display: block;
+                height: 14px;
+            }
         }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 8px;
+            min-width: 0;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .header-actions {
+                gap: 18px;
+            }
         }
 
         .location-btn {
@@ -94,6 +164,47 @@
             border-radius: 6px;
             font-size: 12px;
             cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 160px;
+        }
+
+        @media (min-width: 768px) {
+            .location-btn {
+                max-width: none;
+            }
+        }
+
+        .location-btn:hover {
+            border-color: var(--box-border);
+            background-color: var(--bg-inputbox);
+        }
+
+        .location-btn svg {
+            flex-shrink: 0;
+            width: 1em;
+            height: 1em;
+            font-size: 16px;
+        }
+
+        .location-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .location-lang {
+            margin-left: 4px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .location-arrow {
+            width: 12px;
+            height: 12px;
+            flex-shrink: 0;
         }
 
         .avatar {
@@ -101,6 +212,13 @@
             height: 30px;
             border-radius: 50%;
             overflow: hidden;
+            flex-shrink: 0;
+            transition: opacity 0.2s ease;
+            cursor: pointer;
+        }
+
+        .avatar:hover {
+            opacity: 0.7;
         }
 
         .avatar img {
@@ -121,6 +239,16 @@
             padding: 20px;
         }
 
+        @media (min-width: 768px) {
+            main {
+                background-color: #F9F9F9;
+                background-image: url('https://assets.garena.com/gop/mshop/www/live/assets/FF-8d5fce78.png');
+                background-attachment: fixed;
+                background-position: top center;
+                background-repeat: no-repeat;
+            }
+        }
+
         .card {
             background-color: var(--bg-base);
             border-radius: 16px;
@@ -130,12 +258,27 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
+        @media (min-width: 768px) {
+            .card {
+                margin-bottom: 52px;
+                margin-top: 24px;
+                border-radius: 24px;
+            }
+        }
+
         /* BANNER */
         .banner {
             position: relative;
-            height: 140px;
+            height: 80px;
             background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #8B4513 100%);
             overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .banner {
+                height: 120px;
+                border-radius: 12px 12px 0 0;
+            }
         }
 
         .banner::before {
@@ -155,16 +298,38 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 8px 16px;
+            padding: 6px 12px;
             background-color: rgba(0, 0, 0, 0.4);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.7);
             border-radius: 24px;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 500;
             cursor: pointer;
             z-index: 10;
+            transition: background-color 0.2s ease;
+            outline: none;
+        }
+
+        @media (min-width: 768px) {
+            .back-button {
+                top: 24px;
+                left: 24px;
+                padding: 6px 14px;
+                font-size: 14px;
+                gap: 4px;
+            }
+        }
+
+        .back-button:hover {
+            background-color: rgba(96, 96, 96, 0.5);
+        }
+
+        .back-button svg {
+            width: 1em;
+            height: 1em;
+            font-size: 16px;
         }
 
         /* GAME INFO */
@@ -172,11 +337,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             padding: 0 20px;
-            margin-top: -50px;
+            margin-top: -36px;
             position: relative;
             z-index: 5;
+        }
+
+        @media (min-width: 768px) {
+            .game-info {
+                gap: 16px;
+                margin-top: -40px;
+                padding: 0 20px;
+            }
         }
 
         .game-icon {
@@ -188,25 +361,53 @@
             background-color: white;
         }
 
+        @media (min-width: 768px) {
+            .game-icon {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
         .game-title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             color: var(--text-title);
+        }
+
+        @media (min-width: 768px) {
+            .game-title {
+                font-size: 24px;
+            }
         }
 
         /* SUMMARY */
         .summary {
             padding: 20px;
-            border-bottom: 8px solid var(--bg-base);
+            border-bottom: 8px solid var(--divider);
+        }
+
+        @media (min-width: 768px) {
+            .summary {
+                padding: 40px;
+                border-bottom: 8px solid var(--divider);
+            }
         }
 
         .summary-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 10px 0;
             border-bottom: 1px solid rgba(74, 74, 79, 0.3);
-            font-size: 14px;
+            font-size: 13px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .summary-row {
+                padding: 10px 0;
+                font-size: 14px;
+            }
         }
 
         .summary-row:last-child {
@@ -215,22 +416,45 @@
 
         .summary-label {
             color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .summary-label {
+                font-size: 14px;
+            }
         }
 
         .summary-value {
             color: var(--text-title);
             font-weight: 500;
+            text-align: right;
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .summary-value {
+                font-size: 14px;
+            }
         }
 
         .diamond-icon {
             display: inline-flex;
             align-items: center;
             gap: 4px;
+            justify-content: flex-end;
         }
 
         .diamond-img {
             width: 12px;
             height: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .diamond-img {
+                width: 14px;
+                height: 14px;
+            }
         }
 
         .bonus-box {
@@ -240,6 +464,7 @@
             padding: 12px;
             margin: 8px 0;
             font-size: 13px;
+            grid-column: 1 / -1;
         }
 
         .bonus-row {
@@ -247,6 +472,13 @@
             justify-content: space-between;
             align-items: center;
             padding: 6px 0;
+            font-size: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .bonus-row {
+                font-size: 13px;
+            }
         }
 
         .bonus-row:last-child {
@@ -256,15 +488,27 @@
         /* PROMO SECTION */
         .promo-section {
             padding: 20px;
-            border-bottom: 8px solid var(--bg-base);
+            border-bottom: 8px solid var(--divider);
             border-top: 1px solid rgba(74, 74, 79, 0.3);
         }
 
+        @media (min-width: 768px) {
+            .promo-section {
+                padding: 20px 40px;
+            }
+        }
+
         .promo-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--text-title);
             margin-bottom: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .promo-title {
+                font-size: 14px;
+            }
         }
 
         .promo-input-group {
@@ -280,6 +524,19 @@
             padding: 12px;
             font-size: 13px;
             border-radius: 6px 0 0 6px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        @media (min-width: 768px) {
+            .form-input {
+                padding: 12px;
+                font-size: 13px;
+            }
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-red);
         }
 
         .form-input::placeholder {
@@ -296,11 +553,13 @@
             cursor: pointer;
             border-radius: 0 6px 6px 0;
             white-space: nowrap;
-            transition: background-color 0.2s;
+            transition: all 0.2s ease;
+            outline: none;
         }
 
-        .btn-apply:hover {
-            background-color: #c91820;
+        .btn-apply:hover:not(:disabled) {
+            background-color: var(--primary-red-hover);
+            border-color: var(--primary-red-hover);
         }
 
         .btn-apply:disabled {
@@ -313,6 +572,13 @@
             padding: 20px;
         }
 
+        @media (min-width: 768px) {
+            .payment-section {
+                padding: 40px;
+                padding-top: 24px;
+            }
+        }
+
         .paypal-button {
             width: 100%;
             height: 55px;
@@ -323,12 +589,17 @@
             font-size: 18px;
             color: #003087;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s ease;
             font-family: Arial, sans-serif;
+            outline: none;
         }
 
         .paypal-button:hover {
             background-color: #FFD066;
+        }
+
+        .paypal-button:active {
+            transform: scale(0.98);
         }
 
         /* FOOTER */
@@ -337,30 +608,61 @@
             border-top: 1px solid rgba(74, 74, 79, 0.3);
         }
 
+        @media (min-width: 768px) {
+            footer {
+                background-color: #F9F9F9;
+            }
+        }
+
         .footer-content {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 16px;
             text-align: center;
             font-size: 12px;
             color: var(--text-secondary);
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
         }
 
         .footer-top {
             margin-bottom: 8px;
         }
 
+        @media (min-width: 768px) {
+            .footer-top {
+                margin-bottom: 0;
+                flex: 1;
+            }
+        }
+
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 8px;
             flex-wrap: wrap;
+        }
+
+        @media (min-width: 768px) {
+            .footer-links {
+                justify-content: flex-end;
+                gap: 0;
+                flex: 1;
+            }
         }
 
         .footer-link {
             color: var(--text-secondary);
             text-decoration: none;
-            transition: opacity 0.2s;
+            transition: opacity 0.2s ease;
         }
 
         .footer-link:hover {
@@ -373,6 +675,54 @@
             background-color: var(--line);
             margin: 0 8px;
             display: inline-block;
+        }
+
+        @media (min-width: 768px) {
+            .footer-divider {
+                margin: 0 16px;
+                height: 12px;
+            }
+        }
+
+        /* RESPONSIVE ADJUSTMENTS */
+        @media (max-width: 767px) {
+            .logo-icon {
+                display: block;
+            }
+
+            .header-content {
+                gap: 1px;
+            }
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        /* RESPONSIVE FOOTER */
+        @media (min-width: 768px) {
+            .footer-content {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .footer-top {
+                flex: none;
+            }
         }
     </style>
 </head>
@@ -387,9 +737,17 @@
                     </svg>
                     <span class="logo-text">Centro Oficial de Recargas</span>
                 </a>
+                <div class="header-divider"></div>
                 <div class="header-actions">
                     <button class="location-btn">
-                        🌍 Resto de LATAM <span style="margin-left: 4px; font-weight: 600;">ES</span>
+                        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M40 49C32.8203 49 27 43.1797 27 36C27 28.8203 32.8203 23 40 23C47.1797 23 53 28.8203 53 36C53 43.1797 47.1797 49 40 49ZM33 36C33 39.866 36.134 43 40 43C43.866 43 47 39.866 47 36C47 32.134 43.866 29 40 29C36.134 29 33 32.134 33 36Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M40 6C23.4315 6 10 19.3549 10 35.829C10 43.7268 12.3501 49.6354 16.2895 54.7371C20.069 59.6319 25.305 63.7531 30.8937 68.152L31.0877 68.3047C32.9392 69.7621 34.8449 71.2622 36.8025 72.8626C38.6615 74.3825 41.3458 74.3784 43.2004 72.8546C45.1989 71.2125 47.1458 69.6759 49.0376 68.183L49.3969 67.8994C60.4829 59.1524 70 51.6433 70 35.829C70 19.3549 56.5685 6 40 6ZM16 35.829C16 22.6497 26.7452 11.9658 40 11.9658C53.2548 11.9658 64 22.6497 64 35.829C64 48.5833 56.8205 54.4242 45.3074 63.5102L45.2979 63.5177C43.6045 64.8541 41.8252 66.2583 39.995 67.751C38.2094 66.3015 36.4745 64.9359 34.8214 63.6347L34.8119 63.6272C28.991 59.0453 24.3297 55.3533 21.0486 51.1041C17.8836 47.0052 16 42.3644 16 35.829Z" fill="currentColor"></path>
+                        </svg>
+                        <span class="location-text">Resto de LATAM</span>
+                        <span class="location-lang">ES</span>
+                        <svg class="location-arrow" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.86496 3H3.13504C2.2872 3 1.82405 3.98886 2.36682 4.64018L5.23178 8.07813C5.63157 8.55789 6.36843 8.55789 6.76822 8.07814L9.63318 4.64018C10.176 3.98886 9.7128 3 8.86496 3Z" fill="currentColor"></path>
+                        </svg>
                     </button>
                     <div class="avatar">
                         <img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/icon.png" alt="Avatar">
@@ -403,7 +761,14 @@
             <div class="card">
                 <!-- BANNER -->
                 <div class="banner">
-                    <a href="/" class="back-button">← Regresar</a>
+                    <a href="/" class="back-button" aria-label="Volver a Página de Inicio">
+                        <svg width="1em" height="1em" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg);">
+                            <g id="arrow_down">
+                                <path id="Vector 564 (Stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M17.1716 28.1716C18.7337 26.6095 21.2663 26.6095 22.8284 28.1716L40 45.3431L57.1716 28.1716C58.7337 26.6095 61.2663 26.6095 62.8284 28.1716C64.3905 29.7337 64.3905 32.2663 62.8284 33.8284L42.8284 53.8284C41.2663 55.3905 38.7337 55.3905 37.1716 53.8284L17.1716 33.8284C15.6095 32.2663 15.6095 29.7337 17.1716 28.1716Z" fill="currentColor"></path>
+                            </g>
+                        </svg>
+                        Regresar
+                    </a>
                 </div>
 
                 <!-- GAME INFO -->
@@ -492,9 +857,32 @@
 
     <script>
         // Funcionalidad del botón
-        document.querySelector('.btn-apply').addEventListener('click', function() {
-            const input = document.querySelector('.form-input').value;
-            alert('Código: ' + (input || 'vacío'));
+        const promoInput = document.querySelector('.form-input');
+        const applyButton = document.querySelector('.btn-apply');
+
+        // Habilitar/deshabilitar botón según el input
+        promoInput.addEventListener('input', function() {
+            applyButton.disabled = !this.value.trim();
+        });
+
+        applyButton.addEventListener('click', function() {
+            const code = promoInput.value;
+            alert('Código aplicado: ' + (code || 'vacío'));
+            promoInput.value = '';
+            this.disabled = true;
+        });
+
+        // Animación del back button
+        const backButton = document.querySelector('.back-button');
+        backButton.addEventListener('click', function(e) {
+            // Opcional: agregar animación
+            console.log('Volviendo...');
+        });
+
+        // Manejo del banner hover
+        const banner = document.querySelector('.banner');
+        banner.addEventListener('mouseenter', function() {
+            // Animación adicional si es necesario
         });
     </script>
 </body>
