@@ -42,36 +42,60 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
             line-height: 1.5;
         }
 
-        .viewport {
+        .container {
             width: 100%;
-            max-width: 570px;
+            max-width: 552px;
             background: var(--sys-color-background-surface);
             border-radius: 12px;
-            overflow: hidden;
             box-shadow: 0 4px 12px rgba(1, 5, 6, 0.12);
+            display: flex;
+            flex-direction: column;
+            max-height: 100vh;
+            overflow: hidden;
         }
 
+        /* HEADER */
         .header {
-            padding: 16px 24px;
+            padding: 20px 24px;
             border-bottom: 1px solid var(--sys-color-structure-divider);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-shrink: 0;
         }
 
-        .logo {
-            height: 24px;
+        .header-left {
             display: flex;
             align-items: center;
+            gap: 12px;
         }
 
-        .logo img {
-            height: 100%;
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--sys-color-background-surface-hover);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo-icon img {
+            width: 32px;
+            height: 32px;
             object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+            letter-spacing: -0.5px;
         }
 
         .close-btn {
@@ -80,7 +104,7 @@
             cursor: pointer;
             padding: 8px;
             color: var(--sys-color-structure-border-high-contrast);
-            font-size: 20px;
+            font-size: 24px;
             width: 40px;
             height: 40px;
             display: flex;
@@ -94,70 +118,68 @@
             background: var(--sys-color-background-surface-hover);
         }
 
+        /* CONTENT */
         .content {
             padding: 24px;
-            max-height: calc(100vh - 200px);
+            flex: 1;
             overflow-y: auto;
         }
 
+        /* SECTION: Pagar con */
         .section {
-            margin-bottom: 24px;
+            margin-bottom: 0;
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 0 12px 0;
+            padding: 12px 0 16px 0;
             cursor: pointer;
             user-select: none;
         }
 
         .section-title {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
-            color: var(--sys-color-system-main);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: #222;
+            text-transform: capitalize;
+            letter-spacing: 0px;
         }
 
-        .section-toggle {
+        .section-chevron {
             color: var(--sys-color-structure-border-high-contrast);
-            font-size: 16px;
-            transition: transform 0.2s;
+            font-size: 20px;
+            transition: transform 0.3s;
         }
 
-        .section-toggle.open {
+        .section-chevron.open {
             transform: rotate(180deg);
         }
 
         .section-content {
             max-height: 1000px;
             overflow: hidden;
-            transition: max-height 0.3s ease, opacity 0.3s ease;
-            opacity: 1;
+            transition: max-height 0.3s ease;
         }
 
         .section-content.collapsed {
             max-height: 0;
-            opacity: 0;
+            overflow: hidden;
         }
 
-        .payment-methods {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
+        /* PAYMENT METHODS */
         .payment-method {
             display: flex;
             align-items: center;
             padding: 12px 16px;
+            margin-bottom: 12px;
             border: 2px solid var(--sys-color-structure-border-low-contrast);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
             background: var(--sys-color-background-surface);
+            position: relative;
         }
 
         .payment-method:hover {
@@ -166,49 +188,53 @@
         }
 
         .payment-method.active {
-            border-color: var(--sys-color-primary-main);
+            border-color: #222;
             background: var(--sys-color-background-surface);
         }
 
-        .payment-method.active::before {
-            content: '';
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 16px;
-            height: 16px;
-            border: 2px solid var(--sys-color-primary-main);
+        .radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--sys-color-structure-border-low-contrast);
             border-radius: 50%;
-            background: var(--sys-color-primary-main);
-        }
-
-        .payment-method.active::after {
-            content: '✓';
-            position: absolute;
-            left: 17px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 10px;
-            font-weight: bold;
-        }
-
-        .payment-method {
-            position: relative;
-            padding-left: 48px;
-        }
-
-        .payment-icon {
-            width: 36px;
-            height: 24px;
             margin-right: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--sys-color-background-surface-hover);
-            border-radius: 4px;
-            border: 1px solid var(--sys-color-structure-divider);
+            flex-shrink: 0;
+            background: var(--sys-color-background-surface);
+            transition: all 0.2s;
+        }
+
+        .payment-method:hover .radio {
+            border-color: var(--sys-color-structure-border-high-contrast);
+        }
+
+        .payment-method.active .radio {
+            border-color: #000;
+            background: #000;
+        }
+
+        .radio::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .payment-method.active .radio::after {
+            opacity: 1;
+        }
+
+        .payment-icon {
+            width: 48px;
+            height: 32px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
         }
 
@@ -218,135 +244,125 @@
             object-fit: contain;
         }
 
-        .payment-details {
+        .payment-info {
             flex: 1;
         }
 
         .payment-name {
             font-size: 13px;
             font-weight: 500;
-            color: var(--sys-color-system-main);
+            color: #222;
+            line-height: 1.3;
         }
 
         .payment-desc {
             font-size: 12px;
             color: var(--sys-color-structure-border-high-contrast);
-            margin-top: 2px;
+            margin-top: 3px;
         }
 
         .payment-amount {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            color: var(--sys-color-system-main);
+            color: #222;
             white-space: nowrap;
             margin-left: 16px;
         }
 
-        .add-payment {
+        /* LINK */
+        .show-all-link {
+            color: var(--sys-color-link-main);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 12px 0 0 0;
+            display: block;
+            transition: color 0.2s;
+        }
+
+        .show-all-link:hover {
+            color: var(--sys-color-link-main-hover);
+            text-decoration: underline;
+        }
+
+        /* DIVIDER */
+        .divider {
+            height: 1px;
+            background: var(--sys-color-structure-divider);
+            margin: 16px 0;
+        }
+
+        /* ADD CARD */
+        .add-card-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
             color: var(--sys-color-link-main);
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
-            margin-top: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: color 0.2s;
-            padding: 8px 16px;
-            border: none;
             background: transparent;
+            border: none;
+            margin-top: 8px;
+            transition: color 0.2s;
         }
 
-        .add-payment:hover {
+        .add-card-btn:hover {
             color: var(--sys-color-link-main-hover);
         }
 
-        .divider {
-            height: 1px;
-            background: var(--sys-color-structure-divider);
-            margin: 24px 0;
-        }
-
-        .order-summary-trigger {
-            width: 100%;
-            display: flex;
-            align-items: stretch;
+        /* ORDER SUMMARY */
+        .order-summary {
             background: var(--sys-color-background-alt);
-            border: none;
             border-radius: 8px;
+            padding: 12px 16px;
+            margin: 16px 0 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             cursor: pointer;
             transition: background 0.2s;
-            overflow: hidden;
-            margin-bottom: 24px;
         }
 
-        .order-summary-trigger:hover {
+        .order-summary:hover {
             background: #d1d5d9;
         }
 
-        .order-summary-trigger[data-state="open"] .summary-chevron {
-            transform: rotate(180deg);
-        }
-
-        .summary-left {
-            display: flex;
-            align-items: stretch;
-            flex: 1;
-            padding: 12px 16px;
-        }
-
-        .summary-icon-box {
-            width: 48px;
+        .order-summary-left {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            flex-shrink: 0;
+            gap: 12px;
         }
 
-        .summary-icon {
+        .bag-icon {
             width: 20px;
             height: 20px;
-            color: var(--sys-color-system-main);
+            color: #222;
         }
 
-        .summary-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex: 1;
-        }
-
-        .summary-amount {
-            font-size: 16px;
+        .order-amount {
+            font-size: 15px;
             font-weight: 600;
-            color: var(--sys-color-system-main);
+            color: #222;
         }
 
-        .summary-label {
-            font-size: 12px;
-            color: var(--sys-color-success-main);
-            margin-top: 2px;
-        }
-
-        .summary-chevron {
-            display: flex;
-            align-items: center;
-            padding: 0 16px;
-            transition: transform 0.2s ease;
-        }
-
-        .chevron-icon {
-            width: 18px;
-            height: 18px;
+        .order-summary-chevron {
             color: var(--sys-color-structure-border-high-contrast);
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .order-summary-chevron.open {
+            transform: rotate(180deg);
         }
 
         .order-details {
             background: var(--sys-experimental-color-background-alt);
             border-radius: 8px;
             padding: 16px;
-            margin-bottom: 24px;
+            margin: 0 0 24px 0;
             border: 1px solid var(--sys-color-structure-divider);
             display: none;
         }
@@ -367,25 +383,24 @@
             margin-bottom: 0;
             padding-top: 10px;
             border-top: 1px solid var(--sys-color-structure-divider);
-            color: var(--sys-color-system-main);
+            color: #222;
             font-weight: 600;
         }
 
+        /* FOOTER */
         .footer {
             padding: 20px 24px;
             border-top: 1px solid var(--sys-color-structure-divider);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            flex-shrink: 0;
         }
 
         .pay-btn {
             width: 100%;
-            padding: 12px 24px;
-            background: var(--sys-color-primary-main);
-            color: var(--sys-color-primary-contrast);
+            padding: 14px 24px;
+            background: #0544b5;
+            color: white;
             border: none;
-            border-radius: 24px;
+            border-radius: 50px;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
@@ -394,12 +409,12 @@
         }
 
         .pay-btn:hover:not(:disabled) {
-            background: var(--sys-color-primary-main-hover);
+            background: #0070e0;
             box-shadow: 0 2px 8px rgba(7, 70, 181, 0.2);
         }
 
         .pay-btn:active:not(:disabled) {
-            background: var(--sys-color-primary-main-active);
+            background: #003087;
             transform: scale(0.99);
         }
 
@@ -410,24 +425,8 @@
             opacity: 0.6;
         }
 
-        .show-more-link {
-            color: var(--sys-color-link-main);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            margin-top: 8px;
-            display: block;
-            transition: color 0.2s;
-        }
-
-        .show-more-link:hover {
-            color: var(--sys-color-link-main-hover);
-            text-decoration: underline;
-        }
-
         @media (max-width: 480px) {
-            .viewport {
+            .container {
                 border-radius: 0;
             }
 
@@ -436,7 +435,7 @@
             }
 
             .header {
-                padding: 12px 16px;
+                padding: 16px;
             }
 
             .footer {
@@ -446,89 +445,79 @@
     </style>
 </head>
 <body>
-    <div class="viewport">
-        <!-- Header -->
+    <div class="container">
+        <!-- HEADER -->
         <div class="header">
-            <div class="logo">
-                <svg viewBox="0 0 24 24" width="100" height="24" xmlns="http://www.w3.org/2000/svg">
-                    <text x="2" y="18" font-size="16" font-weight="bold" fill="#003087">PayPal</text>
-                </svg>
+            <div class="header-left">
+                <div class="logo-icon">
+                    <img src="https://www.paypal.com/pay/_next/static/media/paypal-rebrand.3fo58hxqd2-k_.svg?dpl=0-579-1_20261008085749764" alt="PayPal">
+                </div>
+                <div class="logo-text">PayPal</div>
             </div>
             <button class="close-btn" onclick="closeModal()">✕</button>
         </div>
 
-        <!-- Main Content -->
+        <!-- CONTENT -->
         <div class="content">
-            <!-- Pay With Section -->
+            <!-- SECTION: Pagar con -->
             <div class="section">
                 <div class="section-header" onclick="toggleSection(this)">
                     <span class="section-title">Pagar con</span>
-                    <span class="section-toggle">⌃</span>
+                    <span class="section-chevron">⌃</span>
                 </div>
                 <div class="section-content">
-                    <div class="payment-methods">
-                        <!-- Mastercard -->
-                        <div class="payment-method" onclick="selectPayment(this)">
-                            <div class="payment-icon">
-                                <img src="https://pics.paypal.com/00/s/OTY5WDE1MzZYUE5H/p/NGU3OGFjMmMtYmFhNi00N2YxLWIxZWEtNWM2NDQ3NDg3OGRm/image_0.png?format=auto&width=64&quality=85" alt="Mastercard">
-                            </div>
-                            <div class="payment-details">
-                                <div class="payment-name">Mastercard Débito Clásica</div>
-                                <div class="payment-desc">Cargo ••3006</div>
-                            </div>
+                    <!-- Mastercard -->
+                    <div class="payment-method" onclick="selectPayment(this)">
+                        <div class="radio"></div>
+                        <div class="payment-icon">
+                            <img src="https://pics.paypal.com/00/s/OTY5WDE1MzZYUE5H/p/NGU3OGFjMmMtYmFhNi00N2YxLWIxZWEtNWM2NDQ3NDg3OGRm/image_0.png?format=auto&width=64&quality=85" alt="Mastercard">
+                        </div>
+                        <div class="payment-info">
+                            <div class="payment-name">Mastercard Débito Clásica</div>
+                            <div class="payment-desc">Cargo ••3006</div>
                         </div>
                     </div>
-                    <a class="show-more-link" onclick="showAllPayments()">Mostrar todos los métodos de pago</a>
+
+                    <a class="show-all-link" onclick="showAllPayments()">Mostrar todos los métodos de pago</a>
                 </div>
             </div>
 
             <div class="divider"></div>
 
-            <!-- PayPal Balance Section -->
+            <!-- SECTION: Saldo PayPal -->
             <div class="section">
-                <div class="payment-methods">
-                    <!-- PayPal Balance -->
-                    <div class="payment-method active" onclick="selectPayment(this)">
-                        <div class="payment-icon">
-                            <img src="https://www.paypal.com/pay/_next/static/media/paypal-balance-icon.2b6aoe3rlv2nw.svg?dpl=0-579-1_20261008085749764" alt="PayPal Balance">
-                        </div>
-                        <div class="payment-details">
-                            <div class="payment-name">Saldo de PayPal</div>
-                            <div class="payment-desc">$1.787,29 disponibles</div>
-                        </div>
-                        <div class="payment-amount">$0,99</div>
+                <!-- PayPal Balance -->
+                <div class="payment-method active" onclick="selectPayment(this)">
+                    <div class="radio"></div>
+                    <div class="payment-icon">
+                        <img src="https://www.paypal.com/pay/_next/static/media/paypal-balance-icon.2b6aoe3rlv2nw.svg?dpl=0-579-1_20261008085749764" alt="PayPal Balance">
                     </div>
+                    <div class="payment-info">
+                        <div class="payment-name">Saldo de PayPal</div>
+                        <div class="payment-desc">$1.787,29 disponibles</div>
+                    </div>
+                    <div class="payment-amount">$0,99</div>
                 </div>
-                <button class="add-payment" onclick="addNewPayment()">
-                    <span style="font-size: 16px;">+</span> Agregar tarjeta
+
+                <button class="add-card-btn" onclick="addNewCard()">
+                    <span style="font-size: 18px; font-weight: bold;">+</span> Agregar tarjeta
                 </button>
             </div>
 
             <div class="divider"></div>
 
-            <!-- Order Summary -->
-            <button type="button" class="order-summary-trigger" data-state="closed" onclick="toggleOrderSummary(this)">
-                <div class="summary-left">
-                    <div class="summary-icon-box">
-                        <svg class="summary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="9" cy="21" r="1"></circle>
-                            <circle cx="20" cy="21" r="1"></circle>
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                        </svg>
-                    </div>
-                    <div class="summary-info">
-                        <div class="summary-amount">$0,99</div>
-                        <div class="summary-label">Información del pedido</div>
-                    </div>
-                </div>
-                <div class="summary-chevron">
-                    <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
+            <!-- ORDER SUMMARY -->
+            <div class="order-summary" onclick="toggleOrderSummary(this)">
+                <div class="order-summary-left">
+                    <svg class="bag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l.35 8.38A2 2 0 008.35 19h7.3a2 2 0 001.98-1.62L18 9M9 5a3 3 0 016 0M6 9h12M10 14v3M14 14v3"></path>
                     </svg>
+                    <span class="order-amount">$0,99</span>
                 </div>
-            </button>
+                <span class="order-summary-chevron">∨</span>
+            </div>
 
-            <!-- Order Details -->
+            <!-- ORDER DETAILS -->
             <div class="order-details" id="orderDetails">
                 <div class="detail-row">
                     <span>Subtotal</span>
@@ -549,7 +538,7 @@
             </div>
         </div>
 
-        <!-- Footer -->
+        <!-- FOOTER -->
         <div class="footer">
             <button class="pay-btn" onclick="processPayment()">Pagar</button>
         </div>
@@ -558,10 +547,10 @@
     <script>
         function toggleSection(header) {
             const content = header.nextElementSibling;
-            const toggle = header.querySelector('.section-toggle');
+            const chevron = header.querySelector('.section-chevron');
             
             content.classList.toggle('collapsed');
-            toggle.classList.toggle('open');
+            chevron.classList.toggle('open');
         }
 
         function selectPayment(element) {
@@ -571,20 +560,15 @@
             element.classList.add('active');
         }
 
-        function toggleOrderSummary(button) {
+        function toggleOrderSummary(element) {
             const details = document.getElementById('orderDetails');
-            const state = button.getAttribute('data-state');
+            const chevron = element.querySelector('.order-summary-chevron');
             
-            if (state === 'closed') {
-                button.setAttribute('data-state', 'open');
-                details.classList.add('show');
-            } else {
-                button.setAttribute('data-state', 'closed');
-                details.classList.remove('show');
-            }
+            details.classList.toggle('show');
+            chevron.classList.toggle('open');
         }
 
-        function addNewPayment() {
+        function addNewCard() {
             alert('Agregar nueva tarjeta de crédito/débito');
         }
 
