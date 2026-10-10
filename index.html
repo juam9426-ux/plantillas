@@ -13,7 +13,7 @@
 
         body {
             background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -39,7 +39,13 @@
             border-bottom: 1px solid #e8e8e8;
         }
 
-        .logo {
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
             width: 40px;
             height: 40px;
             background: #f5f5f5;
@@ -47,48 +53,68 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            color: #003087;
+            overflow: hidden;
         }
 
-        .logo img {
-            width: 28px;
-            height: 28px;
+        .logo-icon img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
         }
 
-        .paypal-text {
-            font-size: 24px;
-            font-weight: 700;
-            color: #000;
-            letter-spacing: -0.5px;
+        .paypal-logo {
+            height: 32px;
+            display: flex;
+            align-items: center;
+        }
+
+        .paypal-logo img {
+            height: 100%;
+            object-fit: contain;
+            max-width: 120px;
         }
 
         .close-btn {
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
             color: #999;
+            padding: 0;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #f5f5f5;
         }
 
         .section-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            color: #000;
-            margin-bottom: 16px;
+            color: #222;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .section-title.collapsible {
             cursor: pointer;
             user-select: none;
+            padding: 8px 0;
         }
 
         .collapse-icon {
             color: #666;
-            font-size: 18px;
+            font-size: 16px;
             transition: transform 0.3s;
         }
 
@@ -97,28 +123,30 @@
         }
 
         .payment-methods {
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .payment-option {
             display: flex;
             align-items: center;
-            padding: 12px;
-            margin-bottom: 12px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
             border: 2px solid #e8e8e8;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
+            background: white;
         }
 
         .payment-option:hover {
-            border-color: #ddd;
+            border-color: #d0d0d0;
             background: #fafafa;
         }
 
         .payment-option.active {
-            border-color: #003087;
-            background: #f0f5ff;
+            border-color: #222;
+            background: #ffffff;
+            box-shadow: 0 0 0 1px #222;
         }
 
         .radio {
@@ -132,17 +160,18 @@
             justify-content: center;
             flex-shrink: 0;
             cursor: pointer;
+            background: white;
         }
 
         .payment-option.active .radio {
-            border-color: #003087;
-            background: #003087;
+            border-color: #222;
+            background: #222;
         }
 
         .radio::after {
             content: '';
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             background: white;
             border-radius: 50%;
             opacity: 0;
@@ -160,16 +189,23 @@
         }
 
         .payment-icon {
-            width: 32px;
-            height: 20px;
-            background: #1a1a1a;
-            border-radius: 4px;
+            width: 40px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
-            color: white;
-            font-weight: bold;
+            flex-shrink: 0;
+            background: #f5f5f5;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .payment-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            width: auto;
+            height: auto;
         }
 
         .payment-details {
@@ -179,19 +215,22 @@
         .payment-name {
             font-size: 13px;
             font-weight: 500;
-            color: #000;
+            color: #222;
+            line-height: 1.3;
         }
 
         .payment-desc {
             font-size: 12px;
-            color: #666;
-            margin-top: 2px;
+            color: #999;
+            margin-top: 3px;
         }
 
         .payment-amount {
             font-size: 13px;
             font-weight: 600;
-            color: #000;
+            color: #222;
+            white-space: nowrap;
+            margin-left: 12px;
         }
 
         .show-all-link {
@@ -200,11 +239,13 @@
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
-            margin-top: 12px;
-            display: inline-block;
+            margin-bottom: 12px;
+            display: block;
+            transition: color 0.2s;
         }
 
         .show-all-link:hover {
+            color: #005a9c;
             text-decoration: underline;
         }
 
@@ -212,28 +253,38 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 12px;
+            padding: 12px 14px;
             color: #0070ba;
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
             border-radius: 8px;
             transition: background 0.2s;
+            background: transparent;
+            border: 2px dashed #ddd;
         }
 
         .add-card:hover {
             background: #f0f5ff;
+            border-color: #0070ba;
         }
 
         .add-icon {
             font-size: 18px;
+            font-weight: bold;
+        }
+
+        .divider {
+            height: 1px;
+            background: #e8e8e8;
+            margin: 16px 0;
         }
 
         .summary-section {
             background: #f5f5f5;
             border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 24px;
+            padding: 12px 14px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -245,20 +296,30 @@
             background: #efefef;
         }
 
+        .summary-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         .summary-icon {
-            font-size: 20px;
-            margin-right: 12px;
+            font-size: 18px;
         }
 
         .summary-amount {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            color: #000;
+            color: #222;
         }
 
         .dropdown-arrow {
-            color: #666;
+            color: #999;
             font-size: 16px;
+            transition: transform 0.3s;
+        }
+
+        .dropdown-arrow.rotated {
+            transform: rotate(180deg);
         }
 
         .pay-button {
@@ -284,14 +345,8 @@
             transform: scale(0.99);
         }
 
-        .divider {
-            height: 1px;
-            background: #e8e8e8;
-            margin: 16px 0;
-        }
-
         .collapsed-content {
-            max-height: 300px;
+            max-height: 400px;
             overflow: hidden;
             transition: max-height 0.3s ease;
         }
@@ -301,14 +356,40 @@
             overflow: hidden;
         }
 
+        .summary-details {
+            background: white;
+            border-radius: 8px;
+            padding: 16px 14px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+            display: none;
+            border: 1px solid #e8e8e8;
+        }
+
+        .summary-details.show {
+            display: block;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+            padding-top: 10px;
+            border-top: 1px solid #e8e8e8;
+            color: #222;
+            font-weight: 600;
+        }
+
         @media (max-width: 480px) {
             .container {
                 border-radius: 0;
                 padding: 16px;
-            }
-
-            .paypal-text {
-                font-size: 20px;
             }
         }
     </style>
@@ -317,9 +398,13 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div style="display: flex; align-items: center; gap: 12px;">
-                <div class="logo">P</div>
-                <div class="paypal-text">PayPal</div>
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <img src="https://www.paypal.com/pay/_next/static/media/paypal-rebrand.3fo58hxqd2-k_.svg?dpl=0-579-1_20261008085749764" alt="PayPal">
+                </div>
+                <div class="paypal-logo">
+                    <img src="https://www.paypal.com/pay/_next/static/media/paypal-rebrand.3fo58hxqd2-k_.svg?dpl=0-579-1_20261008085749764" alt="PayPal">
+                </div>
             </div>
             <button class="close-btn">✕</button>
         </div>
@@ -336,7 +421,9 @@
                 <div class="payment-option" onclick="selectPayment(this, 'mastercard')">
                     <div class="radio"></div>
                     <div class="payment-info">
-                        <div class="payment-icon" style="background: linear-gradient(135deg, #ff5f00 0%, #ffb000 100%);">MC</div>
+                        <div class="payment-icon">
+                            <img src="https://pics.paypal.com/00/s/OTY5WDE1MzZYUE5H/p/NGU3OGFjMmMtYmFhNi00N2YxLWIxZWEtNWM2NDQ3NDg3OGRm/image_0.png?format=auto&width=64&quality=85" alt="Mastercard">
+                        </div>
                         <div class="payment-details">
                             <div class="payment-name">Mastercard Débito Clásica</div>
                             <div class="payment-desc">Cargo ••3006</div>
@@ -352,13 +439,13 @@
 
         <!-- PayPal Balance Section -->
         <div class="payment-methods">
-            <div style="margin-bottom: 12px;">
+            <div style="margin-bottom: 8px;">
                 <!-- PayPal Balance -->
                 <div class="payment-option active" onclick="selectPayment(this, 'paypal')">
                     <div class="radio"></div>
                     <div class="payment-info">
-                        <div class="payment-icon" style="background: #003087; display: flex; align-items: center; justify-content: center;">
-                            <span style="color: white; font-size: 12px; font-weight: bold;">P</span>
+                        <div class="payment-icon">
+                            <img src="https://www.paypal.com/pay/_next/static/media/paypal-balance-icon.2b6aoe3rlv2nw.svg?dpl=0-579-1_20261008085749764" alt="PayPal Balance">
                         </div>
                         <div class="payment-details">
                             <div class="payment-name">Saldo de PayPal</div>
@@ -379,11 +466,31 @@
 
         <!-- Order Summary -->
         <div class="summary-section" onclick="toggleSummary()">
-            <div style="display: flex; align-items: center;">
+            <div class="summary-left">
                 <span class="summary-icon">🛍️</span>
                 <span class="summary-amount">$0,99</span>
             </div>
             <span class="dropdown-arrow">∨</span>
+        </div>
+
+        <!-- Summary Details -->
+        <div class="summary-details" id="summaryDetails">
+            <div class="detail-row">
+                <span>Subtotal</span>
+                <span>$0,99</span>
+            </div>
+            <div class="detail-row">
+                <span>Envío</span>
+                <span>$0,00</span>
+            </div>
+            <div class="detail-row">
+                <span>Impuestos</span>
+                <span>$0,00</span>
+            </div>
+            <div class="detail-row">
+                <span>Total</span>
+                <span>$0,99</span>
+            </div>
         </div>
 
         <!-- Pay Button -->
@@ -412,7 +519,11 @@
         }
 
         function toggleSummary() {
-            console.log('Resumen expandido');
+            const details = document.getElementById('summaryDetails');
+            const arrow = document.querySelector('.dropdown-arrow');
+            
+            details.classList.toggle('show');
+            arrow.classList.toggle('rotated');
         }
 
         function showAllMethods() {
@@ -424,13 +535,15 @@
         }
 
         function processPayment() {
-            alert(`Pagando $0,99 con: ${selectedPayment.toUpperCase()}`);
-            // Aquí iría la lógica de pago real
+            const method = selectedPayment === 'paypal' ? 'Saldo de PayPal' : 'Mastercard Débito';
+            alert(`✓ Pagando $0,99 con: ${method}`);
         }
 
         // Close button
         document.querySelector('.close-btn').addEventListener('click', () => {
-            alert('Cerrando checkout de PayPal');
+            if (confirm('¿Deseas cerrar esta sesión de pago?')) {
+                alert('Sesión cerrada');
+            }
         });
     </script>
 </body>
