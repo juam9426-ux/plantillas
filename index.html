@@ -1,889 +1,337 @@
 <!DOCTYPE html>
 <html lang="es" class="dark" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centro de Recarga Garena</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-base: #0d0d11;
-            --bg-panel: #1a1a1e;
-            --bg-inputbox: #252529;
-            --text-title: #ffffff;
-            --text-secondary: #a8a8a8;
-            --primary-red: #e41e26;
-            --primary-red-hover: #c91820;
-            --box-border: #4a4a4f;
-            --line: #4a4a4f;
-            --short-line: #4a4a4f;
-            --divider: #0d0d11;
-        }
-
-        html {
-            background-color: var(--bg-base);
-        }
-
-        body {
-            background-color: var(--bg-base);
-            color: var(--text-title);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        #root {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* HEADER */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            height: 56px;
-            border-bottom: 1px solid rgba(74, 74, 79, 0.5);
-            background-color: var(--bg-base);
-        }
-
-        @media (min-width: 768px) {
-            header {
-                height: 60px;
-            }
-        }
-
-        .header-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 12px;
-            gap: 4px;
-        }
-
-        @media (min-width: 768px) {
-            .header-content {
-                padding: 0 16px;
-                gap: 12px;
-            }
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: inherit;
-            min-width: 0;
-        }
-
-        @media (min-width: 768px) {
-            .logo-section {
-                gap: 12px;
-            }
-        }
-
-        .logo-icon {
-            width: 34px;
-            height: 36px;
-            flex-shrink: 0;
-        }
-
-        .logo-icon.hidden-mobile {
-            display: none;
-        }
-
-        @media (min-width: 768px) {
-            .logo-icon.hidden-mobile {
-                display: block;
-            }
-        }
-
-        .logo-text {
-            font-size: 12px;
-            font-weight: 500;
-            max-width: 96px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        @media (min-width: 768px) {
-            .logo-text {
-                font-size: 14px;
-                max-width: none;
-            }
-        }
-
-        .header-divider {
-            width: 1px;
-            height: 20px;
-            background-color: var(--short-line);
-            display: none;
-            margin: 0 8px;
-        }
-
-        @media (min-width: 768px) {
-            .header-divider {
-                display: block;
-                height: 14px;
-            }
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            min-width: 0;
-            flex-shrink: 0;
-        }
-
-        @media (min-width: 768px) {
-            .header-actions {
-                gap: 18px;
-            }
-        }
-
-        .location-btn {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            padding: 6px 12px;
-            border: 1px solid var(--box-border);
-            background-color: var(--bg-inputbox);
-            color: var(--text-title);
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 160px;
-        }
-
-        @media (min-width: 768px) {
-            .location-btn {
-                max-width: none;
-            }
-        }
-
-        .location-btn:hover {
-            border-color: var(--box-border);
-            background-color: var(--bg-inputbox);
-        }
-
-        .location-btn svg {
-            flex-shrink: 0;
-            width: 1em;
-            height: 1em;
-            font-size: 16px;
-        }
-
-        .location-text {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .location-lang {
-            margin-left: 4px;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-
-        .location-arrow {
-            width: 12px;
-            height: 12px;
-            flex-shrink: 0;
-        }
-
-        .avatar {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-            transition: opacity 0.2s ease;
-            cursor: pointer;
-        }
-
-        .avatar:hover {
-            opacity: 0.7;
-        }
-
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* MAIN */
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><rect fill="%230d0d11" width="1920" height="1080"/><defs><radialGradient id="grad" cx="50%25" cy="30%25" r="70%25"><stop offset="0%25" style="stop-color:%23333333;stop-opacity:0.3"/><stop offset="100%25" style="stop-color:%230d0d11;stop-opacity:1"/></radialGradient></defs><rect fill="url(%23grad)" width="1920" height="1080"/></svg>');
-            background-size: cover;
-            background-position: center;
-            padding: 20px;
-        }
-
-        @media (min-width: 768px) {
-            main {
-                background-color: #F9F9F9;
-                background-image: url('https://assets.garena.com/gop/mshop/www/live/assets/FF-8d5fce78.png');
-                background-attachment: fixed;
-                background-position: top center;
-                background-repeat: no-repeat;
-            }
-        }
-
-        .card {
-            background-color: var(--bg-base);
-            border-radius: 16px;
-            overflow: hidden;
-            width: 100%;
-            max-width: 540px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        @media (min-width: 768px) {
-            .card {
-                margin-bottom: 52px;
-                margin-top: 24px;
-                border-radius: 24px;
-            }
-        }
-
-        /* BANNER */
-        .banner {
-            position: relative;
-            height: 80px;
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #8B4513 100%);
-            overflow: hidden;
-        }
-
-        @media (min-width: 768px) {
-            .banner {
-                height: 120px;
-                border-radius: 12px 12px 0 0;
-            }
-        }
-
-        .banner::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: url('https://assets.garena.com/gop/mshop/www/live/assets/FF-4470ba9b.jpg');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.8;
-        }
-
-        .back-button {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background-color: rgba(0, 0, 0, 0.4);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            border-radius: 24px;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
-            z-index: 10;
-            transition: background-color 0.2s ease;
-            outline: none;
-        }
-
-        @media (min-width: 768px) {
-            .back-button {
-                top: 24px;
-                left: 24px;
-                padding: 6px 14px;
-                font-size: 14px;
-                gap: 4px;
-            }
-        }
-
-        .back-button:hover {
-            background-color: rgba(96, 96, 96, 0.5);
-        }
-
-        .back-button svg {
-            width: 1em;
-            height: 1em;
-            font-size: 16px;
-        }
-
-        /* GAME INFO */
-        .game-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-            padding: 0 20px;
-            margin-top: -36px;
-            position: relative;
-            z-index: 5;
-        }
-
-        @media (min-width: 768px) {
-            .game-info {
-                gap: 16px;
-                margin-top: -40px;
-                padding: 0 20px;
-            }
-        }
-
-        .game-icon {
-            width: 72px;
-            height: 72px;
-            border-radius: 8px;
-            border: 4px solid var(--bg-base);
-            object-fit: contain;
-            background-color: white;
-        }
-
-        @media (min-width: 768px) {
-            .game-icon {
-                width: 80px;
-                height: 80px;
-            }
-        }
-
-        .game-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--text-title);
-        }
-
-        @media (min-width: 768px) {
-            .game-title {
-                font-size: 24px;
-            }
-        }
-
-        /* SUMMARY */
-        .summary {
-            padding: 20px;
-            border-bottom: 8px solid var(--divider);
-        }
-
-        @media (min-width: 768px) {
-            .summary {
-                padding: 40px;
-                border-bottom: 8px solid var(--divider);
-            }
-        }
-
-        .summary-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(74, 74, 79, 0.3);
-            font-size: 13px;
-            align-items: center;
-        }
-
-        @media (min-width: 768px) {
-            .summary-row {
-                padding: 10px 0;
-                font-size: 14px;
-            }
-        }
-
-        .summary-row:last-child {
-            border-bottom: none;
-        }
-
-        .summary-label {
-            color: var(--text-secondary);
-            font-size: 13px;
-        }
-
-        @media (min-width: 768px) {
-            .summary-label {
-                font-size: 14px;
-            }
-        }
-
-        .summary-value {
-            color: var(--text-title);
-            font-weight: 500;
-            text-align: right;
-            font-size: 13px;
-        }
-
-        @media (min-width: 768px) {
-            .summary-value {
-                font-size: 14px;
-            }
-        }
-
-        .diamond-icon {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            justify-content: flex-end;
-        }
-
-        .diamond-img {
-            width: 12px;
-            height: 12px;
-        }
-
-        @media (min-width: 768px) {
-            .diamond-img {
-                width: 14px;
-                height: 14px;
-            }
-        }
-
-        .bonus-box {
-            background-color: var(--bg-panel);
-            border: 1px solid rgba(74, 74, 79, 0.5);
-            border-radius: 5px;
-            padding: 12px;
-            margin: 8px 0;
-            font-size: 13px;
-            grid-column: 1 / -1;
-        }
-
-        .bonus-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 0;
-            font-size: 12px;
-        }
-
-        @media (min-width: 768px) {
-            .bonus-row {
-                font-size: 13px;
-            }
-        }
-
-        .bonus-row:last-child {
-            padding-bottom: 0;
-        }
-
-        /* PROMO SECTION */
-        .promo-section {
-            padding: 20px;
-            border-bottom: 8px solid var(--divider);
-            border-top: 1px solid rgba(74, 74, 79, 0.3);
-        }
-
-        @media (min-width: 768px) {
-            .promo-section {
-                padding: 20px 40px;
-            }
-        }
-
-        .promo-title {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-title);
-            margin-bottom: 12px;
-        }
-
-        @media (min-width: 768px) {
-            .promo-title {
-                font-size: 14px;
-            }
-        }
-
-        .promo-input-group {
-            display: flex;
-            gap: 0;
-        }
-
-        .form-input {
-            flex: 1;
-            background-color: var(--bg-inputbox);
-            border: 1px solid var(--box-border);
-            color: var(--text-title);
-            padding: 12px;
-            font-size: 13px;
-            border-radius: 6px 0 0 6px;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-
-        @media (min-width: 768px) {
-            .form-input {
-                padding: 12px;
-                font-size: 13px;
-            }
-        }
-
-        .form-input:focus {
-            border-color: var(--primary-red);
-        }
-
-        .form-input::placeholder {
-            color: #666;
-        }
-
-        .btn-apply {
-            background-color: var(--primary-red);
-            color: white;
-            border: 1px solid var(--primary-red);
-            padding: 12px 20px;
-            font-weight: bold;
-            font-size: 13px;
-            cursor: pointer;
-            border-radius: 0 6px 6px 0;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-            outline: none;
-        }
-
-        .btn-apply:hover:not(:disabled) {
-            background-color: var(--primary-red-hover);
-            border-color: var(--primary-red-hover);
-        }
-
-        .btn-apply:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        /* PAYMENT SECTION */
-        .payment-section {
-            padding: 20px;
-        }
-
-        @media (min-width: 768px) {
-            .payment-section {
-                padding: 40px;
-                padding-top: 24px;
-            }
-        }
-
-        .paypal-button {
-            width: 100%;
-            height: 55px;
-            background-color: #FFC439;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 18px;
-            color: #003087;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            font-family: Arial, sans-serif;
-            outline: none;
-        }
-
-        .paypal-button:hover {
-            background-color: #FFD066;
-        }
-
-        .paypal-button:active {
-            transform: scale(0.98);
-        }
-
-        /* FOOTER */
-        footer {
-            background-color: var(--bg-base);
-            border-top: 1px solid rgba(74, 74, 79, 0.3);
-        }
-
-        @media (min-width: 768px) {
-            footer {
-                background-color: #F9F9F9;
-            }
-        }
-
-        .footer-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 16px;
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        @media (min-width: 768px) {
-            .footer-content {
-                padding: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-        }
-
-        .footer-top {
-            margin-bottom: 8px;
-        }
-
-        @media (min-width: 768px) {
-            .footer-top {
-                margin-bottom: 0;
-                flex: 1;
-            }
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        @media (min-width: 768px) {
-            .footer-links {
-                justify-content: flex-end;
-                gap: 0;
-                flex: 1;
-            }
-        }
-
-        .footer-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: opacity 0.2s ease;
-        }
-
-        .footer-link:hover {
-            opacity: 0.7;
-        }
-
-        .footer-divider {
-            width: 1px;
-            height: 12px;
-            background-color: var(--line);
-            margin: 0 8px;
-            display: inline-block;
-        }
-
-        @media (min-width: 768px) {
-            .footer-divider {
-                margin: 0 16px;
-                height: 12px;
-            }
-        }
-
-        /* RESPONSIVE ADJUSTMENTS */
-        @media (max-width: 767px) {
-            .logo-icon {
-                display: block;
-            }
-
-            .header-content {
-                gap: 1px;
-            }
-        }
-
-        /* ANIMATIONS */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .card {
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        /* RESPONSIVE FOOTER */
-        @media (min-width: 768px) {
-            .footer-content {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .footer-top {
-                flex: none;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>Centro de Recarga Garena</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg-base:#1b1b25;        /* azul oscuro de header / tarjeta */
+  --bg-panel:#242430;
+  --bg-inputbox:#2b2b38;
+  --bg-page:#0d0d11;        /* fondo exterior casi negro */
+  --divider:#13131a;
+  --text-title:#ffffff;
+  --text-secondary:#a4a4b4;
+  --primary-red:#e41e26;
+  --primary-red-hover:#c91820;
+  --box-border:#3c3c4b;
+  --box-border-focus:#6b6b80;
+  --line:#3c3c4b;
+  --short-line:#4a4a5c;
+  --icon:#b4b4c4;
+}
+html{background:var(--bg-page)}
+body{
+  background:var(--bg-page);color:var(--text-title);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:14px;line-height:1.5;
+}
+a{color:inherit;text-decoration:none}
+#root{display:flex;flex-direction:column;min-height:100vh}
+
+/* ============ HEADER ============ */
+header{position:sticky;top:0;z-index:10}
+.header-bar{height:56px;border-bottom:1px solid rgba(60,60,75,.5);background:var(--bg-base)}
+.header-inner{
+  max-width:1024px;margin:0 auto;height:100%;width:100%;
+  display:flex;align-items:stretch;justify-content:space-between;gap:4px;padding:0 12px;
+}
+.logo-link{display:flex;align-items:center;gap:10px;min-width:0}
+.logo-wrap{display:flex;align-items:center}
+.logo-mobile{width:34px;display:block}
+.logo-desktop{width:100px;height:26px;display:none}
+.logo-sep{margin-left:6px;height:20px;border-right:1px solid var(--short-line)}
+.logo-title{font-size:12px;font-weight:500;max-width:96px;line-height:1.25;color:var(--text-title)}
+
+.header-right{display:flex;align-items:stretch;gap:8px;min-width:0}
+.loc-wrap{display:flex;align-items:center;min-width:0}
+.location-btn{
+  display:flex;align-items:center;gap:4px;min-width:0;max-width:160px;
+  padding:5px 7px;border:1px solid var(--box-border);background:var(--bg-inputbox);
+  color:var(--text-title);border-radius:6px;font-size:14px;line-height:1;cursor:pointer;
+  outline:none;transition:border-color .2s;font-family:inherit;
+}
+.location-btn:hover,.location-btn:focus-visible{border-color:var(--box-border-focus)}
+.location-btn svg{flex-shrink:0;color:var(--icon)}
+.location-btn .pin{width:1em;height:1em;font-size:16px}
+.location-btn .caret{width:12px;height:12px}
+.loc-text{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.loc-sep{height:10px;border-right:1px solid var(--short-line)}
+.avatar-wrap{display:flex;align-items:center}
+.avatar{width:30px;height:30px;border-radius:50%;overflow:hidden;border:0;background:none;cursor:pointer;display:block;transition:opacity .2s}
+.avatar:hover{opacity:.7}
+.avatar img{width:100%;height:100%;display:block}
+
+/* ============ MAIN ============ */
+main{flex:1;display:flex;flex-direction:column}
+.page-bg{
+  position:relative;height:100%;flex:1;
+  background-color:var(--bg-base);
+  background-image:url("https://assets.garena.com/gop/mshop/www/live/assets/FF-8d5fce78.png");
+  background-attachment:fixed;background-position:top;background-repeat:no-repeat;
+}
+.card{display:flex;flex-direction:column;background:var(--bg-base);min-height:100%}
+
+/* banner */
+.top{background:var(--bg-base);margin-bottom:12px}
+.banner{position:relative;height:80px;overflow:hidden}
+.banner-img{
+  width:100%;height:100%;background-size:cover;background-position:center;background-repeat:no-repeat;
+  background-image:url("https://assets.garena.com/gop/mshop/www/live/assets/FF-4470ba9b.jpg");
+}
+.back{
+  position:absolute;left:16px;top:16px;display:flex;align-items:center;gap:2px;
+  border-radius:9999px;background:rgba(0,0,0,.4);padding:6px 12px 6px 6px;
+  font-size:14px;line-height:1;font-weight:500;color:#fff;
+  outline:1px solid rgba(255,255,255,.7);outline-offset:-1px;transition:background-color .2s;
+}
+.back:hover{background:rgba(96,96,96,.5)}
+.back svg{width:1em;height:1em;font-size:16px;transform:rotate(90deg)}
+
+.game{position:relative;margin:-36px 20px 0;display:flex;flex-direction:column;align-items:center;gap:16px}
+.game-icon{
+  display:block;width:72px;height:72px;border-radius:8px;background:#fff;object-fit:contain;overflow:hidden;
+  outline:4px solid var(--bg-base);
+}
+.game-name{font-size:20px;line-height:1;font-weight:700;text-align:center;color:var(--text-title)}
+
+/* resumen */
+.summary{
+  display:grid;grid-template-columns:1fr 1fr;justify-content:space-between;column-gap:14px;
+  padding:0 16px;margin-bottom:12px;
+}
+.summary dt{padding:10px 0;font-size:14px;line-height:18px}
+.summary dd{display:flex;align-items:center;justify-content:flex-end;gap:4px;padding:10px 0;text-align:end;font-size:14px;line-height:18px;font-weight:500}
+.summary dd img{width:14px;height:14px}
+.bonus-wrap{grid-column:1 / -1;width:100%;margin-bottom:8px}
+.bonus{
+  list-style:none;display:flex;flex-direction:column;gap:12px;padding:12px;
+  border:1px solid rgba(60,60,75,.5);border-radius:5px;background:var(--bg-panel);
+  font-size:12px;line-height:14px;
+}
+.bonus li{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.bonus .v{display:flex;align-items:center;gap:4px;font-weight:500}
+.bonus .v img{width:12px;height:12px;flex-shrink:0;object-fit:contain}
+
+.gap{height:8px;background:var(--divider)}
+
+/* promo */
+.promo{padding:16px;border-bottom:8px solid var(--divider)}
+.promo-label{font-size:15px;line-height:16px;font-weight:500;color:var(--text-title);display:block;margin-bottom:8px}
+.promo-row{display:flex;align-items:flex-end;justify-content:space-between}
+.form-input{
+  flex:1;width:100%;height:44px;padding:0 12px;
+  background:var(--bg-inputbox);border:1px solid var(--box-border);border-right:0;
+  border-radius:6px 0 0 6px;color:var(--text-title);font-size:14px;font-family:inherit;
+  outline:none;transition:border-color .2s;
+}
+.form-input::placeholder{color:#6b6b7c}
+.form-input:focus{border-color:var(--box-border-focus)}
+.btn-apply{
+  height:44px;padding:4px 20px;border:1px solid var(--primary-red);background:var(--primary-red);
+  color:#fff;border-radius:0 6px 6px 0;font-size:16px;font-weight:700;line-height:1;
+  white-space:nowrap;cursor:pointer;font-family:inherit;transition:background-color .2s,border-color .2s;
+}
+.btn-apply:hover:not(:disabled){background:var(--primary-red-hover);border-color:var(--primary-red-hover)}
+.btn-apply:disabled{opacity:.4;cursor:not-allowed}
+
+/* pago */
+.pay{padding:20px 16px 32px}
+.paypal-btn{
+  display:flex;align-items:center;justify-content:center;width:100%;height:55px;border:0;border-radius:4px;
+  background:#ffc439;cursor:pointer;transition:filter .2s,transform .1s;
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:24px;font-style:italic;font-weight:800;letter-spacing:-.5px;
+}
+.paypal-btn:hover{filter:brightness(.96)}
+.paypal-btn:active{transform:scale(.99)}
+.paypal-btn .p1{color:#003087}
+.paypal-btn .p2{color:#009cde}
+
+/* ============ FOOTER ============ */
+footer{background:var(--bg-page)}
+.footer-inner{max-width:1024px;margin:0 auto;width:100%}
+.footer-hr{display:none;border:0;border-top:1px solid rgba(60,60,75,.5)}
+.footer-box{display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px 16px 20px;text-align:center;font-size:12px;color:var(--text-secondary)}
+.footer-row{display:flex;flex-direction:column;align-items:center;gap:12px;line-height:1}
+.footer-links{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;row-gap:4px}
+.footer-links>div{display:flex;align-items:center}
+.footer-links .sep{margin:0 16px;height:8px;width:1px;background:var(--short-line)}
+.footer-links a{transition:opacity .2s}
+.footer-links a:hover{opacity:.7}
+
+/* ============ DESKTOP ============ */
+@media (min-width:768px){
+  .header-bar{height:60px}
+  .header-inner{padding:0 16px}
+  .logo-link{gap:12px}
+  .logo-mobile{display:none}
+  .logo-desktop{display:block}
+  .logo-sep{margin-left:12px;height:14px}
+  .logo-title{font-size:16px;line-height:20px;max-width:none}
+  .header-right{gap:18px}
+  .location-btn{max-width:none}
+
+  .page-bg{background-color:var(--bg-page)}
+  .card{max-width:600px;margin:24px auto 52px;border-radius:16px;min-height:0}
+  .top{padding:8px 8px 0;margin-bottom:16px;border-radius:16px 16px 0 0}
+  .banner{height:120px;border-radius:8px 8px 0 0}
+  .back{left:24px;top:24px;padding:6px 14px 6px 6px;font-size:16px}
+  .back svg{font-size:20px}
+  .game{margin-top:-40px}
+  .game-icon{width:80px;height:80px}
+  .game-name{font-size:24px}
+
+  .summary{padding:0 40px;margin-bottom:16px}
+  .summary dt,.summary dd{font-size:16px;line-height:16px}
+  .bonus{font-size:14px;line-height:18px}
+  .promo{padding:24px 40px}
+  .pay{padding:24px 40px 40px}
+
+  footer{background:var(--bg-page)}
+  .footer-hr{display:block}
+  .footer-box{align-items:flex-start;padding:16px}
+  .footer-row{flex-direction:row;justify-content:space-between;width:100%}
+  .footer-row>div:first-child{flex:1;text-align:start}
+  .footer-links{flex:1;justify-content:flex-end}
+}
+</style>
 </head>
 <body>
-    <div id="root">
-        <!-- HEADER -->
-        <header>
-            <div class="header-content">
-                <a href="/" class="logo-section">
-                    <svg class="logo-icon" viewBox="0 0 34 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19.5397 0.10298L19.6326 0.022157L19.8982 0L19.7826 0.195385L19.5734 0.229753L19.3184 0.505834L19.1692 0.425641L19.1335 0.516787L18.8325 0.540581L18.8448 0.620774L19.1335 0.655772L18.8911 0.724761L18.8565 0.828244L18.7168 0.81641L18.7058 0.920145L18.4166 0.931098V1.00097L18.2308 1.04679L18.0569 1.24155L17.9295 1.1611C17.9295 1.1611 17.8947 1.1611 17.8714 1.28838C17.2684 1.64168 16.0247 2.32664 14.7703 3.01758C13.7365 3.58698 12.6953 4.16043 11.9993 4.55566C11.9567 4.58208 11.9112 4.61072 11.8625 4.64133C11.2738 5.0112 10.2255 5.66994 8.52449 6.21303C10.1314 5.87985 10.7558 5.59868 11.6469 5.19752C12.079 5.00297 12.5738 4.7802 13.2737 4.50958C15.4158 3.68083 17.7672 3.77273 17.7672 3.77273L17.478 3.94646L17.5003 4.24496L17.6626 4.26837L17.7791 4.29128L17.9871 4.15356L17.9991 4.25691L18.1848 4.29128L18.3465 4.25691L18.5783 4.18856L18.7643 4.23098L18.7396 4.04894L18.8973 4.09993L19.0023 4.21839L19.1335 4.04894L19.4478 4.13606L19.1458 4.14172L19.1804 4.25691L18.6473 4.26837L18.6819 4.34869L18.3115 4.32603L18.2422 4.3604C18.2422 4.3604 18.3005 4.44147 18.2191 4.45255C17.9295 4.55566 17.7731 4.74638 17.7731 4.74638C20.4134 3.64105 23.6109 5.57412 23.6109 5.57412L23.8187 5.62498L23.8546 5.93669L23.9404 6.00631H24.1149L23.9927 6.19528L24.1149 6.33313V6.55721L23.9058 6.5061L23.7495 6.33313L23.8365 6.22939L23.7323 6.09267H23.4195L23.2638 5.98869L23.1416 5.97094L22.8634 5.83258L22.6374 5.86821L22.4292 5.67673L21.4904 5.69435L21.5431 5.78096L22.0121 5.81546L22.0818 5.93669H22.551L22.7937 6.12641L23.107 6.09267L23.2809 6.17815L23.6279 6.28139L23.4023 6.36787C23.4023 6.36787 23.8811 7.1017 26.8589 7.8004C31.1329 8.80112 34 6.95516 34 6.95516C33.2703 7.88638 32.3836 8.16221 32.3836 8.16221L31.7406 8.23208L31.6014 8.33519L31.3065 8.42193L30.4385 8.88798L30.2122 9.04283L30.1948 9.16318L30.1085 9.26742L30.0737 9.09507H29.8121L29.5699 9.16318L29.604 9.25017L29.5519 9.47388H29.3773L29.4655 9.33691L29.3773 9.26742L29.2742 9.09507L29.1182 9.11169L28.8052 9.38765L28.6141 9.33691L28.4918 9.37078L28.3188 9.45714L28.1452 9.52588L27.9192 9.45714L27.6927 9.5605L27.537 9.45714L27.1897 9.42201L27.1721 9.30204H26.9637L26.8067 9.38765L26.5986 9.52588L25.9041 9.5605L26.5464 9.68211L26.7728 9.71572L26.9288 9.52588L27.0854 9.50901L27.242 9.5605L27.5717 9.6991L27.7804 9.68211L27.9363 9.57724L28.058 9.63012L28.2145 9.71572L28.3772 9.80208C28.3772 9.80208 27.3808 9.94006 26.1071 10.0101C27.358 10.078 28.5379 10.9065 28.5379 10.9065C28.5379 10.9065 27.9131 10.6542 25.5978 10.8143C23.4676 10.9631 22.2721 10.4309 21.0773 9.89913C20.129 9.47709 19.1813 9.05525 17.7672 8.97409C13.5286 8.72936 11.7362 11.2349 11.7362 11.2349L11.579 11.5807L11.2405 11.6057L11.206 11.8123L11.1366 11.8384L11.1189 11.9071L10.8933 11.9937L10.902 12.0973L11.1189 12.1224L11.0758 12.261L11.0059 12.4072L11.3276 12.9697L10.9362 12.6326L10.7801 12.5545L10.511 12.4428L10.4241 12.5373L10.3543 12.7278L10.2415 12.9002L10.0767 12.8482C10.0767 12.8482 10.1113 13.3052 9.65914 13.3919C9.48551 13.5728 9.6509 13.677 9.6509 13.677L9.87674 13.694V13.8851L9.96406 13.901C9.96406 13.901 9.91172 13.9611 9.87674 14.0911C10.0416 14.1163 10.1193 14.0047 10.1193 14.0047L10.224 14.03C10.224 14.03 9.97242 14.5573 9.33825 14.7641C9.43342 14.8671 9.53773 14.8765 9.53773 14.8765C9.53773 14.8765 8.84297 15.2818 8.62588 15.7473C8.49585 16.2138 8.7042 16.1794 8.7042 16.1794C8.7042 16.1794 8.50383 16.4036 8.4866 16.0837C8.28724 15.9987 8.19194 16.2219 8.19194 16.2219C8.19194 16.2219 8.18231 16.2737 8.27825 16.3003C8.07826 16.4643 8.08739 16.6787 8.08739 16.6787L8.28724 16.6961C8.28724 16.6961 8.37342 16.9034 8.19194 16.9034C8.00945 16.9034 8.00057 16.9987 8.00057 16.9987V17.0931L8.096 17.1629L7.87587 17.3489C7.87587 17.3489 7.66752 18.1319 7.82999 19.582C8.40891 24.4364 13.0651 24.2304 13.0651 24.2304C13.0651 24.2304 17.6517 24.5978 19.7597 20.916C23.0032 15.1179 18.0454 13.8972 18.0454 13.8972C18.0454 13.8972 14.3855 13.0235 13.1807 14.3585C12.1089 15.5457 13.5514 16.9578 13.5514 16.9578C13.5514 16.9578 14.4087 17.5568 14.0145 18.5701C13.3594 20.253 11.5828 19.8334 11.5828 19.8334C11.5828 19.8334 8.80191 19.1686 9.45117 16.7523C10.3581 13.3735 14.7559 12.8164 14.7559 12.8164C14.7559 12.8164 19.4232 11.9764 22.2846 13.8868C23.5404 14.7256 25.6555 13.9906 25.6555 13.9906C25.044 14.5972 23.964 14.8053 23.9527 14.807C23.9532 14.807 23.9557 14.8065 23.9602 14.8058C24.0877 14.7838 25.8036 14.4876 28.0874 14.5433C30.3032 14.5964 31.6661 12.5633 31.6661 12.5633C31.6661 12.5633 31.2639 13.5216 29.4074 14.6231C26.6483 16.2595 26.2915 16.8663 26.2915 16.8663C26.2915 16.8663 26.524 16.7404 27.323 16.3371C25.4002 17.9829 24.1496 19.823 24.1496 19.823L23.9527 19.8811L24.0795 19.9951L24.253 20.0642L24.1947 20.2029L23.9757 20.2253C23.9757 20.2253 23.9527 20.5479 24.1612 20.6409C23.7903 20.9279 23.4314 21.3074 23.4314 21.3074L23.6159 21.3879C23.6159 21.3879 23.8709 21.6289 23.5465 21.9177C23.2687 22.2166 23.2568 21.837 23.2568 21.837C23.2568 21.837 23.2454 22.3198 22.6085 22.6538C22.4812 22.6992 22.2727 22.6416 22.2727 22.6416L21.9595 22.9987C21.9595 22.9987 24.1612 22.838 26.1071 22.032C22.539 23.7813 20.5126 23.9765 20.5126 23.9765V24.0341L20.7904 24.1037C20.7904 24.1037 20.0723 24.5398 17.3621 24.7826C17.8246 24.9317 17.8947 24.9205 17.8947 24.9205C17.8947 24.9205 17.2572 25.1273 15.7178 25.23C16.3083 25.4379 16.898 25.5081 16.898 25.5081L12.3351 25.5421C8.82523 25.5069 1.68961 22.5415 3.50964 16.1181C5.45538 9.25017 14.1769 8.04375 14.1769 8.04375C14.1769 8.04375 9.96545 6.80094 6.18486 8.55928C2.3281 10.3553 0 9.31929 0 9.31929L1.67998 7.67337L1.07749 7.83464L2.22304 6.81038L2.3044 6.95969L3.86842 5.30346L3.99579 5.50048L4.11213 5.61466L4.1575 5.41789L4.05409 5.2458L4.54036 4.71781L4.48232 4.67135L4.85301 4.08419L5.13107 4.02666L5.98804 3.11721C5.98804 3.11721 5.46729 3.71646 5.13107 4.32603C4.96847 4.87756 4.63301 5.10757 4.63301 5.10757C4.63301 5.10757 4.65582 5.15453 4.71373 5.25688C5.00345 4.48705 6.61284 3.67001 6.61284 3.67001C6.61284 3.67001 6.26635 3.94647 5.89515 4.32603C6.43947 3.8426 10.2161 1.35762 10.2161 1.35762L10.3776 1.36908L10.3896 1.49509C10.3896 1.49509 8.32729 2.99031 7.34321 4.02666C8.21108 3.76254 9.20822 2.9212 9.20822 2.9212L9.2655 3.09481L9.56713 3.11721L9.67092 3.03778L9.94911 2.85246L10.053 2.78347L10.0884 2.58771L10.4583 2.60068L10.4933 2.69195H10.5864L10.7243 2.63505L10.7712 2.51948L10.6902 2.39296L10.7712 2.28922C10.7712 2.28922 10.8641 2.38125 10.9565 2.50865C11.2815 2.19707 12.6137 1.87491 12.6137 1.87491C12.6137 1.87491 12.5323 1.9901 12.4399 2.09359C16.0297 1.42611 19.0416 0.218171 19.0416 0.218171L19.2839 0.206337L19.3079 0.126396L19.5397 0.10298Z" fill="#E41E26"/>
-                    </svg>
-                    <span class="logo-text">Centro Oficial de Recargas</span>
-                </a>
-                <div class="header-divider"></div>
-                <div class="header-actions">
-                    <button class="location-btn">
-                        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M40 49C32.8203 49 27 43.1797 27 36C27 28.8203 32.8203 23 40 23C47.1797 23 53 28.8203 53 36C53 43.1797 47.1797 49 40 49ZM33 36C33 39.866 36.134 43 40 43C43.866 43 47 39.866 47 36C47 32.134 43.866 29 40 29C36.134 29 33 32.134 33 36Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M40 6C23.4315 6 10 19.3549 10 35.829C10 43.7268 12.3501 49.6354 16.2895 54.7371C20.069 59.6319 25.305 63.7531 30.8937 68.152L31.0877 68.3047C32.9392 69.7621 34.8449 71.2622 36.8025 72.8626C38.6615 74.3825 41.3458 74.3784 43.2004 72.8546C45.1989 71.2125 47.1458 69.6759 49.0376 68.183L49.3969 67.8994C60.4829 59.1524 70 51.6433 70 35.829C70 19.3549 56.5685 6 40 6ZM16 35.829C16 22.6497 26.7452 11.9658 40 11.9658C53.2548 11.9658 64 22.6497 64 35.829C64 48.5833 56.8205 54.4242 45.3074 63.5102L45.2979 63.5177C43.6045 64.8541 41.8252 66.2583 39.995 67.751C38.2094 66.3015 36.4745 64.9359 34.8214 63.6347L34.8119 63.6272C28.991 59.0453 24.3297 55.3533 21.0486 51.1041C17.8836 47.0052 16 42.3644 16 35.829Z" fill="currentColor"></path>
-                        </svg>
-                        <span class="location-text">Resto de LATAM</span>
-                        <span class="location-lang">ES</span>
-                        <svg class="location-arrow" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.86496 3H3.13504C2.2872 3 1.82405 3.98886 2.36682 4.64018L5.23178 8.07813C5.63157 8.55789 6.36843 8.55789 6.76822 8.07814L9.63318 4.64018C10.176 3.98886 9.7128 3 8.86496 3Z" fill="currentColor"></path>
-                        </svg>
-                    </button>
-                    <div class="avatar">
-                        <img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/icon.png" alt="Avatar">
-                    </div>
-                </div>
-            </div>
-        </header>
+<!-- símbolo de la llama Garena -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="flame" viewBox="0 0 34 36">
+    <path d="M19.5397 0.10298L19.6326 0.022157L19.8982 0L19.7826 0.195385L19.5734 0.229753L19.3184 0.505834L19.1692 0.425641L19.1335 0.516787L18.8325 0.540581L18.8448 0.620774L19.1335 0.655772L18.8911 0.724761L18.8565 0.828244L18.7168 0.81641L18.7058 0.920145L18.4166 0.931098V1.00097L18.2308 1.04679L18.0569 1.24155L17.9295 1.1611C17.9295 1.1611 17.8947 1.1611 17.8714 1.28838C17.2684 1.64168 16.0247 2.32664 14.7703 3.01758C13.7365 3.58698 12.6953 4.16043 11.9993 4.55566C11.9567 4.58208 11.9112 4.61072 11.8625 4.64133C11.2738 5.0112 10.2255 5.66994 8.52449 6.21303C10.1314 5.87985 10.7558 5.59868 11.6469 5.19752C12.079 5.00297 12.5738 4.7802 13.2737 4.50958C15.4158 3.68083 17.7672 3.77273 17.7672 3.77273L17.478 3.94646L17.5003 4.24496L17.6626 4.26837L17.7791 4.29128L17.9871 4.15356L17.9991 4.25691L18.1848 4.29128L18.3465 4.25691L18.5783 4.18856L18.7643 4.23098L18.7396 4.04894L18.8973 4.09993L19.0023 4.21839L19.1335 4.04894L19.4478 4.13606L19.1458 4.14172L19.1804 4.25691L18.6473 4.26837L18.6819 4.34869L18.3115 4.32603L18.2422 4.3604C18.2422 4.3604 18.3005 4.44147 18.2191 4.45255C17.9295 4.55566 17.7731 4.74638 17.7731 4.74638C20.4134 3.64105 23.6109 5.57412 23.6109 5.57412L23.8187 5.62498L23.8546 5.93669L23.9404 6.00631H24.1149L23.9927 6.19528L24.1149 6.33313V6.55721L23.9058 6.5061L23.7495 6.33313L23.8365 6.22939L23.7323 6.09267H23.4195L23.2638 5.98869L23.1416 5.97094L22.8634 5.83258L22.6374 5.86821L22.4292 5.67673L21.4904 5.69435L21.5431 5.78096L22.0121 5.81546L22.0818 5.93669H22.551L22.7937 6.12641L23.107 6.09267L23.2809 6.17815L23.6279 6.28139L23.4023 6.36787C23.4023 6.36787 23.8811 7.1017 26.8589 7.8004C31.1329 8.80112 34 6.95516 34 6.95516C33.2703 7.88638 32.3836 8.16221 32.3836 8.16221L31.7406 8.23208L31.6014 8.33519L31.3065 8.42193L30.4385 8.88798L30.2122 9.04283L30.1948 9.16318L30.1085 9.26742L30.0737 9.09507H29.8121L29.5699 9.16318L29.604 9.25017L29.5519 9.47388H29.3773L29.4655 9.33691L29.3773 9.26742L29.2742 9.09507L29.1182 9.11169L28.8052 9.38765L28.6141 9.33691L28.4918 9.37078L28.3188 9.45714L28.1452 9.52588L27.9192 9.45714L27.6927 9.5605L27.537 9.45714L27.1897 9.42201L27.1721 9.30204H26.9637L26.8067 9.38765L26.5986 9.52588L25.9041 9.5605L26.5464 9.68211L26.7728 9.71572L26.9288 9.52588L27.0854 9.50901L27.242 9.5605L27.5717 9.6991L27.7804 9.68211L27.9363 9.57724L28.058 9.63012L28.2145 9.71572L28.3772 9.80208C28.3772 9.80208 27.3808 9.94006 26.1071 10.0101C27.358 10.078 28.5379 10.9065 28.5379 10.9065C28.5379 10.9065 27.9131 10.6542 25.5978 10.8143C23.4676 10.9631 22.2721 10.4309 21.0773 9.89913C20.129 9.47709 19.1813 9.05525 17.7672 8.97409C13.5286 8.72936 11.7362 11.2349 11.7362 11.2349L11.579 11.5807L11.2405 11.6057L11.206 11.8123L11.1366 11.8384L11.1189 11.9071L10.8933 11.9937L10.902 12.0973L11.1189 12.1224L11.0758 12.261L11.0059 12.4072L11.3276 12.9697L10.9362 12.6326L10.7801 12.5545L10.511 12.4428L10.4241 12.5373L10.3543 12.7278L10.2415 12.9002L10.0767 12.8482C10.0767 12.8482 10.1113 13.3052 9.65914 13.3919C9.48551 13.5728 9.6509 13.677 9.6509 13.677L9.87674 13.694V13.8851L9.96406 13.901C9.96406 13.901 9.91172 13.9611 9.87674 14.0911C10.0416 14.1163 10.1193 14.0047 10.1193 14.0047L10.224 14.03C10.224 14.03 9.97242 14.5573 9.33825 14.7641C9.43342 14.8671 9.53773 14.8765 9.53773 14.8765C9.53773 14.8765 8.84297 15.2818 8.62588 15.7473C8.49585 16.2138 8.7042 16.1794 8.7042 16.1794C8.7042 16.1794 8.50383 16.4036 8.4866 16.0837C8.28724 15.9987 8.19194 16.2219 8.19194 16.2219C8.19194 16.2219 8.18231 16.2737 8.27825 16.3003C8.07826 16.4643 8.08739 16.6787 8.08739 16.6787L8.28724 16.6961C8.28724 16.6961 8.37342 16.9034 8.19194 16.9034C8.00945 16.9034 8.00057 16.9987 8.00057 16.9987V17.0931L8.096 17.1629L7.87587 17.3489C7.87587 17.3489 7.66752 18.1319 7.82999 19.582C8.40891 24.4364 13.0651 24.2304 13.0651 24.2304C13.0651 24.2304 17.6517 24.5978 19.7597 20.916C23.0032 15.1179 18.0454 13.8972 18.0454 13.8972C18.0454 13.8972 14.3855 13.0235 13.1807 14.3585C12.1089 15.5457 13.5514 16.9578 13.5514 16.9578C13.5514 16.9578 14.4087 17.5568 14.0145 18.5701C13.3594 20.253 11.5828 19.8334 11.5828 19.8334C11.5828 19.8334 8.80191 19.1686 9.45117 16.7523C10.3581 13.3735 14.7559 12.8164 14.7559 12.8164C14.7559 12.8164 19.4232 11.9764 22.2846 13.8868C23.5404 14.7256 25.6555 13.9906 25.6555 13.9906C25.044 14.5972 23.964 14.8053 23.9527 14.807C23.9532 14.807 23.9557 14.8065 23.9602 14.8058C24.0877 14.7838 25.8036 14.4876 28.0874 14.5433C30.3032 14.5964 31.6661 12.5633 31.6661 12.5633C31.6661 12.5633 31.2639 13.5216 29.4074 14.6231C26.6483 16.2595 26.2915 16.8663 26.2915 16.8663C26.2915 16.8663 26.524 16.7404 27.323 16.3371C25.4002 17.9829 24.1496 19.823 24.1496 19.823L23.9527 19.8811L24.0795 19.9951L24.253 20.0642L24.1947 20.2029L23.9757 20.2253C23.9757 20.2253 23.9527 20.5479 24.1612 20.6409C23.7903 20.9279 23.4314 21.3074 23.4314 21.3074L23.6159 21.3879C23.6159 21.3879 23.8709 21.6289 23.5465 21.9177C23.2687 22.2166 23.2568 21.837 23.2568 21.837C23.2568 21.837 23.2454 22.3198 22.6085 22.6538C22.4812 22.6992 22.2727 22.6416 22.2727 22.6416L21.9595 22.9987C21.9595 22.9987 24.1612 22.838 26.1071 22.032C22.539 23.7813 20.5126 23.9765 20.5126 23.9765V24.0341L20.7904 24.1037C20.7904 24.1037 20.0723 24.5398 17.3621 24.7826C17.8246 24.9317 17.8947 24.9205 17.8947 24.9205C17.8947 24.9205 17.2572 25.1273 15.7178 25.23C16.3083 25.4379 16.898 25.5081 16.898 25.5081L12.3351 25.5421C8.82523 25.5069 1.68961 22.5415 3.50964 16.1181C5.45538 9.25017 14.1769 8.04375 14.1769 8.04375C14.1769 8.04375 9.96545 6.80094 6.18486 8.55928C2.3281 10.3553 0 9.31929 0 9.31929L1.67998 7.67337L1.07749 7.83464L2.22304 6.81038L2.3044 6.95969L3.86842 5.30346L3.99579 5.50048L4.11213 5.61466L4.1575 5.41789L4.05409 5.2458L4.54036 4.71781L4.48232 4.67135L4.85301 4.08419L5.13107 4.02666L5.98804 3.11721C5.98804 3.11721 5.46729 3.71646 5.13107 4.32603C4.96847 4.87756 4.63301 5.10757 4.63301 5.10757C4.63301 5.10757 4.65582 5.15453 4.71373 5.25688C5.00345 4.48705 6.61284 3.67001 6.61284 3.67001C6.61284 3.67001 6.26635 3.94647 5.89515 4.32603C6.43947 3.8426 10.2161 1.35762 10.2161 1.35762L10.3776 1.36908L10.3896 1.49509C10.3896 1.49509 8.32729 2.99031 7.34321 4.02666C8.21108 3.76254 9.20822 2.9212 9.20822 2.9212L9.2655 3.09481L9.56713 3.11721L9.67092 3.03778L9.94911 2.85246L10.053 2.78347L10.0884 2.58771L10.4583 2.60068L10.4933 2.69195H10.5864L10.7243 2.63505L10.7712 2.51948L10.6902 2.39296L10.7712 2.28922C10.7712 2.28922 10.8641 2.38125 10.9565 2.50865C11.2815 2.19707 12.6137 1.87491 12.6137 1.87491C12.6137 1.87491 12.5323 1.9901 12.4399 2.09359C16.0297 1.42611 19.0416 0.218171 19.0416 0.218171L19.2839 0.206337L19.3079 0.126396L19.5397 0.10298Z" fill="#E41E26"/>
+  </symbol>
+</svg>
 
-        <!-- MAIN -->
-        <main>
-            <div class="card">
-                <!-- BANNER -->
-                <div class="banner">
-                    <a href="/" class="back-button" aria-label="Volver a Página de Inicio">
-                        <svg width="1em" height="1em" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg);">
-                            <g id="arrow_down">
-                                <path id="Vector 564 (Stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M17.1716 28.1716C18.7337 26.6095 21.2663 26.6095 22.8284 28.1716L40 45.3431L57.1716 28.1716C58.7337 26.6095 61.2663 26.6095 62.8284 28.1716C64.3905 29.7337 64.3905 32.2663 62.8284 33.8284L42.8284 53.8284C41.2663 55.3905 38.7337 55.3905 37.1716 53.8284L17.1716 33.8284C15.6095 32.2663 15.6095 29.7337 17.1716 28.1716Z" fill="currentColor"></path>
-                            </g>
-                        </svg>
-                        Regresar
-                    </a>
-                </div>
+<div id="root">
+  <!-- HEADER -->
+  <header>
+    <div class="header-bar">
+      <div class="header-inner">
+        <a class="logo-link" href="https://plantillas-rouge.vercel.app/">
+          <div class="logo-wrap">
+            <!-- móvil: solo la llama -->
+            <svg class="logo-mobile" viewBox="0 0 34 36" width="34" height="36" fill="none"><use href="#flame"/></svg>
+            <!-- desktop: llama + "Garena" -->
+            <svg class="logo-desktop" viewBox="0 0 100 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <use href="#flame" x="0" y="0" width="34" height="36"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M51.5505 20.1501H50.5769L50.3984 17.5929H50.3582C49.4061 19.599 47.5005 20.4442 45.456 20.4442C40.9891 20.4442 38.7656 16.9636 38.7656 13.1283C38.7656 9.29396 40.9891 5.8125 45.456 5.8125C48.4334 5.8125 50.8555 7.40551 51.372 10.4726H50.0221C49.8431 8.86099 48.1558 6.95308 45.456 6.95308C41.7037 6.95308 40.1168 10.0608 40.1168 13.1283C40.1168 16.1972 41.7037 19.304 45.456 19.304C48.5923 19.304 50.4189 17.1206 50.3582 14.1513H45.535V13.0107H51.5505V20.1501Z" fill="#E41E26"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M60.4616 14.6036H60.4219C60.263 14.8982 59.7081 14.9968 59.3702 15.0561C57.2454 15.4293 54.606 15.4099 54.606 17.3956C54.606 18.6357 55.7179 19.403 56.8883 19.403C58.7944 19.403 60.4822 18.2027 60.4616 16.2161V14.6036ZM53.7915 13.1085C53.9103 10.7291 55.5985 9.70618 57.9407 9.70618C59.7468 9.70618 61.7122 10.2572 61.7122 12.9714V18.3598C61.7122 18.8317 61.951 19.1073 62.4465 19.1073C62.5862 19.1073 62.7442 19.0679 62.8438 19.029V20.0709C62.5666 20.1306 62.3675 20.1497 62.03 20.1497C60.7587 20.1497 60.5614 19.4416 60.5614 18.3802H60.5212C59.6477 19.6981 58.754 20.4442 56.7881 20.4442C54.9035 20.4442 53.355 19.5199 53.355 17.4749C53.355 14.6236 56.1534 14.525 58.8531 14.2106C59.8856 14.0921 60.4614 13.9541 60.4614 12.8329C60.4614 11.1616 59.2499 10.7486 57.7818 10.7486C56.2333 10.7486 55.082 11.4566 55.0419 13.1085H53.7915Z" fill="#E41E26"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M64.2124 10.0007H65.3632V12.3809H65.4034C66.0386 10.7486 67.4282 9.78489 69.274 9.86361V11.1028C67.0117 10.9843 65.4627 12.637 65.4627 14.7408V20.1501H64.2124V10.0007Z" fill="#E41E26"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M77.4719 14.3675C77.4121 12.499 76.2417 10.7485 74.216 10.7485C72.172 10.7485 71.0408 12.5189 70.8413 14.3675H77.4719ZM70.8412 15.4098C70.8613 17.2186 71.8139 19.4029 74.2159 19.4029C76.0429 19.4029 77.0357 18.3397 77.4321 16.806H78.6824C78.1467 19.1079 76.7969 20.444 74.2159 20.444C70.9604 20.444 69.5918 17.9665 69.5918 15.0759C69.5918 12.4007 70.9604 9.70642 74.2159 9.70642C77.5115 9.70642 78.8212 12.5585 78.7221 15.4098H70.8412Z" fill="#E41E26"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M80.3892 10.0008H81.6395V11.7517H81.6792C82.1354 10.5324 83.5049 9.70667 84.9548 9.70667C87.8331 9.70667 88.7057 11.2011 88.7057 13.6198V20.1502H87.4559V13.817C87.4559 12.0666 86.8805 10.7486 84.8552 10.7486C82.8697 10.7486 81.6792 12.2435 81.6395 14.2296V20.1502H80.3892V10.0008Z" fill="#E41E26"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M97.6182 14.6036H97.5781C97.4205 14.8982 96.8638 14.9968 96.5264 15.0561C94.402 15.4293 91.7612 15.4099 91.7612 17.3956C91.7612 18.6357 92.8741 19.403 94.0445 19.403C95.9514 19.403 97.6379 18.2027 97.6182 16.2161V14.6036ZM90.9486 13.1085C91.0678 10.7291 92.7547 9.70618 95.0973 9.70618C96.903 9.70618 98.8688 10.2572 98.8688 12.9714V18.3598C98.8688 18.8317 99.1068 19.1073 99.6022 19.1073C99.7415 19.1073 99.9 19.0679 100 19.029V20.0709C99.7223 20.1306 99.5241 20.1497 99.1862 20.1497C97.9163 20.1497 97.7172 19.4416 97.7172 18.3802H97.6774C96.8048 19.6981 95.9115 20.4442 93.9457 20.4442C92.0592 20.4442 90.5107 19.5199 90.5107 17.4749C90.5107 14.6236 93.31 14.525 96.0102 14.2106C97.0427 14.0921 97.6181 13.9541 97.6181 12.8329C97.6181 11.1616 96.407 10.7486 94.9375 10.7486C93.3895 10.7486 92.2387 11.4566 92.1985 13.1085H90.9486Z" fill="#E41E26"/>
+            </svg>
+            <div class="logo-sep"></div>
+          </div>
+          <div class="logo-title">Centro Oficial de Recargas</div>
+        </a>
 
-                <!-- GAME INFO -->
-                <div class="game-info">
-                    <img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/icon.png" alt="Free Fire" class="game-icon">
-                    <h1 class="game-title">Free Fire</h1>
-                </div>
-
-                <!-- SUMMARY -->
-                <div class="summary">
-                    <div class="summary-row">
-                        <span class="summary-label">Monto total</span>
-                        <span class="summary-value">
-                            <span class="diamond-icon">
-                                <img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png" alt="💎" class="diamond-img">
-                                110
-                            </span>
-                        </span>
-                    </div>
-
-                    <div class="bonus-box">
-                        <div class="bonus-row">
-                            <span>Precio inicial</span>
-                            <span class="diamond-icon">
-                                <img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png" alt="💎" class="diamond-img">
-                                100
-                            </span>
-                        </div>
-                        <div class="bonus-row">
-                            <span>+ Bonus General</span>
-                            <span class="diamond-icon">
-                                <img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png" alt="💎" class="diamond-img">
-                                10
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="summary-row">
-                        <span class="summary-label">Precio</span>
-                        <span class="summary-value">US$ 0.99</span>
-                    </div>
-
-                    <div class="summary-row">
-                        <span class="summary-label">Método de pago</span>
-                        <span class="summary-value">PayPal</span>
-                    </div>
-
-                    <div class="summary-row">
-                        <span class="summary-label">Nombre del jugador</span>
-                        <span class="summary-value">Uriel854256O</span>
-                    </div>
-                </div>
-
-                <!-- PROMO SECTION -->
-                <div class="promo-section">
-                    <div class="promo-title">Código promocional</div>
-                    <div class="promo-input-group">
-                        <input type="text" class="form-input" placeholder="Ingresa el código promocional aqui, ej: PROMO1234">
-                        <button class="btn-apply" disabled>APLICAR</button>
-                    </div>
-                </div>
-
-                <!-- PAYMENT SECTION -->
-                <div class="payment-section">
-                    <button class="paypal-button">PayPal</button>
-                </div>
-            </div>
-        </main>
-
-        <!-- FOOTER -->
-        <footer>
-            <div class="footer-content">
-                <div class="footer-top">© Garena Online. Todos los derechos reservados.</div>
-                <div class="footer-links">
-                    <a href="#" class="footer-link">Preguntas</a>
-                    <span class="footer-divider"></span>
-                    <a href="#" class="footer-link">Help Center</a>
-                    <span class="footer-divider"></span>
-                    <a href="#" class="footer-link">Términos y Condiciones</a>
-                    <span class="footer-divider"></span>
-                    <a href="#" class="footer-link">Política de privacidad</a>
-                </div>
-            </div>
-        </footer>
+        <div class="header-right">
+          <div class="loc-wrap">
+            <button class="location-btn" type="button">
+              <svg class="pin" viewBox="0 0 80 80" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M40 49C32.8203 49 27 43.1797 27 36C27 28.8203 32.8203 23 40 23C47.1797 23 53 28.8203 53 36C53 43.1797 47.1797 49 40 49ZM33 36C33 39.866 36.134 43 40 43C43.866 43 47 39.866 47 36C47 32.134 43.866 29 40 29C36.134 29 33 32.134 33 36Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M40 6C23.4315 6 10 19.3549 10 35.829C10 43.7268 12.3501 49.6354 16.2895 54.7371C20.069 59.6319 25.305 63.7531 30.8937 68.152L31.0877 68.3047C32.9392 69.7621 34.8449 71.2622 36.8025 72.8626C38.6615 74.3825 41.3458 74.3784 43.2004 72.8546C45.1989 71.2125 47.1458 69.6759 49.0376 68.183L49.3969 67.8994C60.4829 59.1524 70 51.6433 70 35.829C70 19.3549 56.5685 6 40 6ZM16 35.829C16 22.6497 26.7452 11.9658 40 11.9658C53.2548 11.9658 64 22.6497 64 35.829C64 48.5833 56.8205 54.4242 45.3074 63.5102L45.2979 63.5177C43.6045 64.8541 41.8252 66.2583 39.995 67.751C38.2094 66.3015 36.4745 64.9359 34.8214 63.6347L34.8119 63.6272C28.991 59.0453 24.3297 55.3533 21.0486 51.1041C17.8836 47.0052 16 42.3644 16 35.829Z" fill="currentColor"/></svg>
+              <span class="loc-text">Resto de LATAM</span>
+              <span class="loc-sep"></span>
+              <span translate="no">ES</span>
+              <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M8.86496 3H3.13504C2.2872 3 1.82405 3.98886 2.36682 4.64018L5.23178 8.07813C5.63157 8.55789 6.36843 8.55789 6.76822 8.07814L9.63318 4.64018C10.176 3.98886 9.7128 3 8.86496 3Z" fill="currentColor"/></svg>
+            </button>
+          </div>
+          <div class="avatar-wrap">
+            <button class="avatar" type="button" aria-label="Avatar">
+              <img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/icon.png" alt="User avatar">
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <script>
-        // Funcionalidad del botón
-        const promoInput = document.querySelector('.form-input');
-        const applyButton = document.querySelector('.btn-apply');
+  <!-- MAIN -->
+  <main>
+    <div class="page-bg">
+      <div class="card">
+        <div class="top">
+          <div class="banner">
+            <div class="banner-img"></div>
+            <a class="back" href="/" aria-label="Volver a Página de Inicio">
+              <svg viewBox="0 0 80 80" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.1716 28.1716C18.7337 26.6095 21.2663 26.6095 22.8284 28.1716L40 45.3431L57.1716 28.1716C58.7337 26.6095 61.2663 26.6095 62.8284 28.1716C64.3905 29.7337 64.3905 32.2663 62.8284 33.8284L42.8284 53.8284C41.2663 55.3905 38.7337 55.3905 37.1716 53.8284L17.1716 33.8284C15.6095 32.2663 15.6095 29.7337 17.1716 28.1716Z" fill="currentColor"/></svg>
+              Regresar
+            </a>
+          </div>
+          <div class="game">
+            <img class="game-icon" src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/icon.png" alt="Free Fire">
+            <div class="game-name">Free Fire</div>
+          </div>
+        </div>
 
-        // Habilitar/deshabilitar botón según el input
-        promoInput.addEventListener('input', function() {
-            applyButton.disabled = !this.value.trim();
-        });
+        <dl class="summary">
+          <dt>Monto total</dt>
+          <dd><img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png" alt="">110</dd>
 
-        applyButton.addEventListener('click', function() {
-            const code = promoInput.value;
-            alert('Código aplicado: ' + (code || 'vacío'));
-            promoInput.value = '';
-            this.disabled = true;
-        });
+          <div class="bonus-wrap">
+            <ul class="bonus">
+              <li><div>Precio inicial</div><div class="v"><img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png" alt="Diamond"><div>100</div></div></li>
+              <li><div>+ Bonus General</div><div class="v"><img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png" alt="Diamond"><div>10</div></div></li>
+            </ul>
+          </div>
 
-        // Animación del back button
-        const backButton = document.querySelector('.back-button');
-        backButton.addEventListener('click', function(e) {
-            // Opcional: agregar animación
-            console.log('Volviendo...');
-        });
+          <dt>Precio</dt>
+          <dd>US$ 0.99</dd>
+          <dt>Método de pago</dt>
+          <dd>PayPal</dd>
+          <dt>Nombre del jugador</dt>
+          <dd>Uriel854256O</dd>
+        </dl>
 
-        // Manejo del banner hover
-        const banner = document.querySelector('.banner');
-        banner.addEventListener('mouseenter', function() {
-            // Animación adicional si es necesario
-        });
-    </script>
+        <div class="gap"></div>
+
+        <div class="promo">
+          <span class="promo-label">Código promocional</span>
+          <div class="promo-row">
+            <input class="form-input" name="promoCode" placeholder="Ingresa el código promocional aqui, ej: PROMO1234" autocomplete="off">
+            <button class="btn-apply" type="button" disabled>APLICAR</button>
+          </div>
+        </div>
+
+        <div class="pay">
+          <button class="paypal-btn" type="button" aria-label="PayPal"><span class="p1">Pay</span><span class="p2">Pal</span></button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <hr class="footer-hr">
+      <div class="footer-box">
+        <div class="footer-row">
+          <div>© Garena Online. Todos los derechos reservados.</div>
+          <div class="footer-links">
+            <div><a href="/faq">Preguntas</a></div>
+            <div><span class="sep"></span><a href="https://soporte.garena.com">Help Center</a></div>
+            <div><span class="sep"></span><a href="http://content.garena.com/legal/tos/tos_es.html">Términos y Condiciones</a></div>
+            <div><span class="sep"></span><a href="http://content.garena.com/legal/pp/pp_es.html">Política de privacidad</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const input = document.querySelector('.form-input');
+  const apply = document.querySelector('.btn-apply');
+  input.addEventListener('input', () => { apply.disabled = !input.value.trim(); });
+  apply.addEventListener('click', () => {
+    alert('Código aplicado: ' + input.value.trim());
+    input.value = ''; apply.disabled = true;
+  });
+</script>
 </body>
 </html>
