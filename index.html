@@ -32,6 +32,7 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
 .avatar{width:28px;height:28px;border-radius:50%;overflow:hidden;cursor:pointer;flex-shrink:0}
 .avatar svg{width:100%;height:100%}
 
+/* ===== Carrusel (banner central con los vecinos asomando) ===== */
 .carousel-wrap{background:#151515;padding:18px 0;overflow:hidden}
 .carousel{position:relative}
 .carousel-track{display:flex;gap:18px;width:max-content;transition:transform .6s ease}
@@ -46,6 +47,7 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
 .carousel-arrow.prev{left:calc(50% - var(--sw)/2 + 10px)}
 .carousel-arrow.next{right:calc(50% - var(--sw)/2 + 10px)}
 
+/* ===== Selector de juego ===== */
 .nav{background:linear-gradient(180deg,#16162B 0%,#242443 76.1%,#333356 100%);padding:20px 0 16px;margin-top:0}
 .nav h3{color:rgba(255,255,255,.85);font-size:18px;font-weight:bold;margin:0 0 14px}
 .game-selector{display:flex;flex-wrap:wrap;gap:38px;padding-left:4px}
@@ -59,6 +61,7 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
 
 .main{padding:32px 0 40px}
 
+/* ===== Banner del juego ===== */
 .app-banner{
   background:
     linear-gradient(90deg, rgba(27,27,37,.45), rgba(27,27,37,0) 55%),
@@ -72,15 +75,18 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
 .security-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(0,0,0,.65);color:#fff;padding:3px 6px;border-radius:4px;border:1px solid rgba(255,255,255,.3);font-size:12px;font-weight:500;line-height:1.3}
 .security-badge svg{width:13px;height:13px;flex-shrink:0}
 
+/* ===== Secciones (de arriba hacia abajo) ===== */
 .section{margin-bottom:32px}
 .half{max-width:417px}
 .section-title{font-size:19px;font-weight:bold;margin-bottom:12px;display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.85)}
 .section-number{background:#E4372E;color:#fff;width:21px;height:21px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;flex-shrink:0}
 
+/* Eventos */
 .event{max-width:417px}
 .event img{width:100%;height:auto;display:block;border-radius:4px;background:#272731}
 .event p{margin-top:10px;color:#fff;font-size:14px;line-height:1.5}
 
+/* Login */
 .login-box{background:#272731;border-radius:4px;padding:14px}
 .form-label{display:flex;align-items:center;gap:5px;margin-bottom:8px;font-weight:600;font-size:14px;color:#fff}
 .help-icon{width:12px;height:12px;border:1px solid rgba(255,255,255,.7);border-radius:50%;font-size:9px;line-height:10px;text-align:center;color:rgba(255,255,255,.7);font-weight:500}
@@ -99,6 +105,7 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
 .social-btn:hover{opacity:.7}
 .social-btn svg{width:18px;height:18px}
 
+/* Monto de recarga */
 .tabs{display:flex;gap:10px;margin-bottom:16px}
 .tab-btn{padding:5px 11px;border-radius:999px;font-size:13px;font-weight:500;cursor:pointer;background:#353542;border:1px solid #353542;color:rgba(255,255,255,.85)}
 .tab-btn.active{background:#2F232C;border:1px solid #E4372E;color:#fff}
@@ -119,6 +126,7 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
 .offer-name{padding:6px 8px 10px;font-size:13px;font-weight:600;text-align:center;line-height:1.3;color:#fff;display:flex;align-items:center;justify-content:center;gap:5px;flex:1}
 .info{display:inline-flex;align-items:center;justify-content:center;width:11px;height:11px;border:1px solid #E4372E;border-radius:3px;font-size:8px;line-height:1;color:#E4372E;font-style:normal;font-weight:bold;flex-shrink:0}
 
+/* Método de pago */
 .payment-note{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:13px;color:rgba(255,255,255,.6)}
 .payment-note svg{width:18px;height:18px;flex-shrink:0}
 .payment-methods{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
@@ -131,6 +139,7 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
 .tag-promo img{width:11px;height:11px;margin:0;border-radius:2px;background:#fff;padding:1px}
 .tag-popular{background:#FFCC18;color:#1B1B25;padding:2px 6px}
 
+/* ===== Barra inferior ===== */
 .bottom-bar{position:sticky;bottom:0;z-index:15;background:#1B1B25;border-top:1px solid rgba(255,255,255,.08);padding:12px 0}
 .bottom-inner{display:flex;align-items:center;justify-content:flex-end;gap:36px}
 .bar-info{text-align:right;line-height:1.4;font-size:13px;color:#fff}
@@ -160,6 +169,7 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
 }
 
 [hidden]{display:none !important}
+/* Cuenta (sesión iniciada) */
 .logout-btn{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.7);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:4px}
 .logout-btn:hover{opacity:.7}
 .account-card{display:flex;align-items:center;gap:12px;background:#272731;border-radius:6px;padding:12px}
@@ -169,6 +179,7 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
 .field-error{margin-top:8px;font-size:12px;color:#FF6B63}
 .avatar img{width:100%;height:100%;object-fit:cover;background:#fff;display:block}
 
+/* Métodos de pago: icono a la izquierda, precio y diamantes a la derecha */
 .payment-methods{grid-template-columns:repeat(3,1fr)}
 .payment-method{display:flex;align-items:center;gap:10px;padding:12px;min-height:80px;text-align:left}
 .payment-method img{margin:0;flex-shrink:0}
@@ -183,6 +194,7 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
 .payment-method-name{font-size:12px;font-weight:500;color:rgba(255,255,255,.65);margin-top:4px}
 .payment-method-name:first-child{font-size:13px;font-weight:600;color:#fff}
 
+/* Barra inferior con detalle */
 .bar-info{position:relative}
 .bar-line{display:flex;align-items:center;justify-content:flex-end;gap:5px;font-size:14px;font-weight:700;color:#fff}
 .bar-line img{width:16px;height:16px}
@@ -196,8 +208,19 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
 .pop-row img,.pop-head img{width:12px;height:12px}
 .pop-head span{display:inline-flex;align-items:center;gap:5px}
 
+/* Aviso */
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#2B2B36;color:#fff;border:1px solid #E4372E;padding:10px 16px;border-radius:6px;font-size:13px;z-index:60;max-width:90vw;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.checkout-overlay{position:fixed;inset:0;z-index:100;background:#0d0d11}
+.checkout-overlay iframe{display:block;width:100%;height:100%;border:0}
+body.checkout-open{overflow:hidden}
+@media (max-width:640px){
+  .payment-methods{grid-template-columns:repeat(2,1fr);gap:10px}
+  .payment-method{padding:10px}
+  .payment-method img{width:44px;height:44px}
+  .bar-popover{width:min(320px,86vw)}
+}
 
+/* Ventanas emergentes */
 .modal{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}
 .modal-event{position:relative;width:min(440px,100%)}
 .modal-event a{display:block}
@@ -214,6 +237,7 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
 .btn-exit{background:#E4372E;color:#fff}
 .btn-exit:hover{background:#CD1214}
 
+/* Panel pequeño para escribir el nombre del jugador */
 .name-panel{position:fixed;top:66px;left:10px;z-index:40;width:190px;background:#272731;border:1px solid rgba(255,255,255,.15);border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.4);font-size:12px;color:#fff}
 .name-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;cursor:pointer;font-weight:700;user-select:none}
 .name-head span:last-child{color:rgba(255,255,255,.6);font-size:11px}
@@ -225,58 +249,7 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
 .name-row button{height:30px;padding:0 10px;border:none;border-radius:4px;background:#E4372E;color:#fff;font-size:12px;font-weight:700;cursor:pointer}
 .name-row button:hover{background:#CD1214}
 .name-hint{margin-top:6px;font-size:11px;color:rgba(255,255,255,.5);line-height:1.3}
-
-/* ===== PAYPAL MODAL ===== */
-.paypal-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  padding: 16px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-}
-
-.paypal-modal.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-.paypal-container {
-  width: 100%;
-  max-width: 552px;
-  background: #fefefe;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(1, 5, 6, 0.12);
-  display: flex;
-  flex-direction: column;
-  max-height: 90vh;
-  overflow: hidden;
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@media (max-width:640px){
-  .name-panel{top:62px;left:6px;width:170px}
-  .paypal-container {
-    border-radius: 0;
-    max-height: 100vh;
-  }
-}
+@media (max-width:640px){.name-panel{top:62px;left:6px;width:170px}}
 </style>
 </head>
 <body>
@@ -366,6 +339,7 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
     </div>
 
     <div class="cols">
+      <!-- Columna izquierda -->
       <div class="col">
         <div class="section event">
           <div class="section-title">Eventos Especiales</div>
@@ -442,6 +416,7 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
         </div>
       </div>
 
+      <!-- Columna derecha -->
       <div class="col">
         <div class="section" id="paymentSection">
           <div class="section-title"><div class="section-number">3</div>Método de pago</div>
@@ -462,12 +437,12 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
             </div>
             <div class="payment-method" data-name="Efectivo y otros Medios" tabindex="0">
               <div class="tag-corner"><span class="tag-promo"><img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png" alt="">PROMO</span></div>
-              <img src="https://cdn-gop.garenanow.com/webmain/static/payment_center/pe/pe_boa_creditcard_mb.png" alt="Efectivo y otros Medios">
+              <img src="https://cdn-gop.garenanow.com/gop/static/channel/0000/214/169/icon.png" alt="Efectivo y otros Medios">
               <div class="pm-text"><div class="pm-price"></div><div class="pm-dia"></div><div class="payment-method-name">Efectivo y otros Medios</div></div>
             </div>
             <div class="payment-method" data-name="Razer Gold" tabindex="0">
               <div class="tag-corner"><span class="tag-promo"><img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png" alt="">PROMO</span></div>
-              <img src="https://cdn-gop.garenanow.com/webmain/static/payment_center/pe/pe_boa_creditcard_mb.png" alt="Razer Gold">
+              <img src="https://cdn-gop.garenanow.com/gop/static/channel/0000/214/003/icon.png" alt="Razer Gold">
               <div class="pm-text"><div class="pm-price"></div><div class="pm-dia"></div><div class="payment-method-name">Razer Gold</div></div>
             </div>
             <div class="payment-method" data-name="PayPal" tabindex="0">
@@ -477,7 +452,7 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
             </div>
             <div class="payment-method" data-name="Google Pay" tabindex="0">
               <div class="tag-corner"><span class="tag-promo"><img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png" alt="">PROMO</span></div>
-              <img src="https://cdn-gop.garenanow.com/webmain/static/payment_center/pe/pe_boa_creditcard_mb.png" alt="Google Pay">
+              <img src="https://cdn-gop.garenanow.com/gop/static/channel/0000/211/321/icon.png" alt="Google Pay">
               <div class="pm-text"><div class="pm-price"></div><div class="pm-dia"></div><div class="payment-method-name">Google Pay</div></div>
             </div>
           </div>
@@ -501,11 +476,6 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
       </button>
     </div>
   </div>
-</div>
-
-<!-- MODAL DE PAYPAL -->
-<div class="paypal-modal" id="paypalModal">
-  <div class="paypal-container" id="paypalContainer"></div>
 </div>
 
 <div class="modal" id="eventModal" hidden>
@@ -641,7 +611,7 @@ methods.forEach(m=>{
   m.addEventListener('keydown', e=>{ if (e.key==='Enter' || e.key===' '){ e.preventDefault(); pick(); }});
 });
 
-/* ===== Nombre del jugador ===== */
+/* ===== Nombre del jugador (panel pequeño) ===== */
 let customName = '';
 try { customName = localStorage.getItem('playerName') || ''; } catch(e) {}
 const displayName = id => customName || ('Jugador' + String(id).slice(-3));
@@ -663,7 +633,7 @@ $('nameHead').addEventListener('click', ()=>{
   $('nameToggle').textContent = b.hidden ? '▸' : '▾';
 });
 
-/* ===== Inicio de sesión ===== */
+/* ===== Inicio de sesión con ID ===== */
 const avatar = $('avatar'), avatarOriginal = avatar.innerHTML;
 function login(){
   const id = $('playerId').value.trim();
@@ -708,214 +678,735 @@ function toast(msg){
   clearTimeout(toastTimer); toastTimer = setTimeout(()=>{ t.hidden = true; }, 3200);
 }
 
-/* ===== PAYPAL CHECKOUT ===== */
-function openPayPalCheckout(){
-  const modal = $('paypalModal');
-  const container = $('paypalContainer');
-  
-  // HTML de PayPal
-  const paypalHTML = `
-    <!-- Pantalla de carga -->
-    <div id="loading-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; display: flex; flex-direction: column; z-index: 9999; transition: opacity 0.2s ease-out;">
-      <div style="width: 100%; height: 56px; background: #343434; display: flex; align-items: center; padding: 0 16px; gap: 12px; border-bottom: 1px solid #2a2a2a;">
-        <div style="width: 24px; height: 24px;"></div>
-        <div style="font-size: 13px; color: #e0e0e0; flex: 1;">Pago con PayPal - Google Chrome</div>
-        <div style="display: flex; gap: 16px; margin-left: auto;">
-          <div style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: #9e9e9e; cursor: pointer; font-size: 18px;">−</div>
-          <div style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: #9e9e9e; cursor: pointer; font-size: 18px;">□</div>
-          <div style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: #9e9e9e; cursor: pointer; font-size: 18px;">✕</div>
+/* ===== NUEVA PANTALLA DE PAGO PAYPAL ===== */
+
+function buildPayPalCheckout(){
+  return `<!DOCTYPE html>
+<html data-ppui-mode="light" dir="ltr" lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pago con PayPal</title>
+    <style>
+        :root {
+            --sys-color-background-main: #f1f2f3;
+            --sys-color-background-alt: #dbdde0;
+            --sys-color-background-surface: #fefefe;
+            --sys-color-background-surface-hover: #f1f2f3;
+            --sys-color-background-surface-active: #dbdde0;
+            --sys-color-primary-main: #0544b5;
+            --sys-color-primary-main-hover: #0070e0;
+            --sys-color-primary-main-active: #003087;
+            --sys-color-primary-contrast: #fff;
+            --sys-color-link-main: #116eca;
+            --sys-color-link-main-hover: #73a5ff;
+            --sys-color-structure-border-high-contrast: #9198a0;
+            --sys-color-structure-border-low-contrast: #cfd3d8;
+            --sys-color-structure-divider: #dbdde0;
+            --sys-color-success-main: #0c6e11;
+            --sys-color-system-main: #001435;
+            --sys-experimental-color-background-alt: #edf0f2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background: var(--sys-color-background-main);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            line-height: 1.5;
+        }
+
+        /* ===== PANTALLA DE CARGA ===== */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            z-index: 9999;
+            transition: opacity 0.2s ease-out;
+        }
+
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Barra del navegador */
+        .browser-bar {
+            width: 100%;
+            height: 56px;
+            background: #343434;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 12px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .browser-logo {
+            width: 24px;
+            height: 24px;
+            background-image: url('https://brandlogos.net/wp-content/uploads/2021/11/paypal-logo-512x512.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .browser-title {
+            font-size: 13px;
+            color: #e0e0e0;
+            flex: 1;
+        }
+
+        .browser-controls {
+            display: flex;
+            gap: 16px;
+            margin-left: auto;
+        }
+
+        .browser-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9e9e9e;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* Contenedor principal de carga */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+        }
+
+        /* Spinner pequeño */
+        .spinner-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        /* Círculo de fondo gris */
+        .spinner-bg {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 6px solid #e8e8e8;
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+        }
+
+        /* Círculo azul que gira */
+        .spinner-blue {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 6px solid transparent;
+            border-top-color: #0070ba;
+            border-right-color: #0070ba;
+            border-radius: 50%;
+            animation: spin 1.2s linear infinite;
+            top: 0;
+            left: 0;
+        }
+
+        /* Candado en el centro */
+        .lock-icon {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .lock-svg {
+            width: 36px;
+            height: 36px;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ===== PANTALLA DE CHECKOUT ===== */
+        .container {
+            width: 100%;
+            max-width: 552px;
+            background: var(--sys-color-background-surface);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(1, 5, 6, 0.12);
+            display: flex;
+            flex-direction: column;
+            max-height: 100vh;
+            overflow: hidden;
+            display: none;
+        }
+
+        .container.visible {
+            display: flex;
+        }
+
+        /* HEADER */
+        .header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+            letter-spacing: -0.5px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--sys-color-structure-border-high-contrast);
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .close-btn:hover {
+            background: var(--sys-color-background-surface-hover);
+        }
+
+        /* CONTENT */
+        .content {
+            padding: 24px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        /* SECTION */
+        .section {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0 16px 0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .section-chevron {
+            color: #666;
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .section-chevron.open {
+            transform: rotate(180deg);
+        }
+
+        .section-content {
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .section-content.collapsed {
+            max-height: 0;
+        }
+
+        /* PAYMENT METHOD */
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            border: 2px solid var(--sys-color-structure-border-low-contrast);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--sys-color-background-surface);
+        }
+
+        .payment-method.active {
+            border-color: #222;
+        }
+
+        .radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--sys-color-structure-border-low-contrast);
+            border-radius: 50%;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .payment-method.active .radio {
+            border-color: #000;
+            background: #000;
+        }
+
+        .radio::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .payment-method.active .radio::after {
+            opacity: 1;
+        }
+
+        .payment-icon {
+            width: 48px;
+            height: 32px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .payment-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .payment-info {
+            flex: 1;
+        }
+
+        .payment-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #222;
+        }
+
+        .payment-desc {
+            font-size: 12px;
+            color: var(--sys-color-structure-border-high-contrast);
+            margin-top: 3px;
+        }
+
+        .payment-amount {
+            font-size: 13px;
+            font-weight: 600;
+            color: #222;
+            margin-left: 16px;
+        }
+
+        /* DIVIDER */
+        .divider {
+            height: 1px;
+            background: #e0e0e0;
+            margin: 16px 0;
+        }
+
+        /* ADD CARD */
+        .add-card-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            color: var(--sys-color-link-main);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            margin-top: 8px;
+        }
+
+        /* ORDER SUMMARY */
+        .order-summary {
+            background: var(--sys-color-background-alt);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 16px 0 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .order-summary-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bag-icon {
+            width: 20px;
+            height: 20px;
+            color: #222;
+        }
+
+        .order-amount {
+            font-size: 15px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .order-summary-chevron {
+            color: #666;
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .order-summary-chevron.open {
+            transform: rotate(180deg);
+        }
+
+        .order-details {
+            background: var(--sys-experimental-color-background-alt);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0 0 24px 0;
+            border: 1px solid var(--sys-color-structure-divider);
+            display: none;
+        }
+
+        .order-details.show {
+            display: block;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--sys-color-structure-border-high-contrast);
+            margin-bottom: 10px;
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+            padding-top: 10px;
+            border-top: 1px solid var(--sys-color-structure-divider);
+            color: #222;
+            font-weight: 600;
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 20px 24px;
+            border-top: 1px solid #e0e0e0;
+            flex-shrink: 0;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: #0544b5;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pay-btn:hover:not(:disabled) {
+            background: #0070e0;
+        }
+
+        .pay-btn:active:not(:disabled) {
+            background: #003087;
+        }
+
+        .pay-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 0;
+            }
+
+            .content {
+                padding: 16px;
+            }
+
+            .header {
+                padding: 16px;
+            }
+
+            .footer {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PANTALLA DE CARGA -->
+    <div id="loading-screen">
+        <div class="browser-bar">
+            <div class="browser-logo"></div>
+            <div class="browser-title">Pago con PayPal - Google Chrome</div>
+            <div class="browser-controls">
+                <div class="browser-btn">−</div>
+                <div class="browser-btn">□</div>
+                <div class="browser-btn">✕</div>
+            </div>
         </div>
-      </div>
-      <div style="flex: 1; display: flex; justify-content: center; align-items: center; background: #ffffff;">
-        <div style="position: relative; width: 80px; height: 80px;">
-          <div style="position: absolute; width: 80px; height: 80px; border: 6px solid #e8e8e8; border-radius: 50%; top: 0; left: 0;"></div>
-          <div style="position: absolute; width: 80px; height: 80px; border: 6px solid transparent; border-top-color: #0070ba; border-right-color: #0070ba; border-radius: 50%; animation: spin 1.2s linear infinite; top: 0; left: 0;"></div>
-          <div style="position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 10;">
-            <svg style="width: 36px; height: 36px;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
-              <path d="M 7 10 A 5 5 0 0 1 17 10" stroke="#b0b0b0" stroke-width="1.5" stroke-linecap="round"/>
-              <rect x="6" y="10" width="12" height="10" rx="1" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-              <circle cx="12" cy="16" r="1" fill="#b0b0b0"/>
-            </svg>
-          </div>
+
+        <div class="main-content">
+            <div class="spinner-container">
+                <div class="spinner-bg"></div>
+                <div class="spinner-blue"></div>
+                <div class="lock-icon">
+                    <svg class="lock-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+                        <path d="M 7 10 A 5 5 0 0 1 17 10" stroke="#b0b0b0" stroke-width="1.5" stroke-linecap="round"/>
+                        <rect x="6" y="10" width="12" height="10" rx="1" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
+                        <circle cx="12" cy="16" r="1" fill="#b0b0b0"/>
+                    </svg>
+                </div>
+            </div>
         </div>
-      </div>
-      <style>
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      </style>
     </div>
 
-    <!-- Pantalla de checkout -->
-    <div style="position: fixed; inset: 0; background: #f1f2f3; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; transition: opacity 0.3s ease-in 0.3s;" id="checkoutScreen">
-      <div style="width: 100%; max-width: 552px; background: #fefefe; border-radius: 12px; box-shadow: 0 4px 12px rgba(1, 5, 6, 0.12); display: flex; flex-direction: column; max-height: 100vh; overflow: hidden;">
-        
-        <!-- Header -->
-        <div style="padding: 20px 24px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: center; align-items: center; flex-shrink: 0; position: relative;">
-          <div style="font-size: 24px; font-weight: 700; color: #000; letter-spacing: -0.5px;">PayPal</div>
-          <button style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 8px; color: #9198a0; font-size: 24px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background 0.2s;" onclick="closePayPalCheckout()">✕</button>
+    <!-- PANTALLA DE CHECKOUT -->
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo-text">PayPal</div>
+            </div>
+            <button class="close-btn" onclick="closeModal()">✕</button>
         </div>
 
-        <!-- Content -->
-        <div style="padding: 24px; flex: 1; overflow-y: auto;">
-          <!-- Métodos de pago -->
-          <div style="margin-bottom: 0;">
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0 16px 0; cursor: pointer; user-select: none;">
-              <span style="font-size: 14px; font-weight: 700; color: #000; text-transform: capitalize;">Métodos de pago</span>
-              <span style="color: #666; font-size: 18px; transition: transform 0.3s; line-height: 1;" onclick="togglePaymentSection(this)">⌃</span>
-            </div>
-            <div style="max-height: 1000px; overflow: hidden; transition: max-height 0.3s ease;">
-              <!-- PayPal Balance -->
-              <div style="display: flex; align-items: center; padding: 12px 16px; margin-bottom: 12px; border: 2px solid #cfd3d8; border-radius: 8px; cursor: pointer; transition: all 0.2s; background: #fefefe;" onclick="selectPaymentMethod(this)" class="payment-selected">
-                <div style="width: 20px; height: 20px; border: 2px solid #000; border-radius: 50%; margin-right: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #000;">
-                  <div style="width: 6px; height: 6px; background: white; border-radius: 50%;"></div>
+        <!-- CONTENT -->
+        <div class="content">
+            <!-- SECTION: Métodos de pago -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <span class="section-title">Métodos de pago</span>
+                    <span class="section-chevron">⌃</span>
                 </div>
-                <div style="width: 48px; height: 32px; margin-right: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                  <img src="https://www.paypal.com/pay/_next/static/media/paypal-balance-icon.2b6aoe3rlv2nw.svg?dpl=0-579-1_20261008085749764" alt="PayPal Balance" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                <div class="section-content">
+                    <!-- PayPal Balance -->
+                    <div class="payment-method active" onclick="selectPayment(this)">
+                        <div class="radio"></div>
+                        <div class="payment-icon">
+                            <img src="https://www.paypal.com/pay/_next/static/media/paypal-balance-icon.2b6aoe3rlv2nw.svg?dpl=0-579-1_20261008085749764" alt="PayPal Balance">
+                        </div>
+                        <div class="payment-info">
+                            <div class="payment-name">Saldo de PayPal</div>
+                            <div class="payment-desc">\$1.787,29 disponibles</div>
+                        </div>
+                        <div class="payment-amount">\$0,99</div>
+                    </div>
+
+                    <button class="add-card-btn" onclick="addNewCard()">
+                        <span style="font-size: 18px; font-weight: bold;">+</span> Agregar tarjeta
+                    </button>
                 </div>
-                <div style="flex: 1;">
-                  <div style="font-size: 13px; font-weight: 500; color: #222; line-height: 1.3;">Saldo de PayPal</div>
-                  <div style="font-size: 12px; color: #9198a0; margin-top: 3px;">$1.787,29 disponibles</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- ORDER SUMMARY -->
+            <div class="order-summary" onclick="toggleOrderSummary(this)">
+                <div class="order-summary-left">
+                    <span>
+                        <svg class="bag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                    </span>
+                    <span class="order-amount">\$0,99</span>
                 </div>
-                <div style="font-size: 13px; font-weight: 600; color: #222; white-space: nowrap; margin-left: 16px;">` + fmtP(state.sel.price) + `</div>
-              </div>
+                <span class="order-summary-chevron">∨</span>
             </div>
-          </div>
 
-          <div style="height: 1px; background: #e0e0e0; margin: 16px 0; border: none;"></div>
-
-          <!-- Resumen de orden -->
-          <div style="background: #dbdde0; border-radius: 8px; padding: 12px 16px; margin: 16px 0 24px 0; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <svg style="width: 20px; height: 20px; color: #222;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-              </svg>
-              <span style="font-size: 15px; font-weight: 600; color: #222;">` + fmtP(state.sel.price) + `</span>
+            <!-- ORDER DETAILS -->
+            <div class="order-details" id="orderDetails">
+                <div class="detail-row">
+                    <span>Subtotal</span>
+                    <span>\$0,99</span>
+                </div>
+                <div class="detail-row">
+                    <span>Envío</span>
+                    <span>\$0,00</span>
+                </div>
+                <div class="detail-row">
+                    <span>Impuestos</span>
+                    <span>\$0,00</span>
+                </div>
+                <div class="detail-row">
+                    <span>Total</span>
+                    <span>\$0,99</span>
+                </div>
             </div>
-            <span style="color: #666; font-size: 18px; transition: transform 0.3s; line-height: 1;" onclick="toggleOrderDetails(this)">∨</span>
-          </div>
-
-          <!-- Detalles de orden -->
-          <div style="background: #edf0f2; border-radius: 8px; padding: 16px; margin: 0 0 24px 0; border: 1px solid #dbdde0; display: none;" onclick="event.stopPropagation()" id="orderDetails">
-            <div style="display: flex; justify-content: space-between; font-size: 13px; color: #9198a0; margin-bottom: 10px;">
-              <span>Subtotal</span>
-              <span>` + fmtP(state.sel.price) + `</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 13px; color: #9198a0; margin-bottom: 10px;">
-              <span>Envío</span>
-              <span>$0,00</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 13px; color: #9198a0; margin-bottom: 10px;">
-              <span>Impuestos</span>
-              <span>$0,00</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 13px; color: #222; font-weight: 600; padding-top: 10px; border-top: 1px solid #dbdde0;">
-              <span>Total</span>
-              <span>` + fmtP(state.sel.price) + `</span>
-            </div>
-          </div>
         </div>
 
-        <!-- Footer -->
-        <div style="padding: 20px 24px; border-top: 1px solid #e0e0e0; flex-shrink: 0;">
-          <button style="width: 100%; padding: 14px 24px; background: #0544b5; color: white; border: none; border-radius: 50px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px;" onmouseover="this.style.background='#0070e0'" onmouseout="this.style.background='#0544b5'" onclick="processPayment()">Pagar</button>
+        <!-- FOOTER -->
+        <div class="footer">
+            <button class="pay-btn" onclick="processPayment()">Pagar</button>
         </div>
-      </div>
     </div>
 
     <script>
-      // Mostrar checkout después de 3 segundos
-      setTimeout(function() {
-        var loadingScreen = document.getElementById('loading-screen');
-        var checkoutScreen = document.getElementById('checkoutScreen');
-        loadingScreen.style.opacity = '0';
-        loadingScreen.style.pointerEvents = 'none';
-        checkoutScreen.style.opacity = '1';
-      }, 3000);
+        // Mostrar interfaz de checkout después de 3 segundos
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                const container = document.querySelector('.container');
+                
+                loadingScreen.classList.add('hidden');
+                container.classList.add('visible');
+            }, 3000);
+        });
 
-      function closePayPalCheckout() {
-        parent.postMessage('close-paypal', '*');
-      }
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const chevron = header.querySelector('.section-chevron');
+            
+            content.classList.toggle('collapsed');
+            chevron.classList.toggle('open');
+        }
 
-      function togglePaymentSection(el) {
-        var content = el.parentElement.nextElementSibling;
-        content.style.maxHeight = content.style.maxHeight === '0px' ? '1000px' : '0px';
-      }
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
 
-      function toggleOrderDetails(el) {
-        var details = document.getElementById('orderDetails');
-        details.style.display = details.style.display === 'none' ? 'block' : 'none';
-      }
+        function toggleOrderSummary(element) {
+            const details = document.getElementById('orderDetails');
+            const chevron = element.querySelector('.order-summary-chevron');
+            
+            details.classList.toggle('show');
+            chevron.classList.toggle('open');
+        }
 
-      function selectPaymentMethod(el) {
-        var selected = document.querySelector('.payment-selected');
-        if (selected) selected.classList.remove('payment-selected');
-        el.classList.add('payment-selected');
-      }
+        function addNewCard() {
+            alert('Agregar nueva tarjeta de crédito/débito');
+        }
 
-      function processPayment() {
-        alert('✓ Pago completado exitosamente');
-        parent.postMessage('close-paypal', '*');
-      }
-    <\/script>
-  `;
+        function processPayment() {
+            const button = document.querySelector('.pay-btn');
+            button.disabled = true;
+            button.textContent = 'Procesando...';
 
-  container.innerHTML = paypalHTML;
-  modal.classList.add('show');
-  document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                alert('✓ Pago de \$0,99 completado exitosamente');
+                button.disabled = false;
+                button.textContent = 'Pagar';
+            }, 2000);
+        }
+
+        function closeModal() {
+            if (confirm('¿Deseas cerrar esta sesión de pago?')) {
+                parent.postMessage('checkout-back','*');
+            }
+        }
+    </script>
+</body>
+</html>`;
 }
 
-function closePayPalCheckout(){
-  const modal = $('paypalModal');
-  modal.classList.remove('show');
-  document.body.style.overflow = 'auto';
+let checkoutEl = null;
+function closeCheckout(){
+  if (checkoutEl){ checkoutEl.remove(); checkoutEl = null; }
+  document.body.classList.remove('checkout-open');
+}
+function openCheckout(){
+  closeCheckout();
+  const ov = document.createElement('div');
+  ov.className = 'checkout-overlay';
+  const fr = document.createElement('iframe');
+  fr.title = 'Centro de Recarga Garena';
+  fr.srcdoc = buildPayPalCheckout();
+  ov.appendChild(fr);
+  document.body.appendChild(ov);
+  document.body.classList.add('checkout-open');
+  checkoutEl = ov;
+  window.scrollTo(0, 0);
 }
 
-// Escuchar mensajes del iframe
-window.addEventListener('message', (e) => {
-  if (e.data === 'close-paypal') {
-    closePayPalCheckout();
-  }
-});
+window.addEventListener('message', e=>{ if (e.data === 'checkout-back') closeCheckout(); });
+document.addEventListener('keydown', e=>{ if (e.key === 'Escape' && checkoutEl) closeCheckout(); });
 
-// Cerrar con Escape
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && $('paypalModal').classList.contains('show')) {
-    closePayPalCheckout();
+$('buyBtn').addEventListener('click', ()=>{
+  if (!state.logged){
+    toast('Inicia sesión con tu ID de jugador para continuar.');
+    const el = $('loginSection');
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    $('playerId').focus(); return;
   }
-});
-
-// Abrir PayPal solo cuando hagas clic en el método PayPal
-document.addEventListener('click', (e) => {
-  const method = e.target.closest('.payment-method[data-name="PayPal"]');
-  if (method) {
-    const frame = $('paypalContainer');
-    frame.innerHTML = `
-      <div id="loading-screen" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; display: flex; flex-direction: column; z-index: 9999;">
-        <div style="width: 100%; height: 56px; background: #343434; display: flex; align-items: center; padding: 0 16px; gap: 12px; border-bottom: 1px solid #2a2a2a;">
-          <div style="font-size: 13px; color: #e0e0e0; flex: 1;">Pago con PayPal</div>
-        </div>
-        <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-          <div style="position: relative; width: 80px; height: 80px;">
-            <div style="position: absolute; width: 80px; height: 80px; border: 6px solid #e8e8e8; border-radius: 50%;"></div>
-            <div style="position: absolute; width: 80px; height: 80px; border: 6px solid transparent; border-top-color: #0070ba; border-right-color: #0070ba; border-radius: 50%; animation: spin 1.2s linear infinite;"></div>
-          </div>
-        </div>
-      </div>
-      <style>@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }</style>
-    `;
-    $('paypalModal').classList.add('show');
-    
-    setTimeout(() => {
-      frame.innerHTML = `
-        <div style="width: 100%; padding: 24px; text-align: center; color: #222;">
-          <h2 style="font-size: 24px; margin-bottom: 24px; color: #000;">PayPal</h2>
-          <p style="margin-bottom: 32px; font-size: 16px;">✓ Pago completado exitosamente</p>
-          <button onclick="document.getElementById('paypalModal').classList.remove('show')" style="padding: 12px 24px; background: #0544b5; color: white; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer;">Cerrar</button>
-        </div>
-      `;
-    }, 3000);
+  if (!state.pm){
+    toast('Selecciona un método de pago.');
+    $('paymentSection').scrollIntoView({behavior:'smooth', block:'center'}); return;
   }
+  openCheckout();
 });
 
 render();
