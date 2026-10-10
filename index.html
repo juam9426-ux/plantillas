@@ -61,7 +61,7 @@
         /* HEADER */
         .header {
             padding: 20px 24px;
-            border-bottom: 1px solid var(--sys-color-structure-divider);
+            border-bottom: 1px solid #e0e0e0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -139,17 +139,18 @@
         }
 
         .section-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #222;
+            font-size: 14px;
+            font-weight: 700;
+            color: #000;
             text-transform: capitalize;
             letter-spacing: 0px;
         }
 
         .section-chevron {
-            color: var(--sys-color-structure-border-high-contrast);
-            font-size: 20px;
+            color: #666;
+            font-size: 18px;
             transition: transform 0.3s;
+            line-height: 1;
         }
 
         .section-chevron.open {
@@ -288,8 +289,9 @@
         /* DIVIDER */
         .divider {
             height: 1px;
-            background: var(--sys-color-structure-divider);
+            background: #e0e0e0;
             margin: 16px 0;
+            border: none;
         }
 
         /* ADD CARD */
@@ -357,9 +359,10 @@
         }
 
         .order-summary-chevron {
-            color: var(--sys-color-structure-border-high-contrast);
-            font-size: 20px;
+            color: #666;
+            font-size: 18px;
             transition: transform 0.3s;
+            line-height: 1;
         }
 
         .order-summary-chevron.open {
@@ -398,7 +401,7 @@
         /* FOOTER */
         .footer {
             padding: 20px 24px;
-            border-top: 1px solid var(--sys-color-structure-divider);
+            border-top: 1px solid #e0e0e0;
             flex-shrink: 0;
         }
 
