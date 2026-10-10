@@ -63,26 +63,21 @@
             padding: 20px 24px;
             border-bottom: 1px solid var(--sys-color-structure-divider);
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             flex-shrink: 0;
+            position: relative;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 0;
         }
 
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--sys-color-background-surface-hover);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            display: none;
         }
 
         .logo-icon img {
@@ -112,6 +107,10 @@
             justify-content: center;
             border-radius: 50%;
             transition: background 0.2s;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .close-btn:hover {
@@ -336,6 +335,15 @@
             gap: 12px;
         }
 
+        .oslo-accordion-icon-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
         .bag-icon {
             width: 20px;
             height: 20px;
@@ -509,9 +517,13 @@
             <!-- ORDER SUMMARY -->
             <div class="order-summary" onclick="toggleOrderSummary(this)">
                 <div class="order-summary-left">
-                    <svg class="bag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 9l.35 8.38A2 2 0 008.35 19h7.3a2 2 0 001.98-1.62L18 9M9 5a3 3 0 016 0M6 9h12M10 14v3M14 14v3"></path>
-                    </svg>
+                    <span class="oslo-accordion-icon-circle">
+                        <svg class="bag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                    </span>
                     <span class="order-amount">$0,99</span>
                 </div>
                 <span class="order-summary-chevron">∨</span>
