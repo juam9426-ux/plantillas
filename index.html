@@ -88,12 +88,62 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
 .login-box{background:#272731;border-radius:4px;padding:14px}
 .form-label{display:flex;align-items:center;gap:5px;margin-bottom:8px;font-weight:600;font-size:14px;color:#fff}
 .help-icon{width:12px;height:12px;border:1px solid rgba(255,255,255,.7);border-radius:50%;font-size:9px;line-height:10px;text-align:center;color:rgba(255,255,255,.7);font-weight:500}
-.input-row{display:flex}
+
+/* ===== INPUT ROW CON DROPDOWN ===== */
+.input-row{display:flex;position:relative}
 .input-wrap{position:relative;flex:1;min-width:0}
 .form-input{width:100%;height:40px;padding:0 36px 0 15px;border-radius:4px 0 0 4px;background:#353542;border:1px solid #353542;border-right:none;color:#fff;font-size:13px}
 .form-input::placeholder{color:rgba(255,255,255,.3)}
 .form-input:focus{outline:none;border-color:#6F6F86}
-.chevron-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.8);cursor:pointer;font-size:14px}
+.chevron-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.8);cursor:pointer;font-size:14px;transition:transform .2s;z-index:2}
+.chevron-btn.open{transform:translateY(-50%) rotate(180deg)}
+
+/* ===== HISTORIAL DROPDOWN ===== */
+.history-dropdown{
+  position:absolute;
+  top:calc(100% + 2px);
+  left:0;
+  right:0;
+  background:#272731;
+  border:1px solid #3c3c4e;
+  border-radius:0 0 6px 6px;
+  z-index:50;
+  overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,.5);
+  display:none;
+}
+.history-dropdown.visible{display:block}
+.history-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  cursor:pointer;
+  transition:background .15s;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.history-item:last-child{border-bottom:none}
+.history-item:hover{background:#353542}
+.history-item-avatar{
+  width:38px;height:38px;border-radius:50%;overflow:hidden;
+  flex-shrink:0;background:#fff;border:2px solid #E4372E;
+}
+.history-item-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.history-item-info{flex:1;min-width:0}
+.history-item-name{font-size:13px;font-weight:700;color:#fff;line-height:1.3;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history-item-id{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px}
+.history-item-del{
+  background:none;border:none;color:rgba(255,255,255,.35);
+  cursor:pointer;padding:4px;border-radius:4px;font-size:16px;
+  flex-shrink:0;transition:color .15s,background .15s;line-height:1;
+}
+.history-item-del:hover{color:#E4372E;background:rgba(228,55,46,.12)}
+.history-empty{
+  padding:14px 12px;font-size:12px;
+  color:rgba(255,255,255,.35);text-align:center;
+}
+
 .button{height:40px;background:#E4372E;color:#fff;padding:0 18px;border:none;border-radius:0 4px 4px 0;font-weight:700;cursor:pointer;font-size:13px;transition:background .3s;white-space:nowrap}
 .button:hover{background:#CD1214}
 .divider-text{display:flex;align-items:center;gap:8px;margin:14px 0 12px;font-size:12px;color:rgba(255,255,255,.7);justify-content:center}
@@ -336,9 +386,11 @@ body.checkout-open{overflow:hidden}
           <div class="login-box">
             <label class="form-label">ID de jugador <span class="help-icon">?</span></label>
             <div class="input-row">
-              <div class="input-wrap">
+              <div class="input-wrap" id="inputWrap">
                 <input type="text" id="playerId" inputmode="numeric" autocomplete="off" class="form-input" placeholder="Introduce el ID del jugador aquí.">
-                <button class="chevron-btn" aria-label="Historial">⌄</button>
+                <button class="chevron-btn" id="chevronBtn" aria-label="Historial">⌄</button>
+                <!-- DROPDOWN DE HISTORIAL -->
+                <div class="history-dropdown" id="historyDropdown"></div>
               </div>
               <button class="button" id="loginBtn" type="button">Iniciar Sesión</button>
             </div>
@@ -524,6 +576,114 @@ const $ = id => document.getElementById(id);
 const barLine = $('barLine'), barPrice = $('barPrice'), barPopover = $('barPopover');
 const methods = [...document.querySelectorAll('.payment-method')];
 
+/* ===========================
+   HISTORIAL DE CUENTAS
+   =========================== */
+const HISTORY_KEY = 'ff_account_history';
+const MAX_HISTORY = 3;
+
+function loadHistory(){
+  try { return JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; }
+  catch(e){ return []; }
+}
+function saveHistory(arr){
+  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(arr)); } catch(e){}
+}
+
+/* Agrega o mueve al frente una cuenta. Se llama tras pago exitoso. */
+function addToHistory(id, name){
+  let arr = loadHistory();
+  // Eliminar si ya existe el mismo ID
+  arr = arr.filter(a => a.id !== id);
+  // Insertar al frente
+  arr.unshift({ id: id, name: name, icon: GAME_ICON });
+  // Máximo 3
+  arr = arr.slice(0, MAX_HISTORY);
+  saveHistory(arr);
+}
+
+function deleteFromHistory(id, e){
+  e.stopPropagation();
+  let arr = loadHistory().filter(a => a.id !== id);
+  saveHistory(arr);
+  renderHistoryDropdown();
+}
+
+function selectHistoryAccount(acc){
+  $('playerId').value = acc.id;
+  closeHistoryDropdown();
+}
+
+/* Renderiza el contenido del dropdown */
+function renderHistoryDropdown(){
+  const dd = $('historyDropdown');
+  const arr = loadHistory();
+  if(arr.length === 0){
+    dd.innerHTML = '<div class="history-empty">Sin cuentas guardadas</div>';
+    return;
+  }
+  dd.innerHTML = arr.map((acc, idx) => `
+    <div class="history-item" data-idx="${idx}">
+      <div class="history-item-avatar">
+        <img src="${esc(acc.icon)}" alt="avatar">
+      </div>
+      <div class="history-item-info">
+        <div class="history-item-name">Nombre de usuario:<br><strong>${esc(acc.name)}</strong></div>
+        <div class="history-item-id">ID de jugador: ${esc(acc.id)}</div>
+      </div>
+      <button class="history-item-del" title="Eliminar" data-id="${esc(acc.id)}">
+        <svg width="16" height="16" viewBox="0 0 80 80" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M30 10C30 7.24 32.24 5 35 5H45C47.76 5 50 7.24 50 10V15H65C67.76 15 70 17.24 70 20C70 22.76 67.76 25 65 25H15C12.24 25 10 22.76 10 20C10 17.24 12.24 15 15 15H30V10ZM20 30H60L56.5 67C56.22 69.82 53.87 72 51 72H29C26.13 72 23.78 69.82 23.5 67L20 30Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  `).join('');
+
+  // Eventos click en items
+  dd.querySelectorAll('.history-item').forEach(item => {
+    item.addEventListener('click', e => {
+      if(e.target.closest('.history-item-del')) return;
+      const idx = parseInt(item.dataset.idx);
+      selectHistoryAccount(arr[idx]);
+    });
+  });
+  // Eventos eliminar
+  dd.querySelectorAll('.history-item-del').forEach(btn => {
+    btn.addEventListener('click', e => deleteFromHistory(btn.dataset.id, e));
+  });
+}
+
+let dropdownOpen = false;
+function openHistoryDropdown(){
+  renderHistoryDropdown();
+  $('historyDropdown').classList.add('visible');
+  $('chevronBtn').classList.add('open');
+  dropdownOpen = true;
+}
+function closeHistoryDropdown(){
+  $('historyDropdown').classList.remove('visible');
+  $('chevronBtn').classList.remove('open');
+  dropdownOpen = false;
+}
+function toggleHistoryDropdown(){
+  if(dropdownOpen) closeHistoryDropdown();
+  else openHistoryDropdown();
+}
+
+$('chevronBtn').addEventListener('click', e => {
+  e.stopPropagation();
+  toggleHistoryDropdown();
+});
+
+// Cierra al clickear afuera
+document.addEventListener('click', e => {
+  if(!e.target.closest('#inputWrap')) closeHistoryDropdown();
+});
+
+/* ===========================
+   FIN HISTORIAL
+   =========================== */
+
 function renderBar(){
   const s = state.sel;
   if (s.amount){
@@ -621,6 +781,7 @@ function login(){
   $('accountSection').hidden = false;
   avatar.innerHTML = '<img src="'+GAME_ICON+'" alt="Avatar">';
   $('eventModal').hidden = false;
+  closeHistoryDropdown();
 }
 function logout(){
   state.logged = false; state.id = ''; state.user = '';
@@ -642,6 +803,7 @@ document.addEventListener('keydown', e=>{
   if (e.key === 'Escape'){
     $('eventModal').hidden = true;
     $('logoutModal').hidden = true;
+    closeHistoryDropdown();
     closePaypal();
     closeCheckout();
   }
@@ -1147,6 +1309,10 @@ window.addEventListener('message', e=>{
   if (e.data === 'paypal-success'){
     closePaypal();
     closeCheckout();
+    // ★ GUARDAR LA CUENTA EN EL HISTORIAL TRAS PAGO EXITOSO ★
+    if(state.logged && state.id){
+      addToHistory(state.id, state.user);
+    }
     openSuccess();
   }
   if (e.data === 'success-home') closeSuccess();
