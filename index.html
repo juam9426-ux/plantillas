@@ -673,7 +673,7 @@ function buildSuccessPage(){
          </div>
        </dd>
        <div class="col-span-2 my-1 w-full">
-         <ul class="flex flex-col gap-3 rounded border p-3 text-xs" style="background:var(--bg-panel);border-color:rgba(64,64,64,.5)">
+         <ul class="flex flex-col gap-3 rounded p-3 text-xs" style="background:var(--bg-panel)">
            <li class="flex items-start justify-between gap-2">
              <div>Precio inicial</div>
              <div class="flex items-center gap-1 font-medium">
@@ -718,9 +718,8 @@ header{position:sticky;top:0;z-index:10}
 .success-subtitle{animation:fadeInUp .6s ease-out .3s both}
 .btn-return{background-color:#E41E26!important;border-color:#E41E26!important;color:white!important;transition:background-color .2s}
 .btn-return:hover{background-color:#C41A1F!important;border-color:#C41A1F!important}
-dt{border-bottom:1px solid rgba(64,64,64,.4)}
-dd{border-bottom:1px solid rgba(64,64,64,.4)}
-dt:last-of-type, dd:last-of-type{border-bottom:none}
+dt{border-bottom:none}
+dd{border-bottom:none}
 </style>
 </head>
 <body class="dark" style="background-color:var(--bg-base);color:var(--text-primary)">
@@ -785,12 +784,12 @@ dt:last-of-type, dd:last-of-type{border-bottom:none}
   <section style="margin:0 auto;width:100%;max-width:552px;padding:16px;display:flex;flex-direction:column;gap:16px">
     <dl style="display:grid;grid-template-columns:1fr 1fr;gap:0 14px">
       ${montoRow}
-      <dt style="padding:12px 0;font-size:13px;color:var(--text-primary);border-bottom:1px solid rgba(64,64,64,.4)">Precio</dt>
-      <dd style="padding:12px 0;font-size:13px;font-weight:600;color:var(--text-title);text-align:right;border-bottom:1px solid rgba(64,64,64,.4)">${fmtP(s.price)}</dd>
-      <dt style="padding:12px 0;font-size:13px;color:var(--text-primary);border-bottom:1px solid rgba(64,64,64,.4)">Juego</dt>
-      <dd style="padding:12px 0;font-size:13px;font-weight:600;color:var(--text-title);text-align:right;border-bottom:1px solid rgba(64,64,64,.4)">Free Fire</dd>
-      <dt style="padding:12px 0;font-size:13px;color:var(--text-primary);border-bottom:1px solid rgba(64,64,64,.4)">Método de pago</dt>
-      <dd style="padding:12px 0;font-size:13px;font-weight:600;color:var(--text-title);text-align:right;border-bottom:1px solid rgba(64,64,64,.4)">PayPal</dd>
+      <dt style="padding:12px 0;font-size:13px;color:var(--text-primary)">Precio</dt>
+      <dd style="padding:12px 0;font-size:13px;font-weight:600;color:var(--text-title);text-align:right">${fmtP(s.price)}</dd>
+      <dt style="padding:12px 0;font-size:13px;color:var(--text-primary)">Juego</dt>
+      <dd style="padding:12px 0;font-size:13px;font-weight:600;color:var(--text-title);text-align:right">Free Fire</dd>
+      <dt style="padding:12px 0;font-size:13px;color:var(--text-primary)">Método de pago</dt>
+      <dd style="padding:12px 0;font-size:13px;font-weight:600;color:var(--text-title);text-align:right">PayPal</dd>
       <dt style="padding:12px 0;font-size:13px;color:var(--text-primary)">Tiempo de movimiento</dt>
       <dd style="padding:12px 0;font-size:13px;font-weight:600;color:var(--text-title);text-align:right">${dateStr}</dd>
     </dl>
