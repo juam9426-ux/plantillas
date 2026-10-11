@@ -663,36 +663,30 @@ function toast(msg){
 function buildSuccessPage(){
   const s = state.sel;
   const now = new Date();
-  const dateStr = now.toLocaleString('es-ES',{
-    year:'numeric', month:'2-digit', day:'2-digit',
-    hour:'2-digit', minute:'2-digit', second:'2-digit'
-  });
+  const pad = n => String(n).padStart(2,'0');
+  const dateStr = `${pad(now.getDate())}-${pad(now.getMonth()+1)}-${now.getFullYear()}, ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())} ${now.getHours()<12?'a. m.':'p. m.'}`;
   const txId = Math.floor(Math.random() * 9e18 + 1e18).toString();
 
   // Fila de monto total — diamantes o nombre de oferta
   const montoRow = s.amount
-    ? `<dd class="break-words py-3 text-end text-sm font-medium">
-        <div class="flex items-center justify-end gap-1">
-          <img class="h-3 w-3" src="${DIAMOND}">
-          <span>${fmtN(s.amount + s.bonus)}</span>
-        </div>
+    ? `<dd style="padding:12px 0;font-size:13px;font-weight:600;color:#fff;text-align:right;border-bottom:1px solid rgba(255,255,255,.06)">
+        <span style="display:inline-flex;align-items:center;justify-content:flex-end;gap:4px">
+          <img src="${DIAMOND}" style="width:13px;height:13px;flex-shrink:0;vertical-align:middle">
+          ${fmtN(s.amount + s.bonus)}
+        </span>
        </dd>`
-    : `<dd class="break-words py-3 text-end text-sm font-medium">${esc(s.name)}</dd>`;
+    : `<dd style="padding:12px 0;font-size:13px;font-weight:600;color:#fff;text-align:right;border-bottom:1px solid rgba(255,255,255,.06)">${esc(s.name)}</dd>`;
 
   const bonusRows = s.amount ? `
-    <div style="grid-column:1/-1;width:100%;margin-bottom:8px">
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;padding:12px;border:1px solid rgba(255,255,255,.12);border-radius:5px;background:#21212B;font-size:12px">
-        <li style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-          <span style="color:#aaa">Precio inicial</span>
-          <span style="display:flex;align-items:center;gap:4px;font-weight:600;color:#fff">
-            <img src="${DIAMOND}" style="width:12px;height:12px"> ${fmtN(s.amount)}
-          </span>
+    <div class="bonus-box">
+      <ul>
+        <li class="bonus-row">
+          <span class="bonus-label">Precio inicial</span>
+          <span class="bonus-val"><img src="${DIAMOND}" class="dia-icon"> ${fmtN(s.amount)}</span>
         </li>
-        <li style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-          <span style="color:#aaa">+ Bonus General</span>
-          <span style="display:flex;align-items:center;gap:4px;font-weight:600;color:#FF7A00">
-            <img src="${DIAMOND}" style="width:12px;height:12px"> ${fmtN(s.bonus)}
-          </span>
+        <li class="bonus-row">
+          <span class="bonus-label">+ Bonus General</span>
+          <span class="bonus-val orange"><img src="${DIAMOND}" class="dia-icon"> ${fmtN(s.bonus)}</span>
         </li>
       </ul>
     </div>` : '';
@@ -732,17 +726,24 @@ header{position:sticky;top:0;z-index:10;background:#0c0c22;border-bottom:1px sol
 
 .success-title{margin-top:20px;font-size:22px;font-weight:700;color:#fff}
 .tx-id{margin-top:10px;font-size:13px;color:#b8b8b8;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
-.copy-btn{background:none;border:none;cursor:pointer;color:#fff;vertical-align:middle;padding:0;display:inline-flex}
+.copy-btn{background:none;border:none;cursor:pointer;color:#fff;vertical-align:middle;padding:0;display:inline-flex;align-items:center}
 .copy-btn svg{width:14px;height:14px}
 
 /* Details */
 .details{max-width:552px;margin:0 auto;width:100%;padding:16px 16px 32px}
-.dl{display:grid;grid-template-columns:1fr 1fr;gap-column:14px}
-.dl dt{padding:12px 0;font-size:13px;color:#aaa;border-bottom:1px solid rgba(255,255,255,.06)}
-.dl dd{padding:12px 0;font-size:13px;font-weight:600;color:#fff;text-align:right;border-bottom:1px solid rgba(255,255,255,.06)}
-.dl .no-border dt,.dl .no-border dd{border-bottom:none}
+.dl{display:grid;grid-template-columns:1fr 1fr;column-gap:14px}
+.dl dt{padding:12px 0;font-size:13px;color:#aaa;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center}
+.dl dd{padding:12px 0;font-size:13px;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:flex-end;gap:4px;text-align:right}
+.dl dt.last,.dl dd.last{border-bottom:none}
+.dia-icon{width:13px;height:13px;flex-shrink:0;object-fit:contain}
+.bonus-box{margin:0 0 4px;padding:12px;border:1px solid rgba(255,255,255,.1);border-radius:5px;background:#1a1a2e}
+.bonus-box ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:12px}
+.bonus-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.bonus-label{color:#aaa}
+.bonus-val{display:inline-flex;align-items:center;gap:4px;font-weight:600;color:#fff}
+.bonus-val.orange{color:#FF7A00}
 
-.btn-home{display:block;width:100%;margin-top:24px;height:44px;background:#E41E26;color:#fff;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;text-align:center;line-height:44px}
+.btn-home{display:flex;align-items:center;justify-content:center;width:100%;margin-top:24px;height:44px;background:#E41E26;color:#fff;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s}
 .btn-home:hover{background:#C41A1F}
 
 /* Footer */
@@ -750,9 +751,6 @@ footer{background:#0c0c22;border-top:1px solid rgba(255,255,255,.06);padding:16p
 .footer-links a{color:#666;margin:0 10px;transition:opacity .2s}
 .footer-links a:hover{opacity:.7}
 .footer-links{margin-top:8px}
-
-/* items center helper */
-.flex-center{display:flex;align-items:center;justify-content:flex-end;gap:5px}
 </style>
 </head>
 <body>
@@ -801,15 +799,17 @@ footer{background:#0c0c22;border-top:1px solid rgba(255,255,255,.06);padding:16p
   <dl class="dl">
     <dt>Monto total</dt>
     ${montoRow}
-    ${bonusRows}
+  </dl>
+  ${bonusRows}
+  <dl class="dl">
     <dt>Precio</dt>
     <dd>${fmtP(s.price)}</dd>
     <dt>Juego</dt>
     <dd>Free Fire</dd>
     <dt>Método de pago</dt>
     <dd>PayPal</dd>
-    <dt style="border-bottom:none">Tiempo de movimiento</dt>
-    <dd style="border-bottom:none">${dateStr}</dd>
+    <dt class="last">Tiempo de movimiento</dt>
+    <dd class="last">${dateStr}</dd>
   </dl>
   <button class="btn-home" onclick="parent.postMessage('success-home','*')">Volver a Página de Inicio</button>
 </div>
