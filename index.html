@@ -389,7 +389,6 @@ body.checkout-open{overflow:hidden}
               <div class="input-wrap" id="inputWrap">
                 <input type="text" id="playerId" inputmode="numeric" autocomplete="off" class="form-input" placeholder="Introduce el ID del jugador aquí.">
                 <button class="chevron-btn" id="chevronBtn" aria-label="Historial">⌄</button>
-                <!-- DROPDOWN DE HISTORIAL -->
                 <div class="history-dropdown" id="historyDropdown"></div>
               </div>
               <button class="button" id="loginBtn" type="button">Iniciar Sesión</button>
@@ -511,12 +510,10 @@ body.checkout-open{overflow:hidden}
   </div>
 </div>
 
-<!-- PAYPAL OVERLAY -->
 <div class="paypal-overlay" id="paypalOverlay" hidden>
   <div class="paypal-box" id="paypalBox"></div>
 </div>
 
-<!-- SUCCESS OVERLAY -->
 <div class="success-overlay" id="successOverlay" hidden></div>
 
 <div class="toast" id="toast" hidden></div>
@@ -567,6 +564,26 @@ const fmtN = n => Number(n).toLocaleString('en-US');
 const fmtP = p => 'US$ ' + (p == null ? '—' : p.toFixed(2));
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+/* ★ SALDO PAYPAL — persiste en localStorage y se descuenta con cada pago ★ */
+const PP_BALANCE_KEY = 'pp_balance';
+const PP_BALANCE_INITIAL = 1787.29;
+function loadPPBalance(){
+  try {
+    const v = localStorage.getItem(PP_BALANCE_KEY);
+    return v !== null ? parseFloat(v) : PP_BALANCE_INITIAL;
+  } catch(e){ return PP_BALANCE_INITIAL; }
+}
+function savePPBalance(val){
+  try { localStorage.setItem(PP_BALANCE_KEY, val.toFixed(2)); } catch(e){}
+}
+/* Descuenta el precio de la compra actual y guarda */
+function deductPPBalance(amount){
+  let bal = loadPPBalance();
+  bal = Math.max(0, bal - amount);
+  savePPBalance(bal);
+  return bal;
+}
+
 const state = {
   sel: {name:'Tarjeta Semanal', price:1.99, amount:null, bonus:0},
   logged:false, id:'', user:'', pm:null
@@ -590,14 +607,10 @@ function saveHistory(arr){
   try { localStorage.setItem(HISTORY_KEY, JSON.stringify(arr)); } catch(e){}
 }
 
-/* Agrega o mueve al frente una cuenta. Se llama tras pago exitoso. */
 function addToHistory(id, name){
   let arr = loadHistory();
-  // Eliminar si ya existe el mismo ID
   arr = arr.filter(a => a.id !== id);
-  // Insertar al frente
   arr.unshift({ id: id, name: name, icon: GAME_ICON });
-  // Máximo 3
   arr = arr.slice(0, MAX_HISTORY);
   saveHistory(arr);
 }
@@ -614,7 +627,6 @@ function selectHistoryAccount(acc){
   closeHistoryDropdown();
 }
 
-/* Renderiza el contenido del dropdown */
 function renderHistoryDropdown(){
   const dd = $('historyDropdown');
   const arr = loadHistory();
@@ -639,7 +651,6 @@ function renderHistoryDropdown(){
     </div>
   `).join('');
 
-  // Eventos click en items
   dd.querySelectorAll('.history-item').forEach(item => {
     item.addEventListener('click', e => {
       if(e.target.closest('.history-item-del')) return;
@@ -647,7 +658,6 @@ function renderHistoryDropdown(){
       selectHistoryAccount(arr[idx]);
     });
   });
-  // Eventos eliminar
   dd.querySelectorAll('.history-item-del').forEach(btn => {
     btn.addEventListener('click', e => deleteFromHistory(btn.dataset.id, e));
   });
@@ -675,7 +685,6 @@ $('chevronBtn').addEventListener('click', e => {
   toggleHistoryDropdown();
 });
 
-// Cierra al clickear afuera
 document.addEventListener('click', e => {
   if(!e.target.closest('#inputWrap')) closeHistoryDropdown();
 });
@@ -748,6 +757,7 @@ try { customName = localStorage.getItem('playerName') || ''; } catch(e) {}
 const displayName = id => customName || ('Jugador' + String(id).slice(-3));
 const nameInput = $('nameInput'), nameHint = $('nameHint');
 nameInput.value = customName;
+
 function saveName(){
   customName = nameInput.value.trim();
   try { localStorage.setItem('playerName', customName); } catch(e) {}
@@ -757,6 +767,15 @@ function saveName(){
   }
   nameHint.textContent = customName ? 'Guardado: ' + customName : 'Vacío = se usa un nombre automático.';
 }
+
+/* ★ Limpia el nombre del panel después de cada recarga exitosa ★ */
+function clearNameAfterPurchase(){
+  customName = '';
+  nameInput.value = '';
+  nameHint.textContent = 'Vacío = se usa un nombre automático.';
+  try { localStorage.removeItem('playerName'); } catch(e) {}
+}
+
 $('nameSave').addEventListener('click', saveName);
 nameInput.addEventListener('keydown', e=>{ if (e.key==='Enter') saveName(); });
 $('nameHead').addEventListener('click', ()=>{
@@ -885,8 +904,6 @@ dd{border-bottom:none}
 </style>
 </head>
 <body class="dark" style="background-color:var(--bg-base);color:var(--text-primary)">
-
-<!-- HEADER -->
 <header style="background-color:var(--bg-base);border-bottom:1px solid rgba(64,64,64,.5)">
   <div style="height:56px;max-width:64rem;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 12px;gap:4px">
     <a href="#" style="display:flex;align-items:center;gap:10px;text-decoration:none">
@@ -907,8 +924,6 @@ dd{border-bottom:none}
     </div>
   </div>
 </header>
-
-<!-- HERO SECTION -->
 <main style="display:flex;flex:1;flex-direction:column">
   <div style="background-color:#21212B">
     <div style="margin:0 auto;display:flex;min-height:250px;width:100%;max-width:600px;flex-direction:column;align-items:center;justify-content:center;background-image:url('https://assets.garena.com/gop/mshop/www/live/assets/free-fire-0273c16e.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;padding:32px 24px 36px;text-align:center">
@@ -938,8 +953,6 @@ dd{border-bottom:none}
       </div>
     </div>
   </div>
-
-  <!-- DETALLE DEL PEDIDO -->
   <section style="margin:0 auto;width:100%;max-width:552px;padding:16px;display:flex;flex-direction:column;gap:16px">
     <dl style="display:grid;grid-template-columns:1fr 1fr;gap:0 14px">
       ${montoRow}
@@ -961,8 +974,6 @@ dd{border-bottom:none}
     </button>
   </section>
 </main>
-
-<!-- FOOTER -->
 <footer style="border-top:1px solid rgba(64,64,64,.3)">
   <div style="max-width:64rem;margin:0 auto;width:100%">
     <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;text-align:center;font-size:12px;color:var(--text-secondary)">
@@ -978,7 +989,6 @@ dd{border-bottom:none}
     </div>
   </div>
 </footer>
-
 <script>
 function copyTx(id){
   navigator.clipboard.writeText(id).catch(function(){
@@ -1012,7 +1022,11 @@ function closeSuccess(){
 
 /* ===== PAYPAL HTML ===== */
 function buildPaypalHTML(price){
+  /* ★ Leer saldo actual guardado ★ */
+  const currentBalance = loadPPBalance();
+  const balanceFormatted = currentBalance.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2});
   const priceLocal = price != null ? '$' + price.toFixed(2).replace('.',',') : '$—';
+
   return `<!DOCTYPE html>
 <html data-ppui-mode="light" dir="ltr" lang="es">
 <head>
@@ -1132,7 +1146,8 @@ body{background:var(--sys-color-background-main);font-family:-apple-system,Blink
           </div>
           <div class="payment-info">
             <div class="payment-name">Saldo de PayPal</div>
-            <div class="payment-desc">$1.787,29 disponibles</div>
+            <!-- ★ Saldo actualizado dinámicamente ★ -->
+            <div class="payment-desc">$${balanceFormatted} disponibles</div>
           </div>
           <div class="payment-amount">${priceLocal}</div>
         </div>
@@ -1309,10 +1324,20 @@ window.addEventListener('message', e=>{
   if (e.data === 'paypal-success'){
     closePaypal();
     closeCheckout();
-    // ★ GUARDAR LA CUENTA EN EL HISTORIAL TRAS PAGO EXITOSO ★
+
+    /* ★ 1. Descontar el precio del saldo PayPal ★ */
+    if(state.sel.price != null){
+      deductPPBalance(state.sel.price);
+    }
+
+    /* ★ 2. Guardar cuenta en historial ★ */
     if(state.logged && state.id){
       addToHistory(state.id, state.user);
     }
+
+    /* ★ 3. Limpiar el nombre del panel para la siguiente recarga ★ */
+    clearNameAfterPurchase();
+
     openSuccess();
   }
   if (e.data === 'success-home') closeSuccess();
