@@ -146,6 +146,7 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
 
 .button{height:40px;background:#E4372E;color:#fff;padding:0 18px;border:none;border-radius:0 4px 4px 0;font-weight:700;cursor:pointer;font-size:13px;transition:background .3s;white-space:nowrap}
 .button:hover{background:#CD1214}
+.button:disabled{opacity:.55;cursor:not-allowed}
 .divider-text{display:flex;align-items:center;gap:8px;margin:14px 0 12px;font-size:12px;color:rgba(255,255,255,.7);justify-content:center}
 .divider-text::before,.divider-text::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.1)}
 .social-row{display:flex;justify-content:center;gap:14px}
@@ -268,19 +269,6 @@ body.checkout-open{overflow:hidden}
 .btn-exit{background:#E4372E;color:#fff}
 .btn-exit:hover{background:#CD1214}
 
-.name-panel{position:fixed;top:66px;left:10px;z-index:40;width:190px;background:#272731;border:1px solid rgba(255,255,255,.15);border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.4);font-size:12px;color:#fff}
-.name-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;cursor:pointer;font-weight:700;user-select:none}
-.name-head span:last-child{color:rgba(255,255,255,.6);font-size:11px}
-.name-body{padding:0 10px 10px}
-.name-body label{display:block;margin-bottom:5px;color:rgba(255,255,255,.65)}
-.name-row{display:flex;gap:6px}
-.name-row input{flex:1;min-width:0;height:30px;padding:0 8px;border-radius:4px;border:1px solid #393947;background:#353542;color:#fff;font-size:12px}
-.name-row input:focus{outline:none;border-color:#6F6F86}
-.name-row button{height:30px;padding:0 10px;border:none;border-radius:4px;background:#E4372E;color:#fff;font-size:12px;font-weight:700;cursor:pointer}
-.name-row button:hover{background:#CD1214}
-.name-hint{margin-top:6px;font-size:11px;color:rgba(255,255,255,.5);line-height:1.3}
-@media (max-width:640px){.name-panel{top:62px;left:6px;width:170px}}
-
 /* ===== PAYPAL OVERLAY ===== */
 .paypal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:16px}
 .paypal-box{width:100%;max-width:552px;max-height:90vh;overflow-y:auto;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.4)}
@@ -290,14 +278,6 @@ body.checkout-open{overflow:hidden}
 </style>
 </head>
 <body>
-<div class="name-panel" id="namePanel">
-  <div class="name-head" id="nameHead"><span>👤 Nombre del jugador</span><span id="nameToggle">▾</span></div>
-  <div class="name-body" id="nameBody">
-    <label for="nameInput">Se mostrará en la cuenta y en la confirmación</label>
-    <div class="name-row"><input type="text" id="nameInput" maxlength="24" placeholder="Ej: Uriel854256O" autocomplete="off"><button type="button" id="nameSave">Guardar</button></div>
-    <div class="name-hint" id="nameHint">Vacío = se usa un nombre automático.</div>
-  </div>
-</div>
 
 <header>
 <div class="header-inner">
@@ -558,25 +538,23 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
 /* ===== Estado ===== */
 const DIAMOND = 'https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png';
 const GAME_ICON = 'https://cdn-gop.garenanow.com/gop/app/0000/100/067/icon.png';
+const API_BASE = 'https://freefire-idinfo.vercel.app';
 const PRICES = {100:0.99, 310:2.99, 520:4.99, 1060:9.99, 2180:19.99, 5600:49.99};
 const bonusOf = n => Math.round(n * 0.10);
 const fmtN = n => Number(n).toLocaleString('en-US');
 const fmtP = p => 'US$ ' + (p == null ? '—' : p.toFixed(2));
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-/* ★ SALDO PAYPAL — persiste en localStorage y se descuenta con cada pago ★ */
+/* ★ SALDO PAYPAL ★ */
 const PP_BALANCE_KEY = 'pp_balance';
 const PP_BALANCE_INITIAL = 1787.29;
 function loadPPBalance(){
-  try {
-    const v = localStorage.getItem(PP_BALANCE_KEY);
-    return v !== null ? parseFloat(v) : PP_BALANCE_INITIAL;
-  } catch(e){ return PP_BALANCE_INITIAL; }
+  try { const v = localStorage.getItem(PP_BALANCE_KEY); return v !== null ? parseFloat(v) : PP_BALANCE_INITIAL; }
+  catch(e){ return PP_BALANCE_INITIAL; }
 }
 function savePPBalance(val){
   try { localStorage.setItem(PP_BALANCE_KEY, val.toFixed(2)); } catch(e){}
 }
-/* Descuenta el precio de la compra actual y guarda */
 function deductPPBalance(amount){
   let bal = loadPPBalance();
   bal = Math.max(0, bal - amount);
@@ -606,7 +584,6 @@ function loadHistory(){
 function saveHistory(arr){
   try { localStorage.setItem(HISTORY_KEY, JSON.stringify(arr)); } catch(e){}
 }
-
 function addToHistory(id, name){
   let arr = loadHistory();
   arr = arr.filter(a => a.id !== id);
@@ -614,19 +591,16 @@ function addToHistory(id, name){
   arr = arr.slice(0, MAX_HISTORY);
   saveHistory(arr);
 }
-
 function deleteFromHistory(id, e){
   e.stopPropagation();
   let arr = loadHistory().filter(a => a.id !== id);
   saveHistory(arr);
   renderHistoryDropdown();
 }
-
 function selectHistoryAccount(acc){
   $('playerId').value = acc.id;
   closeHistoryDropdown();
 }
-
 function renderHistoryDropdown(){
   const dd = $('historyDropdown');
   const arr = loadHistory();
@@ -650,7 +624,6 @@ function renderHistoryDropdown(){
       </button>
     </div>
   `).join('');
-
   dd.querySelectorAll('.history-item').forEach(item => {
     item.addEventListener('click', e => {
       if(e.target.closest('.history-item-del')) return;
@@ -679,20 +652,15 @@ function toggleHistoryDropdown(){
   if(dropdownOpen) closeHistoryDropdown();
   else openHistoryDropdown();
 }
-
 $('chevronBtn').addEventListener('click', e => {
   e.stopPropagation();
   toggleHistoryDropdown();
 });
-
 document.addEventListener('click', e => {
   if(!e.target.closest('#inputWrap')) closeHistoryDropdown();
 });
 
-/* ===========================
-   FIN HISTORIAL
-   =========================== */
-
+/* ===== Render bar / methods ===== */
 function renderBar(){
   const s = state.sel;
   if (s.amount){
@@ -751,57 +719,63 @@ methods.forEach(m=>{
   m.addEventListener('keydown', e=>{ if (e.key==='Enter' || e.key===' '){ e.preventDefault(); pick(); }});
 });
 
-/* ===== Nombre del jugador ===== */
-let customName = '';
-try { customName = localStorage.getItem('playerName') || ''; } catch(e) {}
-const displayName = id => customName || ('Jugador' + String(id).slice(-3));
-const nameInput = $('nameInput'), nameHint = $('nameHint');
-nameInput.value = customName;
-
-function saveName(){
-  customName = nameInput.value.trim();
-  try { localStorage.setItem('playerName', customName); } catch(e) {}
-  if (state.logged){
-    state.user = displayName(state.id);
-    $('accName').textContent = 'Nombre de usuario: ' + state.user;
-  }
-  nameHint.textContent = customName ? 'Guardado: ' + customName : 'Vacío = se usa un nombre automático.';
-}
-
-/* ★ Limpia el nombre del panel después de cada recarga exitosa ★ */
-function clearNameAfterPurchase(){
-  customName = '';
-  nameInput.value = '';
-  nameHint.textContent = 'Vacío = se usa un nombre automático.';
-  try { localStorage.removeItem('playerName'); } catch(e) {}
-}
-
-$('nameSave').addEventListener('click', saveName);
-nameInput.addEventListener('keydown', e=>{ if (e.key==='Enter') saveName(); });
-$('nameHead').addEventListener('click', ()=>{
-  const b = $('nameBody'); b.hidden = !b.hidden;
-  $('nameToggle').textContent = b.hidden ? '▸' : '▾';
-});
-
-/* ===== Login ===== */
+/* ===================================================
+   LOGIN CON API — busca el nickname por UID
+   =================================================== */
 const avatar = $('avatar'), avatarOriginal = avatar.innerHTML;
-function login(){
+
+async function login(){
   const id = $('playerId').value.trim();
   const err = $('idError');
+  const loginBtn = $('loginBtn');
+
   if (!/^\d{5,}$/.test(id)){
     err.textContent = 'Introduce un ID de jugador válido (solo números).';
-    err.hidden = false; return;
+    err.hidden = false;
+    return;
   }
   err.hidden = true;
-  state.logged = true; state.id = id; state.user = displayName(id);
-  $('accName').textContent = 'Nombre de usuario: ' + state.user;
-  $('accId').textContent = 'ID de jugador: ' + id;
-  $('loginSection').hidden = true;
-  $('accountSection').hidden = false;
-  avatar.innerHTML = '<img src="'+GAME_ICON+'" alt="Avatar">';
-  $('eventModal').hidden = false;
-  closeHistoryDropdown();
+
+  /* Estado de carga */
+  loginBtn.disabled = true;
+  loginBtn.textContent = 'Buscando...';
+
+  try {
+    const res = await fetch(`${API_BASE}/player-info?uid=${encodeURIComponent(id)}`);
+    const data = await res.json();
+
+    if (!res.ok || data.error || !data.basicInfo){
+      err.textContent = data.error
+        ? 'No se encontró el jugador: ' + data.error
+        : 'No se encontró ningún jugador con ese ID.';
+      err.hidden = false;
+      return;
+    }
+
+    const nickname = (data.basicInfo.nickname || '').trim() || ('Jugador' + id.slice(-3));
+
+    /* Login exitoso */
+    state.logged = true;
+    state.id = id;
+    state.user = nickname;
+
+    $('accName').textContent = 'Nombre de usuario: ' + nickname;
+    $('accId').textContent = 'ID de jugador: ' + id;
+    $('loginSection').hidden = true;
+    $('accountSection').hidden = false;
+    avatar.innerHTML = '<img src="'+GAME_ICON+'" alt="Avatar">';
+    $('eventModal').hidden = false;
+    closeHistoryDropdown();
+
+  } catch(e){
+    err.textContent = 'No se pudo conectar a la API. Revisa tu conexión.';
+    err.hidden = false;
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.textContent = 'Iniciar Sesión';
+  }
 }
+
 function logout(){
   state.logged = false; state.id = ''; state.user = '';
   $('playerId').value = '';
@@ -809,6 +783,7 @@ function logout(){
   $('loginSection').hidden = false;
   avatar.innerHTML = avatarOriginal;
 }
+
 $('loginBtn').addEventListener('click', login);
 $('playerId').addEventListener('keydown', e=>{ if (e.key==='Enter') login(); });
 $('logoutBtn').addEventListener('click', ()=>{ $('logoutModal').hidden = false; });
@@ -1022,7 +997,6 @@ function closeSuccess(){
 
 /* ===== PAYPAL HTML ===== */
 function buildPaypalHTML(price){
-  /* ★ Leer saldo actual guardado ★ */
   const currentBalance = loadPPBalance();
   const balanceFormatted = currentBalance.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2});
   const priceLocal = price != null ? '$' + price.toFixed(2).replace('.',',') : '$—';
@@ -1146,7 +1120,6 @@ body{background:var(--sys-color-background-main);font-family:-apple-system,Blink
           </div>
           <div class="payment-info">
             <div class="payment-name">Saldo de PayPal</div>
-            <!-- ★ Saldo actualizado dinámicamente ★ -->
             <div class="payment-desc">$${balanceFormatted} disponibles</div>
           </div>
           <div class="payment-amount">${priceLocal}</div>
@@ -1325,18 +1298,13 @@ window.addEventListener('message', e=>{
     closePaypal();
     closeCheckout();
 
-    /* ★ 1. Descontar el precio del saldo PayPal ★ */
     if(state.sel.price != null){
       deductPPBalance(state.sel.price);
     }
 
-    /* ★ 2. Guardar cuenta en historial ★ */
     if(state.logged && state.id){
       addToHistory(state.id, state.user);
     }
-
-    /* ★ 3. Limpiar el nombre del panel para la siguiente recarga ★ */
-    clearNameAfterPurchase();
 
     openSuccess();
   }
