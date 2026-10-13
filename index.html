@@ -239,9 +239,12 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
   color:rgba(255,255,255,.35);text-align:center;
 }
 
-.button{height:40px;background:#E4372E;color:#fff;padding:0 18px;border:none;border-radius:0 4px 4px 0;font-weight:700;cursor:pointer;font-size:13px;transition:background .3s;white-space:nowrap}
+.button{height:40px;background:#E4372E;color:#fff;padding:0 18px;border:none;border-radius:0 4px 4px 0;font-weight:700;cursor:pointer;font-size:13px;transition:background .15s;white-space:nowrap}
 .button:hover{background:#CD1214}
+.button:active{background:#6F6F86;color:rgba(255,255,255,.7);transition:none}
 .button:disabled{opacity:.55;cursor:not-allowed}
+.input-row:has(.button:active) .form-input{background:#2a2a35;border-color:#2a2a35;transition:none}
+.input-row:has(.button:active) .chevron-btn{color:rgba(255,255,255,.4);transition:none}
 .divider-text{display:flex;align-items:center;gap:8px;margin:14px 0 12px;font-size:12px;color:rgba(255,255,255,.7);justify-content:center}
 .divider-text::before,.divider-text::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.1)}
 .social-row{display:flex;justify-content:center;gap:14px}
