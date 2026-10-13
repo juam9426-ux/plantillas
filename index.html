@@ -929,7 +929,9 @@ async function login(){
   err.hidden = true;
 
   loginBtn.disabled = true;
-  loginBtn.textContent = 'Buscando...';
+  loginBtn.style.background = '#6F6F86';
+  loginBtn.style.color = 'rgba(255,255,255,.7)';
+  loginBtn.style.transition = 'none';
 
   try {
     const res = await fetch(`${API_BASE}/player-info?uid=${encodeURIComponent(id)}`);
@@ -962,7 +964,9 @@ async function login(){
     err.hidden = false;
   } finally {
     loginBtn.disabled = false;
-    loginBtn.textContent = 'Iniciar Sesión';
+    loginBtn.style.background = '';
+    loginBtn.style.color = '';
+    loginBtn.style.transition = '';
   }
 }
 
