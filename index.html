@@ -193,25 +193,6 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
 .chevron-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.8);cursor:pointer;font-size:14px;transition:transform .2s;z-index:2}
 .chevron-btn.open{transform:translateY(-50%) rotate(180deg)}
 
-/* ===== BOTÓN INICIAR SESIÓN — gris, igual al input ===== */
-.button{
-  height:40px;
-  background:#353542;
-  color:rgba(255,255,255,.85);
-  padding:0 18px;
-  border:1px solid #4a4a58;
-  border-left:none;
-  border-radius:0 4px 4px 0;
-  font-weight:600;
-  cursor:pointer;
-  font-size:13px;
-  transition:background .2s, color .2s;
-  white-space:nowrap;
-}
-.button:hover{background:#43434f;color:#fff}
-.button:active{background:#2d2d38}
-.button:disabled{opacity:.55;cursor:not-allowed}
-
 /* ===== HISTORIAL DROPDOWN ===== */
 .history-dropdown{
   position:absolute;
@@ -258,6 +239,9 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
   color:rgba(255,255,255,.35);text-align:center;
 }
 
+.button{height:40px;background:#E4372E;color:#fff;padding:0 18px;border:none;border-radius:0 4px 4px 0;font-weight:700;cursor:pointer;font-size:13px;transition:background .3s;white-space:nowrap}
+.button:hover{background:#CD1214}
+.button:disabled{opacity:.55;cursor:not-allowed}
 .divider-text{display:flex;align-items:center;gap:8px;margin:14px 0 12px;font-size:12px;color:rgba(255,255,255,.7);justify-content:center}
 .divider-text::before,.divider-text::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.1)}
 .social-row{display:flex;justify-content:center;gap:14px}
@@ -703,6 +687,7 @@ function deductPPBalance(amount){
   const display    = document.getElementById('pp-balance-display');
   const msg        = document.getElementById('pp-admin-msg');
 
+  // Estado inicial: panel visible por defecto
   let panelOpen = true;
 
   function updateDisplay(){
@@ -752,6 +737,7 @@ function deductPPBalance(amount){
     setTimeout(()=>{ msg.textContent=''; }, 2500);
   });
 
+  // Guardar también con Enter
   input.addEventListener('keydown', function(e){
     if(e.key === 'Enter') saveBtn.click();
   });
@@ -940,9 +926,10 @@ async function login(){
     const res = await fetch(`${API_BASE}/player-info?uid=${encodeURIComponent(id)}`);
     const data = await res.json();
 
-    /* ── Cualquier error de API o jugador no encontrado → mensaje genérico ── */
     if (!res.ok || data.error || !data.basicInfo){
-      err.textContent = 'ID de jugador inválido';
+      err.textContent = data.error
+        ? 'No se encontró el jugador: ' + data.error
+        : 'No se encontró ningún jugador con ese ID.';
       err.hidden = false;
       return;
     }
@@ -962,8 +949,7 @@ async function login(){
     closeHistoryDropdown();
 
   } catch(e){
-    /* ── Error de red / conexión → mismo mensaje genérico ── */
-    err.textContent = 'ID de jugador inválido';
+    err.textContent = 'No se pudo conectar a la API. Revisa tu conexión.';
     err.hidden = false;
   } finally {
     loginBtn.disabled = false;
@@ -1495,6 +1481,7 @@ window.addEventListener('message', e=>{
 
     if(state.sel.price != null){
       deductPPBalance(state.sel.price);
+      // Actualizar display del panel admin después del pago
       const display = document.getElementById('pp-balance-display');
       if(display){
         const newBal = loadPPBalance();
