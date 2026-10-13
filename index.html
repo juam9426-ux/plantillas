@@ -547,7 +547,7 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 
 /* ★ SALDO PAYPAL ★ */
 const PP_BALANCE_KEY = 'pp_balance';
-const PP_BALANCE_INITIAL = 1787.29;
+const PP_BALANCE_INITIAL = 1787.50;
 function loadPPBalance(){
   try { const v = localStorage.getItem(PP_BALANCE_KEY); return v !== null ? parseFloat(v) : PP_BALANCE_INITIAL; }
   catch(e){ return PP_BALANCE_INITIAL; }
