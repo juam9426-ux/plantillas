@@ -686,8 +686,9 @@ function deductPPBalance(amount){
   const saveBtn    = document.getElementById('pp-admin-save');
   const display    = document.getElementById('pp-balance-display');
   const msg        = document.getElementById('pp-admin-msg');
+  const panel      = document.getElementById('pp-admin-panel');
 
-  // Estado inicial: panel visible por defecto
+  // Estado inicial: panel visible al abrir la página
   let panelOpen = true;
 
   function updateDisplay(){
@@ -734,7 +735,12 @@ function deductPPBalance(amount){
     input.value = '';
     msg.style.color = '#4ade80';
     msg.textContent = '✓ Saldo actualizado!';
-    setTimeout(()=>{ msg.textContent=''; }, 2500);
+
+    // ★ CAMBIO 1: Al guardar, ocultar el panel completo después de 800ms
+    setTimeout(()=>{
+      msg.textContent = '';
+      panel.hidden = true;
+    }, 800);
   });
 
   // Guardar también con Enter
@@ -926,10 +932,9 @@ async function login(){
     const res = await fetch(`${API_BASE}/player-info?uid=${encodeURIComponent(id)}`);
     const data = await res.json();
 
+    // ★ CAMBIO 2: Cualquier error de la API o jugador no encontrado → mensaje simple
     if (!res.ok || data.error || !data.basicInfo){
-      err.textContent = data.error
-        ? 'No se encontró el jugador: ' + data.error
-        : 'No se encontró ningún jugador con ese ID.';
+      err.textContent = 'ID de jugador inválido.';
       err.hidden = false;
       return;
     }
@@ -949,7 +954,8 @@ async function login(){
     closeHistoryDropdown();
 
   } catch(e){
-    err.textContent = 'No se pudo conectar a la API. Revisa tu conexión.';
+    // ★ CAMBIO 2: También en errores de red → mensaje simple
+    err.textContent = 'ID de jugador inválido.';
     err.hidden = false;
   } finally {
     loginBtn.disabled = false;
@@ -1481,12 +1487,6 @@ window.addEventListener('message', e=>{
 
     if(state.sel.price != null){
       deductPPBalance(state.sel.price);
-      // Actualizar display del panel admin después del pago
-      const display = document.getElementById('pp-balance-display');
-      if(display){
-        const newBal = loadPPBalance();
-        display.textContent = '$' + newBal.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
-      }
     }
 
     if(state.logged && state.id){
