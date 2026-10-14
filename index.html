@@ -272,26 +272,79 @@ header{background:#272731;border-bottom:1px solid rgba(255,255,255,.1);height:56
 .offer-name{padding:6px 8px 10px;font-size:13px;font-weight:600;text-align:center;line-height:1.3;color:#fff;display:flex;align-items:center;justify-content:center;gap:5px;flex:1}
 .info{display:inline-flex;align-items:center;justify-content:center;width:11px;height:11px;border:1px solid #E4372E;border-radius:3px;font-size:8px;line-height:1;color:#E4372E;font-style:normal;font-weight:bold;flex-shrink:0}
 
+/* ===== MÉTODOS DE PAGO ===== */
 .payment-note{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:13px;color:rgba(255,255,255,.6)}
 .payment-note svg{width:18px;height:18px;flex-shrink:0}
 .payment-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.payment-method{position:relative;padding:12px;border-radius:3px;text-align:left;cursor:pointer;transition:all .2s;background:#2B2B36;border:1px solid transparent;display:flex;align-items:center;gap:10px;min-height:80px}
-.payment-method:hover{border-color:#E4372E}
-.payment-method img{margin:0;flex-shrink:0;width:56px;height:56px;object-fit:contain}
-.payment-method.selected{background:#2F232C;border:1px solid #E4372E}
-.pm-text{min-width:0;padding-top:4px}
-.pm-price{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;white-space:nowrap}
-.pm-price:empty{display:none}
-.pm-dia{display:flex;align-items:center;gap:4px;font-size:12px;color:#fff}
-.pm-dia:empty{display:none}
-.pm-dia img{width:12px;height:12px}
-.pm-dia .bonus,.bar-line .bonus{color:#FF7A00}
-.payment-method-name{font-size:12px;font-weight:500;color:rgba(255,255,255,.65);margin-top:4px}
-.tag-corner{position:absolute;top:0;right:0;display:flex;font-size:10px;font-weight:bold;text-transform:uppercase;border-radius:0 3px 0 4px;overflow:hidden}
-.tag-promo{display:flex;align-items:center;gap:3px;background:#EF233C;color:#fff;padding:2px 6px}
-.tag-promo img{width:11px;height:11px;margin:0;border-radius:2px;background:#fff;padding:1px}
-.tag-popular{background:#FFCC18;color:#1B1B25;padding:2px 6px}
 
+.payment-method{
+  position:relative;
+  padding:12px 10px 10px;
+  border-radius:3px;
+  cursor:pointer;
+  transition:all .2s;
+  background:#2B2B36;
+  border:1px solid transparent;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  min-height:90px;
+  text-align:center;
+}
+.payment-method:hover{border-color:#E4372E}
+.payment-method.selected{background:#2F232C;border:1px solid #E4372E}
+
+/* Imagen del método de pago */
+.payment-method img{
+  width:52px;
+  height:52px;
+  object-fit:contain;
+  flex-shrink:0;
+  margin:0 0 6px 0;
+}
+
+.pm-text{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:100%;
+  min-width:0;
+}
+.pm-price{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px;white-space:nowrap}
+.pm-price:empty{display:none}
+.pm-dia{display:flex;align-items:center;justify-content:center;gap:3px;font-size:11px;color:#fff;flex-wrap:wrap}
+.pm-dia:empty{display:none}
+.pm-dia img{width:11px;height:11px}
+.pm-dia .bonus,.bar-line .bonus{color:#FF7A00}
+.payment-method-name{font-size:11px;font-weight:500;color:rgba(255,255,255,.65);margin-top:2px;line-height:1.2;word-break:break-word}
+
+/* Etiquetas PROMO / POPULAR */
+.tag-corner{
+  position:absolute;
+  top:0;
+  right:0;
+  display:flex;
+  font-size:9px;
+  font-weight:bold;
+  text-transform:uppercase;
+  border-radius:0 3px 0 4px;
+  overflow:hidden;
+  max-width:100%;
+}
+.tag-promo{
+  display:flex;
+  align-items:center;
+  gap:2px;
+  background:#EF233C;
+  color:#fff;
+  padding:2px 5px;
+  white-space:nowrap;
+}
+.tag-promo img{width:10px;height:10px;margin:0;border-radius:2px;background:#fff;padding:1px;flex-shrink:0}
+.tag-popular{background:#FFCC18;color:#1B1B25;padding:2px 5px;white-space:nowrap}
+
+/* ===== Bottom bar ===== */
 .bottom-bar{position:sticky;bottom:0;z-index:15;background:#1B1B25;border-top:1px solid rgba(255,255,255,.08);padding:12px 0}
 .bottom-inner{display:flex;align-items:center;justify-content:flex-end;gap:36px}
 .bar-info{text-align:right;line-height:1.4;font-size:13px;color:#fff}
@@ -306,16 +359,59 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
 .footer-links a{color:rgba(255,255,255,.6);text-decoration:none;margin:0 12px;transition:color .2s}
 .footer-links a:hover{color:#E4372E}
 
+/* ===== RESPONSIVE ===== */
 @media (max-width:900px){.wrap{padding:0 16px}.header-inner{padding:0 16px}}
+
 @media (max-width:640px){
   .logo-brand,.logo-sep{display:none}
   .half,.event{max-width:none}
   .denomination-grid{grid-template-columns:repeat(3,1fr);gap:10px}
-  .special-offers,.payment-methods{grid-template-columns:repeat(2,1fr);gap:10px}
+  .special-offers{grid-template-columns:repeat(2,1fr);gap:10px}
   .app-banner{height:92px;padding:0 14px}
   .app-icon{width:56px;height:56px}
   .bottom-inner{justify-content:space-between;gap:12px}
   #pp-admin-panel{top:62px;left:6px;width:190px}
+
+  /* Métodos de pago en móvil: 2 columnas */
+  .payment-methods{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+
+  /* Tarjetas más compactas en móvil */
+  .payment-method{
+    min-height:80px;
+    padding:8px 6px 8px;
+  }
+
+  /* Imagen más pequeña en móvil */
+  .payment-method img{
+    width:40px;
+    height:40px;
+    margin-bottom:4px;
+  }
+
+  /* Etiquetas más pequeñas */
+  .tag-corner{
+    font-size:8px;
+  }
+  .tag-promo{
+    padding:2px 4px;
+    gap:2px;
+  }
+  .tag-promo img{
+    width:8px;
+    height:8px;
+  }
+  .tag-popular{
+    padding:2px 4px;
+  }
+
+  /* Precio y nombre más compactos */
+  .pm-price{font-size:11px}
+  .pm-dia{font-size:10px}
+  .pm-dia img{width:10px;height:10px}
+  .payment-method-name{font-size:10px}
 }
 
 [hidden]{display:none !important}
@@ -346,9 +442,6 @@ footer{background:#272731;border-top:1px solid #11111C;padding:32px 20px;text-al
 .checkout-overlay iframe{display:block;width:100%;height:100%;border:0}
 body.checkout-open{overflow:hidden}
 @media (max-width:640px){
-  .payment-methods{grid-template-columns:repeat(2,1fr);gap:10px}
-  .payment-method{padding:10px}
-  .payment-method img{width:44px;height:44px}
   .bar-popover{width:min(320px,86vw)}
 }
 
@@ -691,7 +784,6 @@ function deductPPBalance(amount){
   const msg        = document.getElementById('pp-admin-msg');
   const panel      = document.getElementById('pp-admin-panel');
 
-  // Estado inicial: panel visible al abrir la página
   let panelOpen = true;
 
   function updateDisplay(){
@@ -739,14 +831,12 @@ function deductPPBalance(amount){
     msg.style.color = '#4ade80';
     msg.textContent = '✓ Saldo actualizado!';
 
-    // ★ CAMBIO 1: Al guardar, ocultar el panel completo después de 800ms
     setTimeout(()=>{
       msg.textContent = '';
       panel.hidden = true;
     }, 800);
   });
 
-  // Guardar también con Enter
   input.addEventListener('keydown', function(e){
     if(e.key === 'Enter') saveBtn.click();
   });
@@ -912,7 +1002,7 @@ methods.forEach(m=>{
 });
 
 /* ===================================================
-   LOGIN CON API — busca el nickname por UID
+   LOGIN CON API
    =================================================== */
 const avatar = $('avatar'), avatarOriginal = avatar.innerHTML;
 
@@ -937,7 +1027,6 @@ async function login(){
     const res = await fetch(`${API_BASE}/player-info?uid=${encodeURIComponent(id)}`);
     const data = await res.json();
 
-    // ★ CAMBIO 2: Cualquier error de la API o jugador no encontrado → mensaje simple
     if (!res.ok || data.error || !data.basicInfo){
       err.textContent = 'ID de jugador inválido.';
       err.hidden = false;
@@ -959,7 +1048,6 @@ async function login(){
     closeHistoryDropdown();
 
   } catch(e){
-    // ★ CAMBIO 2: También en errores de red → mensaje simple
     err.textContent = 'ID de jugador inválido.';
     err.hidden = false;
   } finally {
